@@ -13,7 +13,9 @@
     <div class="container">
         <div class="navbar">
             <div class="logo">
-                <a href="home.html"><img src="images/Elite.logo.png" width="140px" alt="logo"></a>
+                <a href="home.html">
+                    <img src="images/Elite.logo.png" width="140px" alt="logo">
+                </a>
             </div>
 
             <nav>
@@ -30,173 +32,52 @@
                 <img src="images/cart.png" width="30px" height="30px" alt="Cart">
             </a>
 
-            <img src="images/menu.png" class="menu-icon" alt="Menu" onclick="menutoggle()">
+            <img src="images/menu.png"
+                 class="menu-icon"
+                 alt="Menu"
+                 onclick="menutoggle()">
         </div>
     </div>
 </div>
 
+
 <div class="small-container">
 
     <div class="row row-2">
+
         <h2>All Products</h2>
 
-        <select>
-            <option>Default Sorting</option>
-            <option>Sort By Price</option>
-            <option>Sort By Popularity</option>
-            <option>Sort By Rating</option>
-            <option>Sort By Sale</option>
+        <select id="sortProducts">
+            <option value="default">Default Sorting</option>
+            <option value="priceLow">Price: Low to High</option>
+            <option value="priceHigh">Price: High to Low</option>
+            <option value="nameAZ">Name: A to Z</option>
+            <option value="nameZA">Name: Z to A</option>
         </select>
-    </div>
-
-
-    <div class="row">
-
-        <div class="col-4">
-            <a href="productdetails.html?id=1">
-                <img src="images/product-1.jpg" alt="Red T-Shirt">
-            </a>
-
-            <a href="productdetails.html?id=1">
-                <h4>Red T-Shirt</h4>
-            </a>
-
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-
-            <p>Rs 500</p>
-        </div>
-
-
-        <div class="col-4">
-            <a href="productdetails.html?id=2">
-                <img src="images/product-2.jpg" alt="Shoes">
-            </a>
-
-            <a href="productdetails.html?id=2">
-                <h4>Shoes</h4>
-            </a>
-
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-
-            <p>Rs 800</p>
-        </div>
-
-
-        <div class="col-4">
-            <a href="productdetails.html?id=3">
-                <img src="images/product-3.jpg" alt="Pants">
-            </a>
-
-            <a href="productdetails.html?id=3">
-                <h4>Pants</h4>
-            </a>
-
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-
-            <p>Rs 1000</p>
-        </div>
-
-
-        <div class="col-4">
-            <a href="productdetails.html?id=4">
-                <img src="images/product-4.jpg" alt="Shoes">
-            </a>
-
-            <a href="productdetails.html?id=4">
-                <h4>Shoes</h4>
-            </a>
-
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-
-            <p>Rs 1500</p>
-        </div>
-
-
-        <div class="col-4">
-            <a href="productdetails.html?id=5">
-                <img src="images/product-5.jpg" alt="Socks">
-            </a>
-
-            <a href="productdetails.html?id=5">
-                <h4>Socks</h4>
-            </a>
-
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-
-            <p>Rs 200</p>
-        </div>
-
-
-        <div class="col-4">
-            <a href="productdetails.html?id=6">
-                <img src="images/product-6.jpg" alt="Watch">
-            </a>
-
-            <a href="productdetails.html?id=6">
-                <h4>Watch</h4>
-            </a>
-
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-            </div>
-
-            <p>Rs 1200</p>
-        </div>
 
     </div>
 
 
-    <div class="page-btn">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-        <span>4</span>
-        <span>&#8594;</span>
-    </div>
+    <!-- Products from backend appear here -->
+
+    <div class="row" id="productContainer"></div>
+
+
+    <!-- Pagination buttons appear here -->
+
+    <div class="page-btn" id="paginationContainer"></div>
 
 </div>
 
 
 <div class="footer">
+
     <div class="container">
 
         <div class="row">
 
             <div class="footer-col-1">
+
                 <h3>Download Our App</h3>
 
                 <p>
@@ -204,18 +85,28 @@
                 </p>
 
                 <div class="app-logo">
-                    <img src="images/play-store.png" alt="Play Store">
-                    <img src="images/app-store.png" alt="App Store">
+
+                    <img src="images/play-store.png"
+                         alt="Play Store">
+
+                    <img src="images/app-store.png"
+                         alt="App Store">
+
                 </div>
+
             </div>
 
 
             <div class="footer-col-2">
-                <img src="images/Elitewear-3.png" alt="Elitewear Logo">
+
+                <img src="images/Elitewear-3.png"
+                     alt="Elitewear Logo">
+
             </div>
 
 
             <div class="footer-col-3">
+
                 <h3>Useful Links</h3>
 
                 <ul>
@@ -224,10 +115,12 @@
                     <li>Return Policy</li>
                     <li>Join Affiliate</li>
                 </ul>
+
             </div>
 
 
             <div class="footer-col-4">
+
                 <h3>Follow Us</h3>
 
                 <ul>
@@ -236,17 +129,21 @@
                     <li>Instagram</li>
                     <li>YouTube</li>
                 </ul>
+
             </div>
 
         </div>
 
+
         <hr>
+
 
         <p class="Copyright">
             Copyright 2025 - EliteWear
         </p>
 
     </div>
+
 </div>
 
 
@@ -259,13 +156,15 @@
     var MenuItems =
         document.getElementById("MenuItems");
 
-    MenuItems.style.maxHeight = "0px";
+
+    MenuItems.style.maxHeight =
+        "0px";
 
 
     function menutoggle() {
 
         MenuItems.style.maxHeight =
-            (MenuItems.style.maxHeight === "0px")
+            MenuItems.style.maxHeight === "0px"
                 ? "200px"
                 : "0px";
     }
@@ -276,7 +175,10 @@
     ========================= */
 
     const loggedUser =
-        JSON.parse(localStorage.getItem("loggedUser"));
+        JSON.parse(
+            localStorage.getItem("loggedUser")
+        );
+
 
     const accountLink =
         document.getElementById("accountLink");
@@ -284,14 +186,386 @@
 
     if (loggedUser) {
 
-        accountLink.textContent = "Account";
-        accountLink.href = "account.html";
+        accountLink.textContent =
+            "Account";
+
+        accountLink.href =
+            "account.html";
 
     } else {
 
-        accountLink.textContent = "Login";
-        accountLink.href = "login.html";
+        accountLink.textContent =
+            "Login";
+
+        accountLink.href =
+            "login.html";
     }
+
+
+    /* =========================
+       PRODUCT VARIABLES
+    ========================= */
+
+    const productContainer =
+        document.getElementById(
+            "productContainer"
+        );
+
+
+    const sortProducts =
+        document.getElementById(
+            "sortProducts"
+        );
+
+
+    const paginationContainer =
+        document.getElementById(
+            "paginationContainer"
+        );
+
+
+    let allProducts = [];
+
+    let currentProducts = [];
+
+    let currentPage = 1;
+
+    const productsPerPage = 4;
+
+
+    /* =========================
+       DISPLAY PRODUCTS
+    ========================= */
+
+    function displayProducts() {
+
+        productContainer.innerHTML = "";
+
+
+        if (currentProducts.length === 0) {
+
+            productContainer.innerHTML =
+                "<p>No products available.</p>";
+
+            paginationContainer.innerHTML = "";
+
+            return;
+        }
+
+
+        /*
+         * Find which products belong
+         * on the current page.
+         */
+
+        const startIndex =
+            (currentPage - 1) *
+            productsPerPage;
+
+
+        const endIndex =
+            startIndex +
+            productsPerPage;
+
+
+        const productsForPage =
+            currentProducts.slice(
+                startIndex,
+                endIndex
+            );
+
+
+        productsForPage.forEach(
+            function(product) {
+
+                const productCard =
+                    document.createElement("div");
+
+
+                productCard.className =
+                    "col-4";
+
+
+                productCard.innerHTML = `
+
+                    <a href="productdetails.html?id=${product.id}">
+                        <img
+                            src="${product.image}"
+                            alt="${product.name}">
+                    </a>
+
+                    <a href="productdetails.html?id=${product.id}">
+                        <h4>${product.name}</h4>
+                    </a>
+
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+
+                    <p>
+                        Rs ${Number(product.price)
+                    .toLocaleString("en-NP")}
+                    </p>
+                `;
+
+
+                productContainer
+                    .appendChild(productCard);
+            }
+        );
+
+
+        createPagination();
+    }
+
+
+    /* =========================
+       CREATE PAGINATION
+    ========================= */
+
+    function createPagination() {
+
+        paginationContainer.innerHTML = "";
+
+
+        const totalPages =
+            Math.ceil(
+                currentProducts.length /
+                productsPerPage
+            );
+
+
+        /*
+         * If only one page is needed,
+         * do not show pagination.
+         */
+
+        if (totalPages <= 1) {
+
+            return;
+        }
+
+
+        for (
+            let page = 1;
+            page <= totalPages;
+            page++
+        ) {
+
+            const pageButton =
+                document.createElement("span");
+
+
+            pageButton.textContent =
+                page;
+
+
+            if (page === currentPage) {
+
+                pageButton.style.background =
+                    "#ff523b";
+
+                pageButton.style.color =
+                    "#fff";
+            }
+
+
+            pageButton.addEventListener(
+                "click",
+                function() {
+
+                    currentPage =
+                        page;
+
+
+                    displayProducts();
+
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    });
+                }
+            );
+
+
+            paginationContainer
+                .appendChild(pageButton);
+        }
+
+
+        /*
+         * NEXT ARROW
+         */
+
+        if (currentPage < totalPages) {
+
+            const nextButton =
+                document.createElement("span");
+
+
+            nextButton.innerHTML =
+                "&#8594;";
+
+
+            nextButton.addEventListener(
+                "click",
+                function() {
+
+                    currentPage++;
+
+
+                    displayProducts();
+
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    });
+                }
+            );
+
+
+            paginationContainer
+                .appendChild(nextButton);
+        }
+    }
+
+
+    /* =========================
+       LOAD PRODUCTS
+       FROM BACKEND
+    ========================= */
+
+    async function loadProducts() {
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/products"
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Could not load products"
+                );
+            }
+
+
+            allProducts =
+                await response.json();
+
+
+            currentProducts =
+                [...allProducts];
+
+
+            currentPage = 1;
+
+
+            displayProducts();
+
+
+        } catch (error) {
+
+            productContainer.innerHTML =
+                "<p>Could not load products.</p>";
+
+
+            console.error(error);
+        }
+    }
+
+
+    /* =========================
+       SORT PRODUCTS
+    ========================= */
+
+    sortProducts.addEventListener(
+        "change",
+        function() {
+
+            const sortValue =
+                sortProducts.value;
+
+
+            currentProducts =
+                [...allProducts];
+
+
+            if (sortValue === "priceLow") {
+
+                currentProducts.sort(
+                    (a, b) =>
+                        Number(a.price) -
+                        Number(b.price)
+                );
+            }
+
+
+            else if (
+                sortValue === "priceHigh"
+            ) {
+
+                currentProducts.sort(
+                    (a, b) =>
+                        Number(b.price) -
+                        Number(a.price)
+                );
+            }
+
+
+            else if (
+                sortValue === "nameAZ"
+            ) {
+
+                currentProducts.sort(
+                    (a, b) =>
+                        a.name.localeCompare(
+                            b.name
+                        )
+                );
+            }
+
+
+            else if (
+                sortValue === "nameZA"
+            ) {
+
+                currentProducts.sort(
+                    (a, b) =>
+                        b.name.localeCompare(
+                            a.name
+                        )
+                );
+            }
+
+
+            /*
+             * Whenever sorting changes,
+             * return to page 1.
+             */
+
+            currentPage = 1;
+
+
+            displayProducts();
+        }
+    );
+
+
+    /* =========================
+       START PAGE
+    ========================= */
+
+    loadProducts();
 
 </script>
 

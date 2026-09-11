@@ -69,10 +69,10 @@
 
         <div class="col-2">
 
-            <img src="images/product-2.jpg"
+            <img src=""
                  width="100%"
                  id="productImage"
-                 alt="Black Shoes">
+                 alt="Product">
 
         </div>
 
@@ -81,9 +81,9 @@
 
             <p id="productBreadcrumb">Home / Product</p>
 
-            <h1 id="productName">Black Shoes</h1>
+            <h1 id="productName">Loading...</h1>
 
-            <h4 id="productPrice">Rs 800</h4>
+            <h4 id="productPrice"></h4>
 
 
             <select id="productSize">
@@ -136,41 +136,24 @@
 ========================= -->
 
 <div class="small-container">
+
     <div class="row row-2">
+
         <h2>Related Products</h2>
+
         <a href="Product.html">View More</a>
+
     </div>
 
-    <div class="row">
-        <div class="col-4">
-            <a href="productdetails.html?id=1"><img src="images/product-1.jpg" alt="Red T-Shirt"></a>
-            <a href="productdetails.html?id=1"><h4>Red T-Shirt</h4></a>
-            <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></div>
-            <p>Rs 500</p>
-        </div>
 
-        <div class="col-4">
-            <a href="productdetails.html?id=2"><img src="images/product-2.jpg" alt="Shoes"></a>
-            <a href="productdetails.html?id=2"><h4>Shoes</h4></a>
-            <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></div>
-            <p>Rs 800</p>
-        </div>
+    <!-- Products will be loaded from the backend here -->
 
-        <div class="col-4">
-            <a href="productdetails.html?id=3"><img src="images/product-3.jpg" alt="Pants"></a>
-            <a href="productdetails.html?id=3"><h4>Pants</h4></a>
-            <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></div>
-            <p>Rs 1,000</p>
-        </div>
+    <div class="row" id="relatedProducts">
 
-        <div class="col-4">
-            <a href="productdetails.html?id=4"><img src="images/product-4.jpg" alt="Shoes"></a>
-            <a href="productdetails.html?id=4"><h4>Shoes</h4></a>
-            <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></div>
-            <p>Rs 1,500</p>
-        </div>
     </div>
+
 </div>
+
 
 <!-- =========================
      FOOTER
@@ -289,94 +272,236 @@
     const accountLink =
         document.getElementById("accountLink");
 
+
     if (loggedUser) {
+
         accountLink.textContent = "Account";
         accountLink.href = "account.html";
+
     } else {
+
         accountLink.textContent = "Login";
         accountLink.href = "login.html";
     }
 
 
-
     /* =========================
-       PRODUCT DATA
-       Temporary frontend data.
-       Later this will come from the Spring Boot API.
+       GET PRODUCT ID FROM URL
     ========================= */
 
-    const products = {
-        1: {
-            id: 1,
-            name: "Red T-Shirt",
-            price: 500,
-            image: "images/product-1.jpg",
-            category: "T-Shirt",
-            description: "A comfortable red T-shirt with a clean casual look, designed for everyday wear and easy styling."
-        },
-        2: {
-            id: 2,
-            name: "Shoes",
-            price: 800,
-            image: "images/product-2.jpg",
-            category: "Shoes",
-            description: "Comfortable everyday shoes with a modern design, made for casual outfits and daily wear."
-        },
-        3: {
-            id: 3,
-            name: "Pants",
-            price: 1000,
-            image: "images/product-3.jpg",
-            category: "Pants",
-            description: "Versatile casual pants designed for comfort, durability, and easy everyday styling."
-        },
-        4: {
-            id: 4,
-            name: "Shoes",
-            price: 1500,
-            image: "images/product-4.jpg",
-            category: "Shoes",
-            description: "Stylish premium shoes that combine a modern look with comfortable everyday wear."
-        },
-        5: {
-            id: 5,
-            name: "Socks",
-            price: 200,
-            image: "images/product-5.jpg",
-            category: "Accessories",
-            description: "Soft and comfortable everyday socks designed to pair easily with your favourite footwear."
-        },
-        6: {
-            id: 6,
-            name: "Watch",
-            price: 1200,
-            image: "images/product-6.jpg",
-            category: "Accessories",
-            description: "A clean everyday watch that adds a simple, polished finishing touch to your outfit."
+    const params =
+        new URLSearchParams(window.location.search);
+
+
+    const selectedProductId =
+        params.get("id");
+
+
+    let selectedProduct = null;
+
+
+    /* =========================
+       LOAD PRODUCT FROM BACKEND
+    ========================= */
+
+    async function loadProduct() {
+
+        if (!selectedProductId) {
+
+            document.getElementById("productName")
+                .textContent = "Product not found";
+
+            return;
         }
-    };
 
-    const params = new URLSearchParams(window.location.search);
-    const selectedProductId = Number(params.get("id")) || 1;
-    const selectedProduct = products[selectedProductId] || products[1];
 
-    document.getElementById("productName").textContent =
-        selectedProduct.name;
+        try {
 
-    document.getElementById("productPrice").textContent =
-        "Rs " + selectedProduct.price;
+            const response =
+                await fetch(
+                    "/api/products/" + selectedProductId
+                );
 
-    document.getElementById("productImage").src =
-        selectedProduct.image;
 
-    document.getElementById("productImage").alt =
-        selectedProduct.name;
+            if (!response.ok) {
 
-    document.getElementById("productBreadcrumb").textContent =
-        "Home / " + selectedProduct.category;
+                throw new Error(
+                    "Product not found"
+                );
+            }
 
-    document.getElementById("productDescription").textContent =
-        selectedProduct.description;
+
+            selectedProduct =
+                await response.json();
+
+
+            document.getElementById("productName")
+                .textContent =
+                selectedProduct.name;
+
+
+            document.getElementById("productPrice")
+                .textContent =
+                "Rs " +
+                Number(selectedProduct.price)
+                    .toLocaleString("en-NP");
+
+
+            document.getElementById("productImage")
+                .src =
+                selectedProduct.image;
+
+
+            document.getElementById("productImage")
+                .alt =
+                selectedProduct.name;
+
+
+            document.getElementById("productBreadcrumb")
+                .textContent =
+                "Home / " +
+                selectedProduct.category;
+
+
+            document.getElementById("productDescription")
+                .textContent =
+                selectedProduct.description;
+
+
+            /*
+             * After the selected product loads,
+             * load related products from the database.
+             */
+            loadRelatedProducts();
+
+
+        } catch (error) {
+
+            document.getElementById("productName")
+                .textContent =
+                "Product not found";
+
+
+            document.getElementById("productPrice")
+                .textContent = "";
+
+
+            document.getElementById("productDescription")
+                .textContent =
+                "This product could not be loaded.";
+
+
+            document.getElementById("addToCartButton")
+                .disabled = true;
+
+
+            console.error(error);
+        }
+    }
+
+
+    /* =========================
+       LOAD RELATED PRODUCTS
+       FROM BACKEND
+    ========================= */
+
+    async function loadRelatedProducts() {
+
+        const relatedProductsContainer =
+            document.getElementById(
+                "relatedProducts"
+            );
+
+
+        try {
+
+            const response =
+                await fetch("/api/products");
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Could not load related products"
+                );
+            }
+
+
+            const products =
+                await response.json();
+
+
+            /*
+             * Do not show the product that
+             * the customer is currently viewing.
+             */
+            const relatedProducts =
+                products.filter(
+                    product =>
+                        Number(product.id) !==
+                        Number(selectedProductId)
+                );
+
+
+            /*
+             * Only display four related products.
+             */
+            const productsToShow =
+                relatedProducts.slice(0, 4);
+
+
+            relatedProductsContainer.innerHTML = "";
+
+
+            productsToShow.forEach(function (product) {
+
+                const productCard =
+                    document.createElement("div");
+
+
+                productCard.className =
+                    "col-4";
+
+
+                productCard.innerHTML = `
+                    <a href="productdetails.html?id=${product.id}">
+                        <img
+                            src="${product.image}"
+                            alt="${product.name}">
+                    </a>
+
+                    <a href="productdetails.html?id=${product.id}">
+                        <h4>${product.name}</h4>
+                    </a>
+
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+
+                    <p>
+                        Rs ${Number(product.price)
+                    .toLocaleString("en-NP")}
+                    </p>
+                `;
+
+
+                relatedProductsContainer
+                    .appendChild(productCard);
+            });
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            relatedProductsContainer.innerHTML =
+                "<p>Related products could not be loaded.</p>";
+        }
+    }
 
 
     /* =========================
@@ -386,13 +511,36 @@
     function addToCart() {
 
         const loggedUser =
-            JSON.parse(localStorage.getItem("loggedUser"));
+            JSON.parse(
+                localStorage.getItem("loggedUser")
+            );
+
 
         if (!loggedUser) {
-            alert("Please login to add products to your cart.");
-            window.location.href = "login.html";
+
+            alert(
+                "Please login to add products to your cart."
+            );
+
+
+            window.location.href =
+                "login.html";
+
+
             return;
         }
+
+
+        if (!selectedProduct) {
+
+            alert(
+                "Product information is still loading."
+            );
+
+
+            return;
+        }
+
 
         const productName =
             document.getElementById("productName")
@@ -405,12 +553,6 @@
                 .textContent
                 .trim();
 
-
-        /*
-           Gets the number from "Rs 800".
-           Your cart will display it using the current
-           currency format in cart.html.
-        */
 
         const productPrice =
             Number(
@@ -430,19 +572,23 @@
 
         const productQuantity =
             Number(
-                document.getElementById("productQuantity")
-                    .value
+                document.getElementById(
+                    "productQuantity"
+                ).value
             );
 
 
         const cartMessage =
-            document.getElementById("cartMessage");
+            document.getElementById(
+                "cartMessage"
+            );
 
 
         if (!productSize) {
 
             cartMessage.textContent =
                 "Please select a size first.";
+
 
             return;
         }
@@ -456,26 +602,24 @@
             cartMessage.textContent =
                 "Please enter a valid quantity.";
 
+
             return;
         }
 
 
         let cart =
             JSON.parse(
-                localStorage.getItem("eliteWearCart")
+                localStorage.getItem(
+                    "eliteWearCart"
+                )
             ) || [];
 
-
-        /*
-           Same product + same size:
-           increase quantity instead of making
-           a duplicate cart row.
-        */
 
         const existingProduct =
             cart.find(
                 item =>
-                    Number(item.id) === Number(selectedProduct.id) &&
+                    Number(item.id) ===
+                    Number(selectedProduct.id) &&
                     item.size === productSize
             );
 
@@ -513,13 +657,9 @@
 
 
         cartMessage.textContent =
-            productName + " added to your cart!";
+            productName +
+            " added to your cart!";
 
-
-        /*
-           Small delay so the user can see the
-           confirmation before going to cart.
-        */
 
         setTimeout(function () {
 
@@ -528,6 +668,13 @@
 
         }, 600);
     }
+
+
+    /* =========================
+       START PAGE
+    ========================= */
+
+    loadProduct();
 
 </script>
 

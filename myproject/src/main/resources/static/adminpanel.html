@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EliteWear Admin Panel</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<div class="admin-layout">
+    <div class="sidebar">
+        <h2>EliteWear Admin</h2>
+        <button onclick="showSection('dashboard')">Dashboard</button>
+        <button onclick="showSection('users')">Users</button>
+        <button onclick="showSection('products')">Products</button>
+        <button onclick="showSection('orders')">Orders</button>
+        <button onclick="showSection('messages')">Messages</button>
+    </div>
+
+    <div class="main-content">
+        <div class="top-bar">
+            <h1 id="pageTitle">Dashboard</h1>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+
+        <div id="dashboardSection">
+            <div class="dashboard-cards">
+                <div class="card"><h3>Total Users</h3><p id="totalUsers">0</p></div>
+                <div class="card"><h3>Active Users</h3><p id="activeUsers">0</p></div>
+                <div class="card"><h3>Total Products</h3><p id="totalProducts">0</p></div>
+                <div class="card"><h3>Total Orders</h3><p id="totalOrders">0</p></div>
+                <div class="card"><h3>Total Messages</h3><p id="totalMessages">0</p></div>
+            </div>
+        </div>
+
+        <div id="usersSection" style="display:none;">
+            <h2>User Management</h2>
+            <table>
+                <thead><tr><th>ID</th><th>Username</th><th>Email</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead>
+                <tbody id="userTableBody"></tbody>
+            </table>
+        </div>
+
+        <div id="productsSection" style="display:none;">
+            <h2>Product Management</h2>
+            <div style="margin:20px 0 30px;padding:20px;background:white;border-radius:8px;">
+                <h3 id="productFormTitle">Add Product</h3>
+                <input type="hidden" id="productId">
+                <p><label>Product Name</label><br><input type="text" id="productName"></p>
+                <p><label>Price</label><br><input type="number" id="productPrice" min="0"></p>
+                <p><label>Category</label><br><input type="text" id="productCategory"></p>
+                <p><label>Stock</label><br><input type="number" id="productStock" min="0"></p>
+                <p><label>Product Image</label><br><input type="file" id="productImageFile" accept="image/*"></p>
+                <p><label>Description</label><br><textarea id="productDescription" rows="4"></textarea></p>
+                <button class="action-btn activate-btn" id="saveProductButton" onclick="saveProduct()">Add Product</button>
+                <button class="action-btn deactivate-btn" id="cancelEditButton" onclick="clearProductForm()" style="display:none;">Cancel</button>
+            </div>
+
+            <table>
+                <thead><tr><th>ID</th><th>Image</th><th>Name</th><th>Price</th><th>Category</th><th>Stock</th><th>Actions</th></tr></thead>
+                <tbody id="productTableBody"></tbody>
+            </table>
+        </div>
+
+        <div id="ordersSection" style="display:none;">
+            <h2>Order Management</h2>
+            <table>
+                <thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Payment</th><th>Date</th><th>Status</th><th>Update</th></tr></thead>
+                <tbody id="orderTableBody"></tbody>
+            </table>
+        </div>
+
+        <div id="messagesSection" style="display:none;">
+            <h2>Contact Messages</h2>
+            <table>
+                <thead><tr><th>ID</th><th>User</th><th>Name</th><th>Email</th><th>Phone</th><th>Message</th><th>Date</th></tr></thead>
+                <tbody id="messageTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    let users = [], products = [], orders = [], messages = [];
+
+    async function checkAdminSession() {
+        try {
+            const r = await fetch("/api/auth/session");
+            if (!r.ok) throw new Error();
+            const s = await r.json();
+            if (!s.loggedIn || s.role !== "admin") throw new Error();
+            return true;
+        } catch {
+            localStorage.removeItem("loggedUser");
+            window.location.href = "login.html";
+            return false;
+        }
+    }
+
+    async function loadUsers() {
+        const r = await fetch("/api/admin/users");
+        if (!r.ok) return;
+        users = await r.json();
+        userTableBody.innerHTML = users.map(u => `
+        <tr>
+            <td>${u.id}</td><td>${u.username}</td><td>${u.email}</td><td>${u.role}</td>
+            <td class="${u.active ? "status-active" : "status-inactive"}">${u.active ? "Active" : "Inactive"}</td>
+            <td>
+                <button class="action-btn ${u.active ? "deactivate-btn" : "activate-btn"}"
+                        onclick="changeStatus(${u.id}, ${!u.active})">${u.active ? "Deactivate" : "Activate"}</button>
+                ${u.role !== "admin" ? `<button class="action-btn deactivate-btn" onclick="deleteUser(${u.id})">Delete</button>` : ""}
+            </td>
+        </tr>`).join("");
+        updateDashboard();
+    }
+
+    async function changeStatus(id, active) {
+        const r = await fetch(`/api/admin/users/${id}/status?active=${active}`, {method:"PUT"});
+        if (r.ok) loadUsers(); else alert("Could not update user");
+    }
+
+    async function deleteUser(id) {
+        if (!confirm("Delete this user?")) return;
+        const r = await fetch(`/api/admin/users/${id}`, {method:"DELETE"});
+        if (r.ok) loadUsers(); else alert("Could not delete user");
+    }
+
+    async function loadProducts() {
+        const r = await fetch("/api/products");
+        if (!r.ok) return;
+        products = await r.json();
+
+        productTableBody.innerHTML = products.map(p => `
+        <tr>
+            <td>${p.id}</td>
+            <td><img src="${p.image}" alt="${p.name}" width="60" height="60" style="object-fit:cover;"></td>
+            <td>${p.name}</td>
+            <td>Rs ${Number(p.price).toLocaleString("en-NP")}</td>
+            <td>${p.category}</td><td>${p.stock}</td>
+            <td>
+                <button class="action-btn activate-btn" onclick="editProduct(${p.id})">Edit</button>
+                <button class="action-btn deactivate-btn" onclick="deleteProduct(${p.id})">Delete</button>
+            </td>
+        </tr>`).join("");
+        updateDashboard();
+    }
+
+    async function saveProduct() {
+        const id = productId.value;
+        const file = productImageFile.files[0];
+
+        const data = {
+            name: productName.value.trim(),
+            price: Number(productPrice.value),
+            category: productCategory.value.trim(),
+            stock: Number(productStock.value),
+            description: productDescription.value.trim(),
+            image: id ? (products.find(p => p.id == id)?.image || "") : ""
+        };
+
+        if (!data.name || !productPrice.value || !data.category || !productStock.value || !data.description) {
+            alert("Please fill in all product fields.");
+            return;
+        }
+
+        if (!id && !file) {
+            alert("Please choose a product image.");
+            return;
+        }
+
+        const r = await fetch(id ? `/api/products/${id}` : "/api/products", {
+            method: id ? "PUT" : "POST",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify(data)
+        });
+
+        if (!r.ok) {
+            alert("Could not save product");
+            return;
+        }
+
+        const saved = await r.json();
+
+        if (file) {
+            const fd = new FormData();
+            fd.append("file", file);
+            const ir = await fetch(`/api/products/${saved.id}/image`, {method:"POST", body:fd});
+            if (!ir.ok) alert("Product saved but image upload failed");
+        }
+
+        clearProductForm();
+        loadProducts();
+    }
+
+    function editProduct(id) {
+        const p = products.find(x => x.id == id);
+        if (!p) return;
+
+        productId.value = p.id;
+        productName.value = p.name;
+        productPrice.value = p.price;
+        productCategory.value = p.category;
+        productStock.value = p.stock;
+        productDescription.value = p.description;
+        productImageFile.value = "";
+        productFormTitle.textContent = "Edit Product";
+        saveProductButton.textContent = "Update Product";
+        cancelEditButton.style.display = "inline-block";
+    }
+
+    async function deleteProduct(id) {
+        if (!confirm("Delete this product?")) return;
+        const r = await fetch(`/api/products/${id}`, {method:"DELETE"});
+        if (r.ok) loadProducts(); else alert("Could not delete product");
+    }
+
+    function clearProductForm() {
+        productId.value = "";
+        productName.value = "";
+        productPrice.value = "";
+        productCategory.value = "";
+        productStock.value = "";
+        productDescription.value = "";
+        productImageFile.value = "";
+        productFormTitle.textContent = "Add Product";
+        saveProductButton.textContent = "Add Product";
+        cancelEditButton.style.display = "none";
+    }
+
+    async function loadOrders() {
+        const r = await fetch("/api/orders");
+        if (!r.ok) return;
+        orders = await r.json();
+
+        orderTableBody.innerHTML = orders.length ? orders.map(o => `
+        <tr>
+            <td>EW-${o.id}</td><td>${o.username}</td>
+            <td>Rs ${Number(o.total || 0).toLocaleString("en-NP")}</td>
+            <td>${o.paymentMethod}</td>
+            <td>${o.createdAt ? new Date(o.createdAt).toLocaleDateString("en-NP") : "-"}</td>
+            <td>${o.status}</td>
+            <td>
+                <select id="status-${o.id}">
+                    ${["Order Placed","Processing","Shipped","Delivered","Cancelled"]
+            .map(s => `<option value="${s}" ${o.status === s ? "selected" : ""}>${s}</option>`).join("")}
+                </select>
+                <button class="action-btn activate-btn" onclick="updateOrderStatus(${o.id})">Update</button>
+            </td>
+        </tr>`).join("") : `<tr><td colspan="7">No orders found.</td></tr>`;
+        updateDashboard();
+    }
+
+    async function updateOrderStatus(id) {
+        const status = document.getElementById(`status-${id}`).value;
+        const r = await fetch(`/api/orders/${id}/status?status=${encodeURIComponent(status)}`, {method:"PUT"});
+        if (r.ok) loadOrders(); else alert("Could not update order status");
+    }
+
+    async function loadMessages() {
+        const r = await fetch("/api/messages");
+        if (!r.ok) return;
+        messages = await r.json();
+
+        messageTableBody.innerHTML = messages.length ? messages.map(m => `
+        <tr>
+            <td>${m.id}</td><td>${m.username}</td><td>${m.name}</td>
+            <td>${m.email}</td><td>${m.phone || "-"}</td><td>${m.message}</td>
+            <td>${m.createdAt ? new Date(m.createdAt).toLocaleDateString("en-NP") : "-"}</td>
+        </tr>`).join("") : `<tr><td colspan="7">No messages found.</td></tr>`;
+        updateDashboard();
+    }
+
+    function updateDashboard() {
+        totalUsers.textContent = users.length;
+        activeUsers.textContent = users.filter(u => u.active).length;
+        totalProducts.textContent = products.length;
+        totalOrders.textContent = orders.length;
+        totalMessages.textContent = messages.length;
+    }
+
+    function showSection(section) {
+        ["dashboard","users","products","orders","messages"].forEach(name => {
+            document.getElementById(name + "Section").style.display = name === section ? "block" : "none";
+        });
+
+        pageTitle.textContent = section[0].toUpperCase() + section.slice(1);
+
+        if (section === "users") loadUsers();
+        if (section === "products") loadProducts();
+        if (section === "orders") loadOrders();
+        if (section === "messages") loadMessages();
+    }
+
+    async function logout() {
+        await fetch("/api/auth/logout", {method:"POST"}).catch(() => {});
+        localStorage.removeItem("loggedUser");
+        window.location.href = "login.html";
+    }
+
+    async function start() {
+        if (!await checkAdminSession()) return;
+        loadUsers();
+        loadProducts();
+        loadOrders();
+        loadMessages();
+    }
+
+    start();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Email - EliteWear</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+<div class="account-page">
+    <div class="account-card">
+
+        <div class="form-content active">
+
+            <h2>Verify Your Email</h2>
+
+            <p style="margin-bottom:15px;">
+                We sent a 6-digit verification code to:
+            </p>
+
+            <p id="emailText"
+               style="font-weight:600; margin-bottom:20px;">
+            </p>
+
+            <form id="verifyForm">
+
+                <input
+                        type="text"
+                        id="verificationCode"
+                        placeholder="Enter 6-digit code"
+                        maxlength="6"
+                        required>
+
+                <button
+                        type="submit"
+                        class="btn"
+                        id="verifyButton">
+
+                    Verify Email
+
+                </button>
+
+            </form>
+
+            <p class="error-msg"
+               id="verifyError"
+               style="display:none;">
+            </p>
+
+            <p id="verifySuccess"
+               style="display:none;
+                margin-top:10px;
+                color:green;
+                font-weight:600;">
+            </p>
+
+            <p style="margin-top:15px;">
+                <a href="register.html">
+                    ← Back to Register
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+
+    const email =
+        sessionStorage.getItem(
+            "verificationEmail"
+        );
+
+    const emailText =
+        document.getElementById(
+            "emailText"
+        );
+
+    const verifyForm =
+        document.getElementById(
+            "verifyForm"
+        );
+
+    const verifyError =
+        document.getElementById(
+            "verifyError"
+        );
+
+    const verifySuccess =
+        document.getElementById(
+            "verifySuccess"
+        );
+
+    const verifyButton =
+        document.getElementById(
+            "verifyButton"
+        );
+
+
+    // If user opened verify page directly
+    if (!email) {
+        window.location.href =
+            "register.html";
+    } else {
+        emailText.textContent =
+            email;
+    }
+
+
+    verifyForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+            const code =
+                document.getElementById(
+                    "verificationCode"
+                ).value.trim();
+
+
+            verifyError.style.display =
+                "none";
+
+            verifySuccess.style.display =
+                "none";
+
+
+            if (code.length !== 6) {
+
+                verifyError.textContent =
+                    "Please enter the 6-digit verification code.";
+
+                verifyError.style.display =
+                    "block";
+
+                return;
+            }
+
+
+            const params =
+                new URLSearchParams();
+
+            params.append(
+                "email",
+                email
+            );
+
+            params.append(
+                "code",
+                code
+            );
+
+
+            verifyButton.disabled =
+                true;
+
+            verifyButton.textContent =
+                "Verifying...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/auth/verify",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/x-www-form-urlencoded"
+                            },
+
+                            body: params
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (response.ok && data.success) {
+
+                    verifySuccess.textContent =
+                        "Email verified successfully! Redirecting to login...";
+
+                    verifySuccess.style.display =
+                        "block";
+
+
+                    sessionStorage.removeItem(
+                        "verificationEmail"
+                    );
+
+
+                    setTimeout(function () {
+
+                        window.location.href =
+                            "login.html";
+
+                    }, 1200);
+
+
+                } else {
+
+                    verifyError.textContent =
+                        data.message ||
+                        "Invalid verification code.";
+
+                    verifyError.style.display =
+                        "block";
+                }
+
+
+            } catch (error) {
+
+                verifyError.textContent =
+                    "Could not reach the server.";
+
+                verifyError.style.display =
+                    "block";
+
+            } finally {
+
+                verifyButton.disabled =
+                    false;
+
+                verifyButton.textContent =
+                    "Verify Email";
+            }
+
+        });
+
+</script>
+
+</body>
+</html>

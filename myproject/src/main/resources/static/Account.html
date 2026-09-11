@@ -81,11 +81,14 @@
 
             <aside class="account-profile-card">
 
-                <div class="account-avatar" id="accountAvatar">
+                <div class="account-avatar"
+                     id="accountAvatar">
                     U
                 </div>
 
-                <h2 id="profileName">Elite Wear User</h2>
+                <h2 id="profileName">
+                    Elite Wear User
+                </h2>
 
                 <p class="account-email"
                    id="profileEmail">
@@ -107,7 +110,9 @@
 
                     <div>
                         <i class="fa-solid fa-location-dot"></i>
-                        <span id="profileLocation">Location not added</span>
+                        <span id="profileLocation">
+                            Location not added
+                        </span>
                     </div>
 
                 </div>
@@ -163,7 +168,8 @@
                             View your recent purchases and order information.
                         </p>
 
-                        <a href="./orders.html" id="viewOrdersLink">
+                        <a href="./orders.html"
+                           id="viewOrdersLink">
                             View Orders &#8594;
                         </a>
 
@@ -221,6 +227,7 @@
 
                         <div class="account-detail-item">
                             <span>Full Name</span>
+
                             <strong id="detailName">
                                 Elite Wear User
                             </strong>
@@ -229,6 +236,7 @@
 
                         <div class="account-detail-item">
                             <span>Email Address</span>
+
                             <strong id="detailEmail">
                                 user@example.com
                             </strong>
@@ -237,6 +245,7 @@
 
                         <div class="account-detail-item">
                             <span>Phone Number</span>
+
                             <strong id="detailPhone">
                                 Not added
                             </strong>
@@ -245,6 +254,7 @@
 
                         <div class="account-detail-item">
                             <span>Address</span>
+
                             <strong id="detailAddress">
                                 Not added
                             </strong>
@@ -288,11 +298,13 @@
                 </p>
 
                 <div class="app-logo">
+
                     <img src="images/play-store.png"
                          alt="Play Store">
 
                     <img src="images/app-store.png"
                          alt="App Store">
+
                 </div>
 
             </div>
@@ -338,6 +350,7 @@
 
         <hr>
 
+
         <p class="Copyright">
             Copyright 2025 - EliteWear
         </p>
@@ -353,84 +366,194 @@
        MOBILE MENU
     ========================= */
 
-    var MenuItems = document.getElementById("MenuItems");
+    var MenuItems =
+        document.getElementById("MenuItems");
 
-    MenuItems.style.maxHeight = "0px";
+
+    MenuItems.style.maxHeight =
+        "0px";
 
 
     function menutoggle() {
 
-        if (MenuItems.style.maxHeight === "0px") {
-            MenuItems.style.maxHeight = "200px";
+        if (
+            MenuItems.style.maxHeight ===
+            "0px"
+        ) {
+
+            MenuItems.style.maxHeight =
+                "200px";
+
         } else {
-            MenuItems.style.maxHeight = "0px";
+
+            MenuItems.style.maxHeight =
+                "0px";
         }
     }
 
 
     /* =========================
-       ACCOUNT INFORMATION
-       Temporary frontend version.
-       Later this will come from Spring Boot.
+       ACCOUNT SESSION
     ========================= */
 
-    const loggedUser =
-        JSON.parse(localStorage.getItem("loggedUser"));
-
-    // Protect the Account page.
-    // Guests can browse the website, but must log in to access their account.
-    if (!loggedUser) {
-        window.location.href = "login.html";
-    } else {
-
-        const fullName =
-            loggedUser.fullName ||
-            loggedUser.name ||
-            loggedUser.username ||
-            "Elite Wear User";
-
-        const email =
-            loggedUser.email ||
-            "user@example.com";
-
-        const phone =
-            loggedUser.phone ||
-            "Not added";
-
-        const address =
-            loggedUser.address ||
-            "Not added";
+    let loggedUser = null;
 
 
-        document.getElementById("profileName").textContent =
-            fullName;
+    async function loadAccount() {
 
-        document.getElementById("profileEmail").textContent =
-            email;
+        try {
 
-        document.getElementById("welcomeName").textContent =
-            fullName.split(" ")[0];
-
-        document.getElementById("detailName").textContent =
-            fullName;
-
-        document.getElementById("detailEmail").textContent =
-            email;
-
-        document.getElementById("detailPhone").textContent =
-            phone;
-
-        document.getElementById("detailAddress").textContent =
-            address;
-
-        document.getElementById("profileLocation").textContent =
-            address !== "Not added"
-                ? address
-                : "Location not added";
+            const response =
+                await fetch(
+                    "/api/auth/session"
+                );
 
 
-        document.getElementById("accountAvatar").textContent =
-            fullName.charAt(0).toUpperCase();
+            if (!response.ok) {
+
+                localStorage.removeItem(
+                    "loggedUser"
+                );
+
+                window.location.href =
+                    "login.html";
+
+                return;
+            }
+
+
+            const session =
+                await response.json();
+
+
+            if (!session.loggedIn) {
+
+                localStorage.removeItem(
+                    "loggedUser"
+                );
+
+                window.location.href =
+                    "login.html";
+
+                return;
+            }
+
+
+            loggedUser = session;
+
+
+            /*
+             * Use session username as the
+             * trusted account identity.
+             */
+            const fullName =
+                session.username ||
+                "Elite Wear User";
+
+
+            /*
+             * The current session endpoint
+             * does not return profile email,
+             * phone or address.
+             *
+             * We can add a profile API later.
+             */
+            const email =
+                "Not available";
+
+            const phone =
+                "Not added";
+
+            const address =
+                "Not added";
+
+
+            document
+                .getElementById(
+                    "profileName"
+                )
+                .textContent =
+                fullName;
+
+
+            document
+                .getElementById(
+                    "profileEmail"
+                )
+                .textContent =
+                email;
+
+
+            document
+                .getElementById(
+                    "welcomeName"
+                )
+                .textContent =
+                fullName
+                    .split(" ")[0];
+
+
+            document
+                .getElementById(
+                    "detailName"
+                )
+                .textContent =
+                fullName;
+
+
+            document
+                .getElementById(
+                    "detailEmail"
+                )
+                .textContent =
+                email;
+
+
+            document
+                .getElementById(
+                    "detailPhone"
+                )
+                .textContent =
+                phone;
+
+
+            document
+                .getElementById(
+                    "detailAddress"
+                )
+                .textContent =
+                address;
+
+
+            document
+                .getElementById(
+                    "profileLocation"
+                )
+                .textContent =
+                "Location not added";
+
+
+            document
+                .getElementById(
+                    "accountAvatar"
+                )
+                .textContent =
+                fullName
+                    .charAt(0)
+                    .toUpperCase();
+
+
+        } catch (error) {
+
+            console.error(
+                "Account session error:",
+                error
+            );
+
+
+            window.location.href =
+                "login.html";
+        }
     }
 
 
@@ -438,28 +561,72 @@
        LOGOUT
     ========================= */
 
-    function logoutUser() {
+    async function logoutUser() {
 
-        localStorage.removeItem("loggedUser");
+        try {
 
-        window.location.href = "login.html";
+            await fetch(
+                "/api/auth/logout",
+                {
+                    method: "POST"
+                }
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Logout error:",
+                error
+            );
+
+        } finally {
+
+            // Remove old frontend copy too
+            localStorage.removeItem(
+                "loggedUser"
+            );
+
+
+            window.location.href =
+                "login.html";
+        }
     }
 
-</script>
 
+    /* =========================
+       ORDERS LINK
+    ========================= */
 
+    const viewOrdersLink =
+        document.getElementById(
+            "viewOrdersLink"
+        );
 
-<script>
-    const viewOrdersLink = document.getElementById("viewOrdersLink");
 
     if (viewOrdersLink) {
-        viewOrdersLink.addEventListener("click", function (event) {
-            event.preventDefault();
-            window.location.assign("./orders.html");
-        });
+
+        viewOrdersLink.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+                window.location.assign(
+                    "./orders.html"
+                );
+            }
+        );
     }
+
+
+    /* =========================
+       START PAGE
+    ========================= */
+
+    loadAccount();
+
 </script>
 
 </body>
 </html>
-

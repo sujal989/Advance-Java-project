@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Elitewear - My Orders</title>
 
     <link rel="stylesheet" href="css/main.css">
@@ -12,13 +14,17 @@
 
 <body>
 
+<!-- HEADER -->
 <div class="header">
     <div class="container">
+
         <div class="navbar">
 
             <div class="logo">
                 <a href="home.html">
-                    <img src="images/Elite.logo.png" width="140px" alt="Elitewear Logo">
+                    <img src="images/Elite.logo.png"
+                         width="140px"
+                         alt="Elitewear Logo">
                 </a>
             </div>
 
@@ -28,39 +34,58 @@
                     <li><a href="Product.html">Products</a></li>
                     <li><a href="Aboutus.html">About</a></li>
                     <li><a href="contactus.html">Contact</a></li>
-                    <li><a href="#" id="accountLink">Account</a></li>
+                    <li><a href="account.html">Account</a></li>
                 </ul>
             </nav>
 
             <a href="cart.html">
-                <img src="images/cart.png" width="30px" height="30px" alt="Cart">
+                <img src="images/cart.png"
+                     width="30px"
+                     height="30px"
+                     alt="Cart">
             </a>
 
             <img src="images/menu.png"
                  class="menu-icon"
                  onclick="menutoggle()"
                  alt="Menu">
+
         </div>
+
     </div>
 </div>
 
 
+<!-- ORDERS -->
 <main class="orders-page">
 
     <div class="orders-container">
 
         <div class="orders-heading">
+
             <div>
-                <p class="orders-eyebrow">ELITEWEAR ACCOUNT</p>
+                <p class="orders-eyebrow">
+                    ELITEWEAR ACCOUNT
+                </p>
+
                 <h1>My Orders</h1>
-                <p>View your recent EliteWear purchases and order details.</p>
+
+                <p>
+                    View your recent EliteWear purchases
+                    and order details.
+                </p>
             </div>
 
-            <a href="Product.html" class="orders-shop-btn">
+            <a href="Product.html"
+               class="orders-shop-btn">
+
                 <i class="fa-solid fa-bag-shopping"></i>
                 Continue Shopping
+
             </a>
+
         </div>
+
 
         <div id="ordersList"></div>
 
@@ -69,123 +94,275 @@
 </main>
 
 
+<!-- FOOTER -->
 <div class="footer">
+
     <div class="container">
+
         <div class="row">
 
             <div class="footer-col-1">
+
                 <h3>Download Our App</h3>
-                <p>Download the app for Android and iOS mobile phones.</p>
+
+                <p>
+                    Download the app for Android and iOS mobile phones.
+                </p>
 
                 <div class="app-logo">
-                    <img src="images/play-store.png" alt="Play Store">
-                    <img src="images/app-store.png" alt="App Store">
+
+                    <img src="images/play-store.png"
+                         alt="Play Store">
+
+                    <img src="images/app-store.png"
+                         alt="App Store">
+
                 </div>
+
             </div>
+
 
             <div class="footer-col-2">
-                <img src="images/Elitewear-3.png" alt="Elitewear Logo">
+
+                <img src="images/Elitewear-3.png"
+                     alt="Elitewear Logo">
+
             </div>
 
+
             <div class="footer-col-3">
+
                 <h3>Useful Links</h3>
+
                 <ul>
                     <li>Coupons</li>
                     <li>Blog Post</li>
                     <li>Return Policy</li>
                     <li>Join Affiliate</li>
                 </ul>
+
             </div>
 
+
             <div class="footer-col-4">
+
                 <h3>Follow Us</h3>
+
                 <ul>
                     <li>Facebook</li>
                     <li>Twitter</li>
                     <li>Instagram</li>
                     <li>YouTube</li>
                 </ul>
+
             </div>
 
         </div>
 
+
         <hr>
-        <p class="Copyright">Copyright 2025 - EliteWear</p>
+
+        <p class="Copyright">
+            Copyright 2025 - EliteWear
+        </p>
+
     </div>
+
 </div>
 
 
 <script>
 
-    /* =========================
-       LOGIN PROTECTION
-       Guests can browse the website,
-       but must log in to view orders.
-    ========================= */
+    // Logged-in user from backend session
+    let loggedUser = null;
 
-    const loggedUser =
-        JSON.parse(localStorage.getItem("loggedUser"));
 
-    if (!loggedUser) {
-        window.location.href = "login.html";
+    // Check real Spring Boot session
+    async function checkSession() {
+
+        try {
+
+            const response =
+                await fetch("/api/auth/session");
+
+
+            if (!response.ok) {
+
+                localStorage.removeItem("loggedUser");
+
+                window.location.href =
+                    "login.html";
+
+                return false;
+            }
+
+
+            const session =
+                await response.json();
+
+
+            if (!session.loggedIn) {
+
+                localStorage.removeItem("loggedUser");
+
+                window.location.href =
+                    "login.html";
+
+                return false;
+            }
+
+
+            loggedUser = session;
+
+            return true;
+
+
+        } catch (error) {
+
+            console.error(
+                "Session check failed:",
+                error
+            );
+
+
+            window.location.href =
+                "login.html";
+
+            return false;
+        }
     }
 
 
-    var MenuItems = document.getElementById("MenuItems");
+    // Mobile menu
+    const MenuItems =
+        document.getElementById("MenuItems");
+
     MenuItems.style.maxHeight = "0px";
 
     function menutoggle() {
+
         MenuItems.style.maxHeight =
-            MenuItems.style.maxHeight === "0px" ? "200px" : "0px";
+            MenuItems.style.maxHeight === "0px"
+                ? "200px"
+                : "0px";
     }
 
-
-    const accountLink = document.getElementById("accountLink");
-    accountLink.textContent = "Account";
-    accountLink.href = "account.html";
-
-
-    const orders =
-        JSON.parse(localStorage.getItem("eliteWearOrders")) || [];
 
     const ordersList =
         document.getElementById("ordersList");
 
 
     function formatMoney(amount) {
-        return "Rs " + Number(amount || 0).toLocaleString("en-NP");
+
+        return "Rs " +
+            Number(amount || 0)
+                .toLocaleString("en-NP");
     }
 
 
     function formatDate(dateValue) {
-        const date = new Date(dateValue);
+
+        const date =
+            new Date(dateValue);
 
         if (isNaN(date.getTime())) {
             return "Date unavailable";
         }
 
-        return date.toLocaleDateString("en-NP", {
-            year: "numeric",
-            month: "short",
-            day: "numeric"
-        });
+        return date.toLocaleDateString(
+            "en-NP",
+            {
+                year: "numeric",
+                month: "short",
+                day: "numeric"
+            }
+        );
     }
 
 
     function safeText(value) {
-        const element = document.createElement("div");
-        element.textContent = value == null ? "" : String(value);
+
+        const element =
+            document.createElement("div");
+
+        element.textContent =
+            value == null
+                ? ""
+                : String(value);
+
         return element.innerHTML;
     }
 
 
-    function renderOrders() {
+    // Get orders from Spring Boot
+    async function loadOrders() {
+
+        ordersList.innerHTML =
+            "<p>Loading orders...</p>";
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/orders/user/" +
+                    encodeURIComponent(
+                        loggedUser.username
+                    )
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Could not load orders"
+                );
+            }
+
+
+            const orders =
+                await response.json();
+
+
+            renderOrders(orders);
+
+
+        } catch (error) {
+
+            console.error(
+                "Order loading error:",
+                error
+            );
+
+
+            ordersList.innerHTML = `
+                <div class="orders-empty">
+
+                    <div class="orders-empty-icon">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+
+                    <h2>Could not load orders</h2>
+
+                    <p>
+                        Please try again later.
+                    </p>
+
+                </div>
+            `;
+        }
+    }
+
+
+    function renderOrders(orders) {
 
         ordersList.innerHTML = "";
 
-        if (orders.length === 0) {
+
+        if (!orders || orders.length === 0) {
+
             ordersList.innerHTML = `
                 <div class="orders-empty">
+
                     <div class="orders-empty-icon">
                         <i class="fa-solid fa-box-open"></i>
                     </div>
@@ -193,12 +370,17 @@
                     <h2>No orders yet</h2>
 
                     <p>
-                        Once you complete checkout, your orders will appear here.
+                        Once you complete checkout,
+                        your orders will appear here.
                     </p>
 
-                    <a href="Product.html" class="orders-primary-btn">
+                    <a href="Product.html"
+                       class="orders-primary-btn">
+
                         Start Shopping
+
                     </a>
+
                 </div>
             `;
 
@@ -206,14 +388,7 @@
         }
 
 
-        orders.forEach((order, orderIndex) => {
-
-            const orderCard =
-                document.createElement("section");
-
-            orderCard.className =
-                "orders-card";
-
+        orders.forEach((order, index) => {
 
             const items =
                 Array.isArray(order.items)
@@ -224,7 +399,8 @@
             const itemCount =
                 items.reduce(
                     (total, item) =>
-                        total + Number(item.quantity || 0),
+                        total +
+                        Number(item.quantity || 0),
                     0
                 );
 
@@ -235,24 +411,44 @@
                     <div class="orders-product">
 
                         <div class="orders-product-image">
+
                             <img
-                                src="${safeText(item.image || "images/Elite.logo.png")}"
-                                alt="${safeText(item.name || "Product")}"
+                                src="${safeText(
+                    item.image ||
+                    "images/Elite.logo.png"
+                )}"
+                                alt="${safeText(
+                    item.name ||
+                    "Product"
+                )}"
                                 onerror="this.src='images/Elite.logo.png'">
+
                         </div>
+
 
                         <div class="orders-product-info">
 
                             <h3>
-                                ${safeText(item.name || "Product")}
+                                ${safeText(
+                    item.name ||
+                    "Product"
+                )}
                             </h3>
 
                             <p>
                                 Size:
-                                ${safeText(item.size || "Standard")}
+                                ${safeText(
+                    item.size ||
+                    "Standard"
+                )}
+
                                 &nbsp; • &nbsp;
+
                                 Qty:
-                                ${safeText(item.quantity || 1)}
+                                ${safeText(
+                    item.quantity ||
+                    1
+                )}
                             </p>
 
                             <strong>
@@ -269,11 +465,11 @@
                 `).join("");
 
 
-            const customer =
-                order.customer || {};
+            const orderCard =
+                document.createElement("section");
 
-            const address =
-                order.address || {};
+            orderCard.className =
+                "orders-card";
 
 
             orderCard.innerHTML = `
@@ -281,17 +477,23 @@
                 <div class="orders-card-header">
 
                     <div>
+
                         <span class="orders-label">
                             Order ID
                         </span>
 
                         <h2>
-                            ${safeText(order.id || "EliteWear Order")}
+                            EW-${safeText(order.id)}
                         </h2>
+
                     </div>
 
+
                     <span class="orders-status">
-                        ${safeText(order.status || "Order Placed")}
+                        ${safeText(
+                order.status ||
+                "Order Placed"
+            )}
                     </span>
 
                 </div>
@@ -300,42 +502,58 @@
                 <div class="orders-meta">
 
                     <div>
+
                         <i class="fa-regular fa-calendar"></i>
 
                         <span>
-                            ${formatDate(order.date)}
+                            ${formatDate(
+                order.createdAt
+            )}
                         </span>
+
                     </div>
 
+
                     <div>
+
                         <i class="fa-solid fa-box"></i>
 
                         <span>
                             ${itemCount}
-                            ${itemCount === 1 ? "item" : "items"}
+                            ${itemCount === 1
+                ? "item"
+                : "items"}
                         </span>
+
                     </div>
 
+
                     <div>
+
                         <i class="fa-solid fa-wallet"></i>
 
                         <span>
                             ${safeText(
                 order.paymentMethod ||
-                "Payment method unavailable"
+                "Payment unavailable"
             )}
                         </span>
+
                     </div>
 
                 </div>
 
 
                 <div class="orders-products">
+
                     ${itemHtml}
+
                 </div>
 
 
-                <div class="orders-details-grid">
+                <div class="orders-details-grid"
+                     data-order-details="${index}">
+
 
                     <div class="orders-detail-box">
 
@@ -345,34 +563,26 @@
                         </h3>
 
                         <p>
-                            ${safeText(
-                customer.firstName ||
-                customer.name ||
-                ""
-            )}
-                            ${safeText(customer.lastName || "")}
+                            ${safeText(order.firstName)}
+                            ${safeText(order.lastName)}
                         </p>
 
                         <p>
-                            ${safeText(
-                address.street ||
-                address.address ||
-                ""
-            )}
+                            ${safeText(order.street)}
                         </p>
 
                         <p>
-                            ${safeText(address.city || "")}
-                            ${address.state
-                ? ", " + safeText(address.state)
+                            ${safeText(order.city)}
+                            ${order.state
+                ? ", " + safeText(order.state)
                 : ""}
-                            ${address.postcode
-                ? " " + safeText(address.postcode)
+                            ${order.postcode
+                ? " " + safeText(order.postcode)
                 : ""}
                         </p>
 
                         <p>
-                            ${safeText(address.country || "")}
+                            ${safeText(order.country)}
                         </p>
 
                     </div>
@@ -385,25 +595,49 @@
                             Order Summary
                         </h3>
 
-                        <div>
-                            <span>Subtotal</span>
-                            <span>
-                                ${formatMoney(order.subtotal)}
-                            </span>
-                        </div>
 
                         <div>
-                            <span>Delivery</span>
+
                             <span>
-                                ${formatMoney(order.delivery)}
+                                Subtotal
                             </span>
+
+                            <span>
+                                ${formatMoney(
+                order.subtotal
+            )}
+                            </span>
+
                         </div>
+
+
+                        <div>
+
+                            <span>
+                                Delivery
+                            </span>
+
+                            <span>
+                                ${formatMoney(
+                order.delivery
+            )}
+                            </span>
+
+                        </div>
+
 
                         <div class="orders-total">
-                            <span>Total</span>
+
+                            <span>
+                                Total
+                            </span>
+
                             <strong>
-                                ${formatMoney(order.total)}
+                                ${formatMoney(
+                order.total
+            )}
                             </strong>
+
                         </div>
 
                     </div>
@@ -416,46 +650,31 @@
                     <button
                         type="button"
                         class="orders-details-btn"
-                        onclick="toggleOrderDetails(${orderIndex}, this)">
+                        onclick="toggleOrderDetails(
+                            ${index},
+                            this
+                        )">
 
                         <i class="fa-solid fa-chevron-up"></i>
                         Hide Details
 
                     </button>
 
-                    ${
-                (order.status || "Order Placed") === "Order Placed"
-                    ? `
-                                <button
-                                    type="button"
-                                    class="orders-cancel-btn"
-                                    onclick="cancelOrder(${orderIndex})">
-
-                                    <i class="fa-solid fa-xmark"></i>
-                                    Cancel Order
-
-                                </button>
-                              `
-                    : ""
-            }
-
                 </div>
-
             `;
 
 
-            orderCard
-                .querySelector(".orders-details-grid")
-                .dataset.orderDetails =
-                orderIndex;
-
-
-            ordersList.appendChild(orderCard);
+            ordersList.appendChild(
+                orderCard
+            );
         });
     }
 
 
-    function toggleOrderDetails(index, button) {
+    function toggleOrderDetails(
+        index,
+        button
+    ) {
 
         const details =
             document.querySelector(
@@ -476,50 +695,33 @@
 
         button.innerHTML =
             hidden
+
                 ? `<i class="fa-solid fa-chevron-down"></i>
                    View Details`
+
                 : `<i class="fa-solid fa-chevron-up"></i>
                    Hide Details`;
     }
 
 
-    function cancelOrder(index) {
+    // Start page only after backend confirms login
+    async function startPage() {
 
-        const order = orders[index];
+        const loggedIn =
+            await checkSession();
 
-        if (!order) {
-            return;
+
+        if (loggedIn) {
+
+            loadOrders();
         }
-
-        if ((order.status || "Order Placed") !== "Order Placed") {
-            alert("This order can no longer be cancelled.");
-            return;
-        }
-
-        const confirmed = confirm(
-            "Are you sure you want to cancel this order?"
-        );
-
-        if (!confirmed) {
-            return;
-        }
-
-        order.status = "Cancelled";
-
-        localStorage.setItem(
-            "eliteWearOrders",
-            JSON.stringify(orders)
-        );
-
-        renderOrders();
-
-        alert("Your order has been cancelled.");
     }
 
 
-    renderOrders();
+    startPage();
 
 </script>
 
 </body>
+
 </html>

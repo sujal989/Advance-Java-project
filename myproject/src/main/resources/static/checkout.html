@@ -1,4 +1,3 @@
-```
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,20 +7,15 @@
     <title>Elitewear - Checkout</title>
 
     <link rel="stylesheet" href="css/main.css">
-
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
-<!-- =========================
-     HEADER / NAVBAR
-========================= -->
-
+<!-- HEADER -->
 <div class="header">
     <div class="container">
-
         <div class="navbar">
 
             <div class="logo">
@@ -55,15 +49,11 @@
                  onclick="menutoggle()">
 
         </div>
-
     </div>
 </div>
 
 
-<!-- =========================
-     CHECKOUT
-========================= -->
-
+<!-- CHECKOUT -->
 <section class="checkout-page">
 
     <div class="checkout-container">
@@ -76,14 +66,12 @@
 
         <div class="checkout-layout">
 
-            <!-- CHECKOUT FORM -->
-
             <form class="checkout-form-card"
                   id="checkoutForm"
                   novalidate>
 
-                <!-- Contact -->
 
+                <!-- CONTACT -->
                 <div class="checkout-section">
 
                     <div class="checkout-section-title">
@@ -95,40 +83,28 @@
 
                         <div class="checkout-field">
                             <label for="firstName">First Name</label>
-                            <input type="text"
-                                   id="firstName"
-                                   name="firstName"
-                                   autocomplete="given-name">
+                            <input type="text" id="firstName">
                             <small class="checkout-error"
                                    id="firstNameError"></small>
                         </div>
 
                         <div class="checkout-field">
                             <label for="lastName">Last Name</label>
-                            <input type="text"
-                                   id="lastName"
-                                   name="lastName"
-                                   autocomplete="family-name">
+                            <input type="text" id="lastName">
                             <small class="checkout-error"
                                    id="lastNameError"></small>
                         </div>
 
                         <div class="checkout-field">
                             <label for="email">Email Address</label>
-                            <input type="email"
-                                   id="email"
-                                   name="email"
-                                   autocomplete="email">
+                            <input type="email" id="email">
                             <small class="checkout-error"
                                    id="emailError"></small>
                         </div>
 
                         <div class="checkout-field">
                             <label for="phone">Phone Number</label>
-                            <input type="tel"
-                                   id="phone"
-                                   name="phone"
-                                   autocomplete="tel">
+                            <input type="tel" id="phone">
                             <small class="checkout-error"
                                    id="phoneError"></small>
                         </div>
@@ -138,8 +114,7 @@
                 </div>
 
 
-                <!-- Delivery -->
-
+                <!-- DELIVERY -->
                 <div class="checkout-section">
 
                     <div class="checkout-section-title">
@@ -151,56 +126,41 @@
 
                         <div class="checkout-field full-width">
                             <label for="address">Street Address</label>
-                            <input type="text"
-                                   id="address"
-                                   name="address"
-                                   autocomplete="street-address">
+                            <input type="text" id="address">
                             <small class="checkout-error"
                                    id="addressError"></small>
                         </div>
 
                         <div class="checkout-field">
                             <label for="city">City</label>
-                            <input type="text"
-                                   id="city"
-                                   name="city"
-                                   autocomplete="address-level2">
+                            <input type="text" id="city">
                             <small class="checkout-error"
                                    id="cityError"></small>
                         </div>
 
                         <div class="checkout-field">
                             <label for="state">State / Province</label>
-                            <input type="text"
-                                   id="state"
-                                   name="state"
-                                   autocomplete="address-level1">
+                            <input type="text" id="state">
                             <small class="checkout-error"
                                    id="stateError"></small>
                         </div>
 
                         <div class="checkout-field">
                             <label for="postcode">Postcode</label>
-                            <input type="text"
-                                   id="postcode"
-                                   name="postcode"
-                                   autocomplete="postal-code">
+                            <input type="text" id="postcode">
                             <small class="checkout-error"
                                    id="postcodeError"></small>
                         </div>
 
                         <div class="checkout-field">
                             <label for="country">Country</label>
-                            <select id="country"
-                                    name="country"
-                                    autocomplete="country-name">
-                                <option value="">Select country</option>
-                                <option value="Australia">Australia</option>
-                                <option value="Nepal">Nepal</option>
-                                <option value="India">India</option>
-                                <option value="New Zealand">New Zealand</option>
-                                <option value="Other">Other</option>
+
+                            <select id="country">
+                                <option value="Nepal" selected>
+                                    Nepal
+                                </option>
                             </select>
+
                             <small class="checkout-error"
                                    id="countryError"></small>
                         </div>
@@ -210,8 +170,7 @@
                 </div>
 
 
-                <!-- Payment -->
-
+                <!-- PAYMENT -->
                 <div class="checkout-section">
 
                     <div class="checkout-section-title">
@@ -219,9 +178,11 @@
                         <h2>Payment Method</h2>
                     </div>
 
+
                     <div class="checkout-payment-options">
 
                         <div class="checkout-payment-option">
+
                             <input type="radio"
                                    id="cardPayment"
                                    name="paymentMethod"
@@ -232,9 +193,12 @@
                                 <i class="fa-solid fa-credit-card"></i>
                                 Credit / Debit Card
                             </label>
+
                         </div>
 
+
                         <div class="checkout-payment-option">
+
                             <input type="radio"
                                    id="cashPayment"
                                    name="paymentMethod"
@@ -244,6 +208,7 @@
                                 <i class="fa-solid fa-money-bill-wave"></i>
                                 Cash on Delivery
                             </label>
+
                         </div>
 
                     </div>
@@ -255,45 +220,58 @@
                         <div class="checkout-form-grid">
 
                             <div class="checkout-field full-width">
-                                <label for="cardName">Name on Card</label>
+                                <label for="cardName">
+                                    Name on Card
+                                </label>
+
                                 <input type="text"
-                                       id="cardName"
-                                       autocomplete="cc-name">
+                                       id="cardName">
+
                                 <small class="checkout-error"
                                        id="cardNameError"></small>
                             </div>
 
+
                             <div class="checkout-field full-width">
-                                <label for="cardNumber">Card Number</label>
+                                <label for="cardNumber">
+                                    Card Number
+                                </label>
+
                                 <input type="text"
                                        id="cardNumber"
-                                       inputmode="numeric"
                                        maxlength="19"
-                                       placeholder="1234 5678 9012 3456"
-                                       autocomplete="cc-number">
+                                       placeholder="1234 5678 9012 3456">
+
                                 <small class="checkout-error"
                                        id="cardNumberError"></small>
                             </div>
 
+
                             <div class="checkout-field">
-                                <label for="expiry">Expiry</label>
+                                <label for="expiry">
+                                    Expiry
+                                </label>
+
                                 <input type="text"
                                        id="expiry"
                                        maxlength="5"
-                                       placeholder="MM/YY"
-                                       autocomplete="cc-exp">
+                                       placeholder="MM/YY">
+
                                 <small class="checkout-error"
                                        id="expiryError"></small>
                             </div>
 
+
                             <div class="checkout-field">
-                                <label for="cvv">CVV</label>
+                                <label for="cvv">
+                                    CVV
+                                </label>
+
                                 <input type="password"
                                        id="cvv"
                                        maxlength="4"
-                                       inputmode="numeric"
-                                       placeholder="123"
-                                       autocomplete="cc-csc">
+                                       placeholder="123">
+
                                 <small class="checkout-error"
                                        id="cvvError"></small>
                             </div>
@@ -308,7 +286,6 @@
 
 
             <!-- ORDER SUMMARY -->
-
             <aside class="checkout-summary-card">
 
                 <h2>Your Order</h2>
@@ -317,40 +294,58 @@
                      id="checkoutOrderItems">
                 </div>
 
+
                 <div id="checkoutTotals">
 
                     <div class="checkout-summary-row">
                         <span>Subtotal</span>
-                        <strong id="checkoutSubtotal">Rs 0</strong>
+                        <strong id="checkoutSubtotal">
+                            Rs 0
+                        </strong>
                     </div>
+
 
                     <div class="checkout-summary-row">
                         <span>Delivery</span>
-                        <strong id="checkoutDelivery">Rs 0</strong>
+                        <strong id="checkoutDelivery">
+                            Rs 0
+                        </strong>
                     </div>
+
 
                     <div class="checkout-summary-divider"></div>
 
+
                     <div class="checkout-summary-total">
                         <span>Total</span>
-                        <strong id="checkoutTotal">Rs 0</strong>
+                        <strong id="checkoutTotal">
+                            Rs 0
+                        </strong>
                     </div>
+
 
                     <button type="submit"
                             form="checkoutForm"
                             class="checkout-place-order-btn"
                             id="placeOrderButton">
+
                         Place Order
+
                     </button>
+
 
                     <p class="checkout-secure-note">
                         <i class="fa-solid fa-lock"></i>
-                        This is a project checkout interface. No real payment is processed.
+                        This is a project checkout interface.
+                        No real payment is processed.
                     </p>
+
 
                     <a href="cart.html"
                        class="checkout-back-cart">
+
                         &#8592; Back to Cart
+
                     </a>
 
                 </div>
@@ -364,10 +359,7 @@
 </section>
 
 
-<!-- =========================
-     FOOTER
-========================= -->
-
+<!-- FOOTER -->
 <div class="footer">
 
     <div class="container">
@@ -375,13 +367,21 @@
         <div class="row">
 
             <div class="footer-col-1">
+
                 <h3>Download Our App</h3>
-                <p>Download the app for Android and iOS mobile phones.</p>
+
+                <p>
+                    Download the app for Android and iOS mobile phones.
+                </p>
 
                 <div class="app-logo">
-                    <img src="images/play-store.png" alt="Play Store">
-                    <img src="images/app-store.png" alt="App Store">
+                    <img src="images/play-store.png"
+                         alt="Play Store">
+
+                    <img src="images/app-store.png"
+                         alt="App Store">
                 </div>
+
             </div>
 
 
@@ -392,27 +392,34 @@
 
 
             <div class="footer-col-3">
+
                 <h3>Useful Links</h3>
+
                 <ul>
                     <li>Coupons</li>
                     <li>Blog Post</li>
                     <li>Return Policy</li>
                     <li>Join Affiliate</li>
                 </ul>
+
             </div>
 
 
             <div class="footer-col-4">
+
                 <h3>Follow Us</h3>
+
                 <ul>
                     <li>Facebook</li>
                     <li>Twitter</li>
                     <li>Instagram</li>
                     <li>YouTube</li>
                 </ul>
+
             </div>
 
         </div>
+
 
         <hr>
 
@@ -427,63 +434,128 @@
 
 <script>
 
-    /* =========================
-       LOGIN PROTECTION
-       Guests can browse the website,
-       but must log in to checkout.
-    ========================= */
-
-    const loggedUser =
-        JSON.parse(localStorage.getItem("loggedUser"));
-
-    if (!loggedUser) {
-        window.location.href = "login.html";
-    }
+    // User confirmed by Spring Boot session
+    let loggedUser = null;
 
 
+    async function checkSession() {
 
-    /* =========================
-       MOBILE MENU
-    ========================= */
+        try {
 
-    const MenuItems = document.getElementById("MenuItems");
-    MenuItems.style.maxHeight = "0px";
+            const response =
+                await fetch("/api/auth/session");
 
-    function menutoggle() {
 
-        if (MenuItems.style.maxHeight === "0px") {
-            MenuItems.style.maxHeight = "200px";
-        } else {
-            MenuItems.style.maxHeight = "0px";
+            if (!response.ok) {
+
+                localStorage.removeItem("loggedUser");
+
+                window.location.href =
+                    "login.html";
+
+                return false;
+            }
+
+
+            const session =
+                await response.json();
+
+
+            if (!session.loggedIn) {
+
+                localStorage.removeItem("loggedUser");
+
+                window.location.href =
+                    "login.html";
+
+                return false;
+            }
+
+
+            loggedUser = session;
+
+            return true;
+
+
+        } catch (error) {
+
+            console.error(
+                "Session check failed:",
+                error
+            );
+
+            window.location.href =
+                "login.html";
+
+            return false;
         }
     }
 
 
-    /* =========================
-       CART DATA
-    ========================= */
+    // Mobile menu
+    const MenuItems =
+        document.getElementById("MenuItems");
 
+    MenuItems.style.maxHeight = "0px";
+
+
+    function menutoggle() {
+
+        MenuItems.style.maxHeight =
+            MenuItems.style.maxHeight === "0px"
+                ? "200px"
+                : "0px";
+    }
+
+
+    // Cart
     let cart =
-        JSON.parse(localStorage.getItem("eliteWearCart")) || [];
+        JSON.parse(
+            localStorage.getItem("eliteWearCart")
+        ) || [];
 
 
     const orderItems =
-        document.getElementById("checkoutOrderItems");
-
-    const subtotalElement =
-        document.getElementById("checkoutSubtotal");
-
-    const deliveryElement =
-        document.getElementById("checkoutDelivery");
-
-    const totalElement =
-        document.getElementById("checkoutTotal");
+        document.getElementById(
+            "checkoutOrderItems"
+        );
 
     const totalsArea =
-        document.getElementById("checkoutTotals");
+        document.getElementById(
+            "checkoutTotals"
+        );
+
+    const subtotalElement =
+        document.getElementById(
+            "checkoutSubtotal"
+        );
+
+    const deliveryElement =
+        document.getElementById(
+            "checkoutDelivery"
+        );
+
+    const totalElement =
+        document.getElementById(
+            "checkoutTotal"
+        );
 
     const placeOrderButton =
-        document.getElementById("placeOrderButton");
+        document.getElementById(
+            "placeOrderButton"
+        );
+
+
+    function calculateSubtotal() {
+
+        return cart.reduce(
+            (total, item) =>
+                total +
+                Number(item.price || 0) *
+                Number(item.quantity || 1),
+            0
+        );
+    }
 
 
     function renderCheckout() {
@@ -495,29 +567,22 @@
 
             orderItems.innerHTML = `
                 <div class="checkout-empty">
-
                     <i class="fa-solid fa-cart-shopping"></i>
-
                     <h3>Your cart is empty</h3>
-
-                    <p>
-                        Add products to your cart before checking out.
-                    </p>
-
-                    <a href="Product.html">
-                        Shop Products
-                    </a>
-
+                    <p>Add products before checking out.</p>
+                    <a href="Product.html">Shop Products</a>
                 </div>
             `;
 
-            totalsArea.style.display = "none";
+            totalsArea.style.display =
+                "none";
 
             return;
         }
 
 
-        totalsArea.style.display = "block";
+        totalsArea.style.display =
+            "block";
 
 
         cart.forEach(item => {
@@ -529,37 +594,38 @@
                 Number(item.price) || 0;
 
 
-            const itemElement =
-                document.createElement("div");
+            orderItems.innerHTML += `
 
-            itemElement.className =
-                "checkout-order-item";
+                <div class="checkout-order-item">
 
+                    <img
+                        src="${item.image || 'images/Elite.logo.png'}"
+                        alt="${item.name || 'Product'}"
+                        onerror="this.src='images/Elite.logo.png'">
 
-            itemElement.innerHTML = `
+                    <div>
 
-                <img
-                    src="${item.image || 'images/Elite.logo.png'}"
-                    alt="${item.name || 'Product'}"
-                    onerror="this.src='images/Elite.logo.png'"
-                >
+                        <h3>
+                            ${item.name || "Product"}
+                        </h3>
 
-                <div>
-                    <h3>${item.name || "Product"}</h3>
+                        <p>
+                            Qty: ${quantity}
 
-                    <p>
-                        Qty: ${quantity}
-                        ${item.size ? " | Size: " + item.size : ""}
-                    </p>
+                            ${item.size
+                ? " | Size: " + item.size
+                : ""}
+                        </p>
+
+                    </div>
+
+                    <strong>
+                        Rs ${(price * quantity)
+                .toLocaleString("en-NP")}
+                    </strong>
+
                 </div>
-
-                <strong>
-                    Rs ${ (price * quantity).toLocaleString("en-NP") }
-                </strong>
             `;
-
-
-            orderItems.appendChild(itemElement);
         });
 
 
@@ -570,93 +636,96 @@
     function updateTotals() {
 
         const subtotal =
-            cart.reduce(
-                (total, item) =>
-                    total +
-                    (Number(item.price) || 0) *
-                    (Number(item.quantity) || 1),
-                0
-            );
-
+            calculateSubtotal();
 
         const delivery =
             subtotal > 0 ? 100 : 0;
-
 
         const total =
             subtotal + delivery;
 
 
         subtotalElement.textContent =
-            "Rs " + subtotal.toLocaleString("en-NP");
+            "Rs " +
+            subtotal.toLocaleString("en-NP");
 
         deliveryElement.textContent =
-            "Rs " + delivery.toLocaleString("en-NP");
+            "Rs " +
+            delivery.toLocaleString("en-NP");
 
         totalElement.textContent =
-            "Rs " + total.toLocaleString("en-NP");
+            "Rs " +
+            total.toLocaleString("en-NP");
     }
 
 
-    /* =========================
-       PAYMENT METHOD
-    ========================= */
-
+    // Payment selection
     const cardFields =
-        document.getElementById("cardFields");
-
-    const paymentOptions =
-        document.querySelectorAll(
-            'input[name="paymentMethod"]'
+        document.getElementById(
+            "cardFields"
         );
 
 
-    paymentOptions.forEach(option => {
+    document
+        .querySelectorAll(
+            'input[name="paymentMethod"]'
+        )
+        .forEach(option => {
 
-        option.addEventListener("change", function () {
+            option.addEventListener(
+                "change",
+                function () {
 
-            cardFields.style.display =
-                this.value === "Card"
-                    ? "block"
-                    : "none";
+                    cardFields.style.display =
+                        this.value === "Card"
+                            ? "block"
+                            : "none";
 
-            clearCardErrors();
+                    clearCardErrors();
+                }
+            );
         });
 
-    });
 
-
-    /* =========================
-       SIMPLE CLIENT VALIDATION
-    ========================= */
-
-    function setError(fieldId, message) {
+    // Validation
+    function setError(id, message) {
 
         const field =
-            document.getElementById(fieldId);
+            document.getElementById(id);
 
         const error =
-            document.getElementById(fieldId + "Error");
+            document.getElementById(
+                id + "Error"
+            );
 
 
-        field.classList.add("checkout-input-error");
+        field.classList.add(
+            "checkout-input-error"
+        );
+
 
         if (error) {
-            error.textContent = message;
+            error.textContent =
+                message;
         }
     }
 
 
-    function clearError(fieldId) {
+    function clearError(id) {
 
         const field =
-            document.getElementById(fieldId);
+            document.getElementById(id);
 
         const error =
-            document.getElementById(fieldId + "Error");
+            document.getElementById(
+                id + "Error"
+            );
 
 
-        field.classList.remove("checkout-input-error");
+        field.classList.remove(
+            "checkout-input-error"
+        );
+
 
         if (error) {
             error.textContent = "";
@@ -666,8 +735,12 @@
 
     function clearCardErrors() {
 
-        ["cardName", "cardNumber", "expiry", "cvv"]
-            .forEach(clearError);
+        [
+            "cardName",
+            "cardNumber",
+            "expiry",
+            "cvv"
+        ].forEach(clearError);
     }
 
 
@@ -676,39 +749,63 @@
         let valid = true;
 
 
-        const requiredFields = [
-            ["firstName", "Please enter your first name."],
-            ["lastName", "Please enter your last name."],
-            ["email", "Please enter your email."],
-            ["phone", "Please enter your phone number."],
-            ["address", "Please enter your street address."],
-            ["city", "Please enter your city."],
-            ["state", "Please enter your state or province."],
-            ["postcode", "Please enter your postcode."],
-            ["country", "Please select your country."]
-        ];
+        const fields = {
+
+            firstName:
+                "Please enter your first name.",
+
+            lastName:
+                "Please enter your last name.",
+
+            email:
+                "Please enter your email.",
+
+            phone:
+                "Please enter your phone number.",
+
+            address:
+                "Please enter your street address.",
+
+            city:
+                "Please enter your city.",
+
+            state:
+                "Please enter your state or province.",
+
+            postcode:
+                "Please enter your postcode.",
+
+            country:
+                "Country is required."
+        };
 
 
-        requiredFields.forEach(([id, message]) => {
+        for (const id in fields) {
 
             clearError(id);
 
             const value =
-                document.getElementById(id)
+                document
+                    .getElementById(id)
                     .value
                     .trim();
 
 
             if (!value) {
 
-                setError(id, message);
+                setError(
+                    id,
+                    fields[id]
+                );
+
                 valid = false;
             }
-        });
+        }
 
 
         const email =
-            document.getElementById("email")
+            document
+                .getElementById("email")
                 .value
                 .trim();
 
@@ -727,70 +824,85 @@
         }
 
 
-        const selectedPayment =
+        const paymentMethod =
             document.querySelector(
                 'input[name="paymentMethod"]:checked'
             ).value;
 
 
-        if (selectedPayment === "Card") {
-
-            const cardName =
-                document.getElementById("cardName")
-                    .value
-                    .trim();
-
-            const cardNumber =
-                document.getElementById("cardNumber")
-                    .value
-                    .replace(/\s/g, "");
-
-            const expiry =
-                document.getElementById("expiry")
-                    .value
-                    .trim();
-
-            const cvv =
-                document.getElementById("cvv")
-                    .value
-                    .trim();
-
+        if (paymentMethod === "Card") {
 
             clearCardErrors();
 
 
+            const cardName =
+                document
+                    .getElementById("cardName")
+                    .value
+                    .trim();
+
+
+            const cardNumber =
+                document
+                    .getElementById("cardNumber")
+                    .value
+                    .replace(/\s/g, "");
+
+
+            const expiry =
+                document
+                    .getElementById("expiry")
+                    .value
+                    .trim();
+
+
+            const cvv =
+                document
+                    .getElementById("cvv")
+                    .value
+                    .trim();
+
+
             if (!cardName) {
+
                 setError(
                     "cardName",
                     "Please enter the name on the card."
                 );
+
                 valid = false;
             }
 
 
             if (!/^\d{16}$/.test(cardNumber)) {
+
                 setError(
                     "cardNumber",
                     "Enter a 16-digit card number."
                 );
+
                 valid = false;
             }
 
 
             if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry)) {
+
                 setError(
                     "expiry",
                     "Use MM/YY format."
                 );
+
                 valid = false;
             }
 
 
             if (!/^\d{3,4}$/.test(cvv)) {
+
                 setError(
                     "cvv",
                     "Enter a valid CVV."
                 );
+
                 valid = false;
             }
         }
@@ -800,216 +912,350 @@
     }
 
 
-    /* Format card number */
+    // Card number formatting
+    document
+        .getElementById("cardNumber")
+        .addEventListener(
+            "input",
+            function () {
 
-    document.getElementById("cardNumber")
-        .addEventListener("input", function () {
-
-            let value =
-                this.value
-                    .replace(/\D/g, "")
-                    .substring(0, 16);
-
-            this.value =
-                value.replace(/(.{4})/g, "$1 ")
-                    .trim();
-        });
+                const numbers =
+                    this.value
+                        .replace(/\D/g, "")
+                        .substring(0, 16);
 
 
-    /* Format expiry */
-
-    document.getElementById("expiry")
-        .addEventListener("input", function () {
-
-            let value =
-                this.value
-                    .replace(/\D/g, "")
-                    .substring(0, 4);
-
-
-            if (value.length > 2) {
-
-                value =
-                    value.substring(0, 2) +
-                    "/" +
-                    value.substring(2);
+                this.value =
+                    numbers
+                        .replace(
+                            /(.{4})/g,
+                            "$1 "
+                        )
+                        .trim();
             }
+        );
 
 
-            this.value = value;
-        });
+    // Expiry formatting
+    document
+        .getElementById("expiry")
+        .addEventListener(
+            "input",
+            function () {
+
+                let value =
+                    this.value
+                        .replace(/\D/g, "")
+                        .substring(0, 4);
 
 
-    /* =========================
-       PLACE ORDER
-       Frontend-only for now.
-    ========================= */
+                if (value.length > 2) {
 
-    document.getElementById("checkoutForm")
-        .addEventListener("submit", function (event) {
-
-            event.preventDefault();
+                    value =
+                        value.substring(0, 2) +
+                        "/" +
+                        value.substring(2);
+                }
 
 
-            if (cart.length === 0) {
-                return;
+                this.value =
+                    value;
             }
+        );
 
 
-            if (!validateCheckout()) {
-                return;
-            }
+    // Place order
+    document
+        .getElementById("checkoutForm")
+        .addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
 
 
-            const subtotal =
-                cart.reduce(
-                    (total, item) =>
-                        total +
-                        (Number(item.price) || 0) *
-                        (Number(item.quantity) || 1),
-                    0
-                );
+                if (
+                    cart.length === 0 ||
+                    !validateCheckout()
+                ) {
+
+                    return;
+                }
 
 
-            const delivery =
-                subtotal > 0 ? 100 : 0;
+                // Make sure session still exists
+                const sessionValid =
+                    await checkSession();
 
 
-            const order = {
+                if (!sessionValid) {
+                    return;
+                }
 
-                id: "EW-" + Date.now(),
 
-                date: new Date().toISOString(),
+                const subtotal =
+                    calculateSubtotal();
 
-                status: "Order Placed",
+                const delivery =
+                    subtotal > 0
+                        ? 100
+                        : 0;
 
-                items: cart,
 
-                subtotal: subtotal,
+                const orderData = {
 
-                delivery: delivery,
+                    // Backend also overrides this
+                    // using the session username.
+                    username:
+                    loggedUser.username,
 
-                total: subtotal + delivery,
-
-                customer: {
                     firstName:
-                        document.getElementById("firstName").value.trim(),
+                        document
+                            .getElementById(
+                                "firstName"
+                            )
+                            .value
+                            .trim(),
 
                     lastName:
-                        document.getElementById("lastName").value.trim(),
+                        document
+                            .getElementById(
+                                "lastName"
+                            )
+                            .value
+                            .trim(),
 
                     email:
-                        document.getElementById("email").value.trim(),
+                        document
+                            .getElementById(
+                                "email"
+                            )
+                            .value
+                            .trim(),
 
                     phone:
-                        document.getElementById("phone").value.trim()
-                },
+                        document
+                            .getElementById(
+                                "phone"
+                            )
+                            .value
+                            .trim(),
 
-                address: {
                     street:
-                        document.getElementById("address").value.trim(),
+                        document
+                            .getElementById(
+                                "address"
+                            )
+                            .value
+                            .trim(),
 
                     city:
-                        document.getElementById("city").value.trim(),
+                        document
+                            .getElementById(
+                                "city"
+                            )
+                            .value
+                            .trim(),
 
                     state:
-                        document.getElementById("state").value.trim(),
+                        document
+                            .getElementById(
+                                "state"
+                            )
+                            .value
+                            .trim(),
 
                     postcode:
-                        document.getElementById("postcode").value.trim(),
+                        document
+                            .getElementById(
+                                "postcode"
+                            )
+                            .value
+                            .trim(),
 
                     country:
-                    document.getElementById("country").value
-                },
+                    document
+                        .getElementById(
+                            "country"
+                        )
+                        .value,
 
-                paymentMethod:
-                document.querySelector(
-                    'input[name="paymentMethod"]:checked'
-                ).value
-            };
+                    paymentMethod:
+                    document
+                        .querySelector(
+                            'input[name="paymentMethod"]:checked'
+                        )
+                        .value,
+
+                    subtotal:
+                    subtotal,
+
+                    delivery:
+                    delivery,
+
+                    total:
+                        subtotal +
+                        delivery,
+
+                    items:
+                        cart.map(
+                            item => ({
+
+                                productId:
+                                    Number(
+                                        item.id ||
+                                        item.productId
+                                    ) || 0,
+
+                                name:
+                                    item.name ||
+                                    "Product",
+
+                                price:
+                                    Number(
+                                        item.price
+                                    ) || 0,
+
+                                quantity:
+                                    Number(
+                                        item.quantity
+                                    ) || 1,
+
+                                size:
+                                    item.size ||
+                                    "",
+
+                                image:
+                                    item.image ||
+                                    ""
+                            })
+                        )
+                };
 
 
-            const orders =
-                JSON.parse(
-                    localStorage.getItem("eliteWearOrders")
-                ) || [];
+                placeOrderButton.disabled =
+                    true;
+
+                placeOrderButton.textContent =
+                    "Placing Order...";
 
 
-            orders.unshift(order);
+                try {
+
+                    const response =
+                        await fetch(
+                            "/api/orders",
+                            {
+                                method:
+                                    "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify(
+                                        orderData
+                                    )
+                            }
+                        );
 
 
-            localStorage.setItem(
-                "eliteWearOrders",
-                JSON.stringify(orders)
-            );
+                    if (
+                        response.status === 401
+                    ) {
+
+                        localStorage.removeItem(
+                            "loggedUser"
+                        );
+
+                        window.location.href =
+                            "login.html";
+
+                        return;
+                    }
 
 
-            localStorage.removeItem("eliteWearCart");
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "Could not place order"
+                        );
+                    }
 
 
-            /*
-               Next step:
-               orders.html will read eliteWearOrders
-               and display this new order.
-            */
-
-            window.location.href = "orders.html";
-        });
+                    const savedOrder =
+                        await response.json();
 
 
-    /* =========================
-       PREFILL LOGGED USER
-    ========================= */
-
-    if (loggedUser) {
-
-        const name =
-            loggedUser.fullName ||
-            loggedUser.name ||
-            "";
+                    localStorage.removeItem(
+                        "eliteWearCart"
+                    );
 
 
-        const nameParts =
-            name.trim().split(/\s+/);
+                    localStorage.setItem(
+                        "lastEliteWearOrderId",
+                        savedOrder.id
+                    );
 
 
-        if (nameParts[0]) {
-            document.getElementById("firstName").value =
-                nameParts[0];
+                    window.location.href =
+                        "orders.html";
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Order error:",
+                        error
+                    );
+
+
+                    alert(
+                        "Could not place your order. Please try again."
+                    );
+
+
+                    placeOrderButton.disabled =
+                        false;
+
+
+                    placeOrderButton.textContent =
+                        "Place Order";
+                }
+            }
+        );
+
+
+    // Start checkout after session check
+    async function startCheckout() {
+
+        const loggedIn =
+            await checkSession();
+
+
+        if (!loggedIn) {
+            return;
         }
 
 
-        if (nameParts.length > 1) {
-            document.getElementById("lastName").value =
-                nameParts.slice(1).join(" ");
-        }
+        /*
+         * The session endpoint currently gives us
+         * username and role.
+         *
+         * Email and phone stay editable because
+         * the customer enters them at checkout.
+         */
 
 
-        if (loggedUser.email) {
-            document.getElementById("email").value =
-                loggedUser.email;
-        }
-
-
-        if (loggedUser.phone) {
-            document.getElementById("phone").value =
-                loggedUser.phone;
-        }
-
-
-        if (loggedUser.address) {
-            document.getElementById("address").value =
-                loggedUser.address;
-        }
+        renderCheckout();
     }
 
 
-    renderCheckout();
+    startCheckout();
 
 </script>
 
-
 </body>
 </html>
-
-```

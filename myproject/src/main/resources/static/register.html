@@ -138,6 +138,7 @@
     }
 
     const params = new URLSearchParams();
+
     params.append("username", username);
     params.append("email", email);
     params.append("password", password);
@@ -155,23 +156,27 @@
         body: params
       });
 
-      if (!response.ok) {
-        throw new Error("Registration request failed.");
-      }
-
       const data = await response.json();
 
-      if (data.success) {
+      if (response.ok && data.success) {
+
+        // Save email temporarily for verification page
+        sessionStorage.setItem(
+                "verificationEmail",
+                email
+        );
+
         successEl.textContent =
-                "Registration successful! Redirecting to login...";
+                "Verification code sent to your email. Redirecting...";
 
         successEl.style.display = "block";
 
         setTimeout(function () {
-          window.location.href = "login.html";
-        }, 900);
+          window.location.href = "verify.html";
+        }, 1000);
 
       } else {
+
         errorEl.textContent =
                 data.message ||
                 "Username or email already exists.";
@@ -180,12 +185,14 @@
       }
 
     } catch (error) {
+
       errorEl.textContent =
               "Could not reach the server. Please make sure the backend is running.";
 
       errorEl.style.display = "block";
 
     } finally {
+
       registerButton.disabled = false;
       registerButton.textContent = "Register";
     }
