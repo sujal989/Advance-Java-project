@@ -1,0 +1,1015 @@
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Elitewear - Checkout</title>
+
+    <link rel="stylesheet" href="css/main.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER / NAVBAR
+========================= -->
+
+<div class="header">
+    <div class="container">
+
+        <div class="navbar">
+
+            <div class="logo">
+                <a href="home.html">
+                    <img src="images/Elite.logo.png"
+                         width="140px"
+                         alt="Elitewear Logo">
+                </a>
+            </div>
+
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="Product.html">Products</a></li>
+                    <li><a href="Aboutus.html">About</a></li>
+                    <li><a href="contactus.html">Contact</a></li>
+                    <li><a href="account.html">Account</a></li>
+                </ul>
+            </nav>
+
+            <a href="cart.html">
+                <img src="images/cart.png"
+                     width="30px"
+                     height="30px"
+                     alt="Shopping Cart">
+            </a>
+
+            <img src="images/menu.png"
+                 class="menu-icon"
+                 alt="Menu"
+                 onclick="menutoggle()">
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- =========================
+     CHECKOUT
+========================= -->
+
+<section class="checkout-page">
+
+    <div class="checkout-container">
+
+        <div class="checkout-header">
+            <h1>Checkout</h1>
+            <p>Enter your delivery details and review your order.</p>
+        </div>
+
+
+        <div class="checkout-layout">
+
+            <!-- CHECKOUT FORM -->
+
+            <form class="checkout-form-card"
+                  id="checkoutForm"
+                  novalidate>
+
+                <!-- Contact -->
+
+                <div class="checkout-section">
+
+                    <div class="checkout-section-title">
+                        <i class="fa-solid fa-user"></i>
+                        <h2>Contact Information</h2>
+                    </div>
+
+                    <div class="checkout-form-grid">
+
+                        <div class="checkout-field">
+                            <label for="firstName">First Name</label>
+                            <input type="text"
+                                   id="firstName"
+                                   name="firstName"
+                                   autocomplete="given-name">
+                            <small class="checkout-error"
+                                   id="firstNameError"></small>
+                        </div>
+
+                        <div class="checkout-field">
+                            <label for="lastName">Last Name</label>
+                            <input type="text"
+                                   id="lastName"
+                                   name="lastName"
+                                   autocomplete="family-name">
+                            <small class="checkout-error"
+                                   id="lastNameError"></small>
+                        </div>
+
+                        <div class="checkout-field">
+                            <label for="email">Email Address</label>
+                            <input type="email"
+                                   id="email"
+                                   name="email"
+                                   autocomplete="email">
+                            <small class="checkout-error"
+                                   id="emailError"></small>
+                        </div>
+
+                        <div class="checkout-field">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel"
+                                   id="phone"
+                                   name="phone"
+                                   autocomplete="tel">
+                            <small class="checkout-error"
+                                   id="phoneError"></small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Delivery -->
+
+                <div class="checkout-section">
+
+                    <div class="checkout-section-title">
+                        <i class="fa-solid fa-truck"></i>
+                        <h2>Delivery Address</h2>
+                    </div>
+
+                    <div class="checkout-form-grid">
+
+                        <div class="checkout-field full-width">
+                            <label for="address">Street Address</label>
+                            <input type="text"
+                                   id="address"
+                                   name="address"
+                                   autocomplete="street-address">
+                            <small class="checkout-error"
+                                   id="addressError"></small>
+                        </div>
+
+                        <div class="checkout-field">
+                            <label for="city">City</label>
+                            <input type="text"
+                                   id="city"
+                                   name="city"
+                                   autocomplete="address-level2">
+                            <small class="checkout-error"
+                                   id="cityError"></small>
+                        </div>
+
+                        <div class="checkout-field">
+                            <label for="state">State / Province</label>
+                            <input type="text"
+                                   id="state"
+                                   name="state"
+                                   autocomplete="address-level1">
+                            <small class="checkout-error"
+                                   id="stateError"></small>
+                        </div>
+
+                        <div class="checkout-field">
+                            <label for="postcode">Postcode</label>
+                            <input type="text"
+                                   id="postcode"
+                                   name="postcode"
+                                   autocomplete="postal-code">
+                            <small class="checkout-error"
+                                   id="postcodeError"></small>
+                        </div>
+
+                        <div class="checkout-field">
+                            <label for="country">Country</label>
+                            <select id="country"
+                                    name="country"
+                                    autocomplete="country-name">
+                                <option value="">Select country</option>
+                                <option value="Australia">Australia</option>
+                                <option value="Nepal">Nepal</option>
+                                <option value="India">India</option>
+                                <option value="New Zealand">New Zealand</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <small class="checkout-error"
+                                   id="countryError"></small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Payment -->
+
+                <div class="checkout-section">
+
+                    <div class="checkout-section-title">
+                        <i class="fa-solid fa-credit-card"></i>
+                        <h2>Payment Method</h2>
+                    </div>
+
+                    <div class="checkout-payment-options">
+
+                        <div class="checkout-payment-option">
+                            <input type="radio"
+                                   id="cardPayment"
+                                   name="paymentMethod"
+                                   value="Card"
+                                   checked>
+
+                            <label for="cardPayment">
+                                <i class="fa-solid fa-credit-card"></i>
+                                Credit / Debit Card
+                            </label>
+                        </div>
+
+                        <div class="checkout-payment-option">
+                            <input type="radio"
+                                   id="cashPayment"
+                                   name="paymentMethod"
+                                   value="Cash on Delivery">
+
+                            <label for="cashPayment">
+                                <i class="fa-solid fa-money-bill-wave"></i>
+                                Cash on Delivery
+                            </label>
+                        </div>
+
+                    </div>
+
+
+                    <div class="checkout-card-fields"
+                         id="cardFields">
+
+                        <div class="checkout-form-grid">
+
+                            <div class="checkout-field full-width">
+                                <label for="cardName">Name on Card</label>
+                                <input type="text"
+                                       id="cardName"
+                                       autocomplete="cc-name">
+                                <small class="checkout-error"
+                                       id="cardNameError"></small>
+                            </div>
+
+                            <div class="checkout-field full-width">
+                                <label for="cardNumber">Card Number</label>
+                                <input type="text"
+                                       id="cardNumber"
+                                       inputmode="numeric"
+                                       maxlength="19"
+                                       placeholder="1234 5678 9012 3456"
+                                       autocomplete="cc-number">
+                                <small class="checkout-error"
+                                       id="cardNumberError"></small>
+                            </div>
+
+                            <div class="checkout-field">
+                                <label for="expiry">Expiry</label>
+                                <input type="text"
+                                       id="expiry"
+                                       maxlength="5"
+                                       placeholder="MM/YY"
+                                       autocomplete="cc-exp">
+                                <small class="checkout-error"
+                                       id="expiryError"></small>
+                            </div>
+
+                            <div class="checkout-field">
+                                <label for="cvv">CVV</label>
+                                <input type="password"
+                                       id="cvv"
+                                       maxlength="4"
+                                       inputmode="numeric"
+                                       placeholder="123"
+                                       autocomplete="cc-csc">
+                                <small class="checkout-error"
+                                       id="cvvError"></small>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+
+            <!-- ORDER SUMMARY -->
+
+            <aside class="checkout-summary-card">
+
+                <h2>Your Order</h2>
+
+                <div class="checkout-order-items"
+                     id="checkoutOrderItems">
+                </div>
+
+                <div id="checkoutTotals">
+
+                    <div class="checkout-summary-row">
+                        <span>Subtotal</span>
+                        <strong id="checkoutSubtotal">Rs 0</strong>
+                    </div>
+
+                    <div class="checkout-summary-row">
+                        <span>Delivery</span>
+                        <strong id="checkoutDelivery">Rs 0</strong>
+                    </div>
+
+                    <div class="checkout-summary-divider"></div>
+
+                    <div class="checkout-summary-total">
+                        <span>Total</span>
+                        <strong id="checkoutTotal">Rs 0</strong>
+                    </div>
+
+                    <button type="submit"
+                            form="checkoutForm"
+                            class="checkout-place-order-btn"
+                            id="placeOrderButton">
+                        Place Order
+                    </button>
+
+                    <p class="checkout-secure-note">
+                        <i class="fa-solid fa-lock"></i>
+                        This is a project checkout interface. No real payment is processed.
+                    </p>
+
+                    <a href="cart.html"
+                       class="checkout-back-cart">
+                        &#8592; Back to Cart
+                    </a>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<div class="footer">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="footer-col-1">
+                <h3>Download Our App</h3>
+                <p>Download the app for Android and iOS mobile phones.</p>
+
+                <div class="app-logo">
+                    <img src="images/play-store.png" alt="Play Store">
+                    <img src="images/app-store.png" alt="App Store">
+                </div>
+            </div>
+
+
+            <div class="footer-col-2">
+                <img src="images/Elitewear-3.png"
+                     alt="Elitewear Logo">
+            </div>
+
+
+            <div class="footer-col-3">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li>Coupons</li>
+                    <li>Blog Post</li>
+                    <li>Return Policy</li>
+                    <li>Join Affiliate</li>
+                </ul>
+            </div>
+
+
+            <div class="footer-col-4">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                    <li>Instagram</li>
+                    <li>YouTube</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <p class="Copyright">
+            Copyright 2025 - EliteWear
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* =========================
+       LOGIN PROTECTION
+       Guests can browse the website,
+       but must log in to checkout.
+    ========================= */
+
+    const loggedUser =
+        JSON.parse(localStorage.getItem("loggedUser"));
+
+    if (!loggedUser) {
+        window.location.href = "login.html";
+    }
+
+
+
+    /* =========================
+       MOBILE MENU
+    ========================= */
+
+    const MenuItems = document.getElementById("MenuItems");
+    MenuItems.style.maxHeight = "0px";
+
+    function menutoggle() {
+
+        if (MenuItems.style.maxHeight === "0px") {
+            MenuItems.style.maxHeight = "200px";
+        } else {
+            MenuItems.style.maxHeight = "0px";
+        }
+    }
+
+
+    /* =========================
+       CART DATA
+    ========================= */
+
+    let cart =
+        JSON.parse(localStorage.getItem("eliteWearCart")) || [];
+
+
+    const orderItems =
+        document.getElementById("checkoutOrderItems");
+
+    const subtotalElement =
+        document.getElementById("checkoutSubtotal");
+
+    const deliveryElement =
+        document.getElementById("checkoutDelivery");
+
+    const totalElement =
+        document.getElementById("checkoutTotal");
+
+    const totalsArea =
+        document.getElementById("checkoutTotals");
+
+    const placeOrderButton =
+        document.getElementById("placeOrderButton");
+
+
+    function renderCheckout() {
+
+        orderItems.innerHTML = "";
+
+
+        if (cart.length === 0) {
+
+            orderItems.innerHTML = `
+                <div class="checkout-empty">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    <h3>Your cart is empty</h3>
+
+                    <p>
+                        Add products to your cart before checking out.
+                    </p>
+
+                    <a href="Product.html">
+                        Shop Products
+                    </a>
+
+                </div>
+            `;
+
+            totalsArea.style.display = "none";
+
+            return;
+        }
+
+
+        totalsArea.style.display = "block";
+
+
+        cart.forEach(item => {
+
+            const quantity =
+                Number(item.quantity) || 1;
+
+            const price =
+                Number(item.price) || 0;
+
+
+            const itemElement =
+                document.createElement("div");
+
+            itemElement.className =
+                "checkout-order-item";
+
+
+            itemElement.innerHTML = `
+
+                <img
+                    src="${item.image || 'images/Elite.logo.png'}"
+                    alt="${item.name || 'Product'}"
+                    onerror="this.src='images/Elite.logo.png'"
+                >
+
+                <div>
+                    <h3>${item.name || "Product"}</h3>
+
+                    <p>
+                        Qty: ${quantity}
+                        ${item.size ? " | Size: " + item.size : ""}
+                    </p>
+                </div>
+
+                <strong>
+                    Rs ${ (price * quantity).toLocaleString("en-NP") }
+                </strong>
+            `;
+
+
+            orderItems.appendChild(itemElement);
+        });
+
+
+        updateTotals();
+    }
+
+
+    function updateTotals() {
+
+        const subtotal =
+            cart.reduce(
+                (total, item) =>
+                    total +
+                    (Number(item.price) || 0) *
+                    (Number(item.quantity) || 1),
+                0
+            );
+
+
+        const delivery =
+            subtotal > 0 ? 100 : 0;
+
+
+        const total =
+            subtotal + delivery;
+
+
+        subtotalElement.textContent =
+            "Rs " + subtotal.toLocaleString("en-NP");
+
+        deliveryElement.textContent =
+            "Rs " + delivery.toLocaleString("en-NP");
+
+        totalElement.textContent =
+            "Rs " + total.toLocaleString("en-NP");
+    }
+
+
+    /* =========================
+       PAYMENT METHOD
+    ========================= */
+
+    const cardFields =
+        document.getElementById("cardFields");
+
+    const paymentOptions =
+        document.querySelectorAll(
+            'input[name="paymentMethod"]'
+        );
+
+
+    paymentOptions.forEach(option => {
+
+        option.addEventListener("change", function () {
+
+            cardFields.style.display =
+                this.value === "Card"
+                    ? "block"
+                    : "none";
+
+            clearCardErrors();
+        });
+
+    });
+
+
+    /* =========================
+       SIMPLE CLIENT VALIDATION
+    ========================= */
+
+    function setError(fieldId, message) {
+
+        const field =
+            document.getElementById(fieldId);
+
+        const error =
+            document.getElementById(fieldId + "Error");
+
+
+        field.classList.add("checkout-input-error");
+
+        if (error) {
+            error.textContent = message;
+        }
+    }
+
+
+    function clearError(fieldId) {
+
+        const field =
+            document.getElementById(fieldId);
+
+        const error =
+            document.getElementById(fieldId + "Error");
+
+
+        field.classList.remove("checkout-input-error");
+
+        if (error) {
+            error.textContent = "";
+        }
+    }
+
+
+    function clearCardErrors() {
+
+        ["cardName", "cardNumber", "expiry", "cvv"]
+            .forEach(clearError);
+    }
+
+
+    function validateCheckout() {
+
+        let valid = true;
+
+
+        const requiredFields = [
+            ["firstName", "Please enter your first name."],
+            ["lastName", "Please enter your last name."],
+            ["email", "Please enter your email."],
+            ["phone", "Please enter your phone number."],
+            ["address", "Please enter your street address."],
+            ["city", "Please enter your city."],
+            ["state", "Please enter your state or province."],
+            ["postcode", "Please enter your postcode."],
+            ["country", "Please select your country."]
+        ];
+
+
+        requiredFields.forEach(([id, message]) => {
+
+            clearError(id);
+
+            const value =
+                document.getElementById(id)
+                    .value
+                    .trim();
+
+
+            if (!value) {
+
+                setError(id, message);
+                valid = false;
+            }
+        });
+
+
+        const email =
+            document.getElementById("email")
+                .value
+                .trim();
+
+
+        if (
+            email &&
+            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+        ) {
+
+            setError(
+                "email",
+                "Please enter a valid email address."
+            );
+
+            valid = false;
+        }
+
+
+        const selectedPayment =
+            document.querySelector(
+                'input[name="paymentMethod"]:checked'
+            ).value;
+
+
+        if (selectedPayment === "Card") {
+
+            const cardName =
+                document.getElementById("cardName")
+                    .value
+                    .trim();
+
+            const cardNumber =
+                document.getElementById("cardNumber")
+                    .value
+                    .replace(/\s/g, "");
+
+            const expiry =
+                document.getElementById("expiry")
+                    .value
+                    .trim();
+
+            const cvv =
+                document.getElementById("cvv")
+                    .value
+                    .trim();
+
+
+            clearCardErrors();
+
+
+            if (!cardName) {
+                setError(
+                    "cardName",
+                    "Please enter the name on the card."
+                );
+                valid = false;
+            }
+
+
+            if (!/^\d{16}$/.test(cardNumber)) {
+                setError(
+                    "cardNumber",
+                    "Enter a 16-digit card number."
+                );
+                valid = false;
+            }
+
+
+            if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry)) {
+                setError(
+                    "expiry",
+                    "Use MM/YY format."
+                );
+                valid = false;
+            }
+
+
+            if (!/^\d{3,4}$/.test(cvv)) {
+                setError(
+                    "cvv",
+                    "Enter a valid CVV."
+                );
+                valid = false;
+            }
+        }
+
+
+        return valid;
+    }
+
+
+    /* Format card number */
+
+    document.getElementById("cardNumber")
+        .addEventListener("input", function () {
+
+            let value =
+                this.value
+                    .replace(/\D/g, "")
+                    .substring(0, 16);
+
+            this.value =
+                value.replace(/(.{4})/g, "$1 ")
+                    .trim();
+        });
+
+
+    /* Format expiry */
+
+    document.getElementById("expiry")
+        .addEventListener("input", function () {
+
+            let value =
+                this.value
+                    .replace(/\D/g, "")
+                    .substring(0, 4);
+
+
+            if (value.length > 2) {
+
+                value =
+                    value.substring(0, 2) +
+                    "/" +
+                    value.substring(2);
+            }
+
+
+            this.value = value;
+        });
+
+
+    /* =========================
+       PLACE ORDER
+       Frontend-only for now.
+    ========================= */
+
+    document.getElementById("checkoutForm")
+        .addEventListener("submit", function (event) {
+
+            event.preventDefault();
+
+
+            if (cart.length === 0) {
+                return;
+            }
+
+
+            if (!validateCheckout()) {
+                return;
+            }
+
+
+            const subtotal =
+                cart.reduce(
+                    (total, item) =>
+                        total +
+                        (Number(item.price) || 0) *
+                        (Number(item.quantity) || 1),
+                    0
+                );
+
+
+            const delivery =
+                subtotal > 0 ? 100 : 0;
+
+
+            const order = {
+
+                id: "EW-" + Date.now(),
+
+                date: new Date().toISOString(),
+
+                status: "Order Placed",
+
+                items: cart,
+
+                subtotal: subtotal,
+
+                delivery: delivery,
+
+                total: subtotal + delivery,
+
+                customer: {
+                    firstName:
+                        document.getElementById("firstName").value.trim(),
+
+                    lastName:
+                        document.getElementById("lastName").value.trim(),
+
+                    email:
+                        document.getElementById("email").value.trim(),
+
+                    phone:
+                        document.getElementById("phone").value.trim()
+                },
+
+                address: {
+                    street:
+                        document.getElementById("address").value.trim(),
+
+                    city:
+                        document.getElementById("city").value.trim(),
+
+                    state:
+                        document.getElementById("state").value.trim(),
+
+                    postcode:
+                        document.getElementById("postcode").value.trim(),
+
+                    country:
+                    document.getElementById("country").value
+                },
+
+                paymentMethod:
+                document.querySelector(
+                    'input[name="paymentMethod"]:checked'
+                ).value
+            };
+
+
+            const orders =
+                JSON.parse(
+                    localStorage.getItem("eliteWearOrders")
+                ) || [];
+
+
+            orders.unshift(order);
+
+
+            localStorage.setItem(
+                "eliteWearOrders",
+                JSON.stringify(orders)
+            );
+
+
+            localStorage.removeItem("eliteWearCart");
+
+
+            /*
+               Next step:
+               orders.html will read eliteWearOrders
+               and display this new order.
+            */
+
+            window.location.href = "orders.html";
+        });
+
+
+    /* =========================
+       PREFILL LOGGED USER
+    ========================= */
+
+    if (loggedUser) {
+
+        const name =
+            loggedUser.fullName ||
+            loggedUser.name ||
+            "";
+
+
+        const nameParts =
+            name.trim().split(/\s+/);
+
+
+        if (nameParts[0]) {
+            document.getElementById("firstName").value =
+                nameParts[0];
+        }
+
+
+        if (nameParts.length > 1) {
+            document.getElementById("lastName").value =
+                nameParts.slice(1).join(" ");
+        }
+
+
+        if (loggedUser.email) {
+            document.getElementById("email").value =
+                loggedUser.email;
+        }
+
+
+        if (loggedUser.phone) {
+            document.getElementById("phone").value =
+                loggedUser.phone;
+        }
+
+
+        if (loggedUser.address) {
+            document.getElementById("address").value =
+                loggedUser.address;
+        }
+    }
+
+
+    renderCheckout();
+
+</script>
+
+
+</body>
+</html>
+
+```

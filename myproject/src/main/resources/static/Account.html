@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Elitewear - My Account</title>
+
+    <link rel="stylesheet" href="css/main.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER / NAVBAR
+========================= -->
+
+<div class="header">
+    <div class="container">
+
+        <div class="navbar">
+
+            <div class="logo">
+                <a href="home.html">
+                    <img src="images/Elite.logo.png"
+                         width="140px"
+                         alt="Elitewear Logo">
+                </a>
+            </div>
+
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="Product.html">Products</a></li>
+                    <li><a href="Aboutus.html">About</a></li>
+                    <li><a href="contactus.html">Contact</a></li>
+                    <li><a href="account.html">Account</a></li>
+                </ul>
+            </nav>
+
+            <a href="cart.html">
+                <img src="images/cart.png"
+                     width="30px"
+                     height="30px"
+                     alt="Shopping Cart">
+            </a>
+
+            <img src="images/menu.png"
+                 class="menu-icon"
+                 alt="Menu"
+                 onclick="menutoggle()">
+
+        </div>
+    </div>
+</div>
+
+
+<!-- =========================
+     ACCOUNT DASHBOARD
+========================= -->
+
+<section class="account-dashboard-page">
+
+    <div class="account-dashboard-container">
+
+        <div class="account-dashboard-header">
+            <h1>My Account</h1>
+
+            <p>
+                Manage your profile, orders and shopping details in one place.
+            </p>
+        </div>
+
+
+        <div class="account-dashboard-grid">
+
+            <!-- LEFT PROFILE CARD -->
+
+            <aside class="account-profile-card">
+
+                <div class="account-avatar" id="accountAvatar">
+                    U
+                </div>
+
+                <h2 id="profileName">Elite Wear User</h2>
+
+                <p class="account-email"
+                   id="profileEmail">
+                    user@example.com
+                </p>
+
+
+                <div class="account-profile-meta">
+
+                    <div>
+                        <i class="fa-solid fa-user"></i>
+                        <span>Customer Account</span>
+                    </div>
+
+                    <div>
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Account Active</span>
+                    </div>
+
+                    <div>
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span id="profileLocation">Location not added</span>
+                    </div>
+
+                </div>
+
+
+                <button
+                        type="button"
+                        class="account-logout-btn"
+                        onclick="logoutUser()">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+
+                </button>
+
+            </aside>
+
+
+            <!-- RIGHT ACCOUNT CONTENT -->
+
+            <main class="account-main-panel">
+
+                <!-- Welcome -->
+
+                <div class="account-welcome-card">
+
+                    <h2>
+                        Welcome back,
+                        <span id="welcomeName">User</span>!
+                    </h2>
+
+                    <p>
+                        From here you can review your orders, manage your
+                        personal information and continue shopping with Elite Wear.
+                    </p>
+
+                </div>
+
+
+                <!-- Quick Actions -->
+
+                <div class="account-quick-grid">
+
+                    <div class="account-quick-card">
+
+                        <div class="account-quick-icon">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                        </div>
+
+                        <h3>My Orders</h3>
+
+                        <p>
+                            View your recent purchases and order information.
+                        </p>
+
+                        <a href="./orders.html" id="viewOrdersLink">
+                            View Orders &#8594;
+                        </a>
+
+                    </div>
+
+
+                    <div class="account-quick-card">
+
+                        <div class="account-quick-icon">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </div>
+
+                        <h3>My Cart</h3>
+
+                        <p>
+                            Review the products currently waiting in your cart.
+                        </p>
+
+                        <a href="cart.html">
+                            Open Cart &#8594;
+                        </a>
+
+                    </div>
+
+
+                    <div class="account-quick-card">
+
+                        <div class="account-quick-icon">
+                            <i class="fa-solid fa-shirt"></i>
+                        </div>
+
+                        <h3>Shop Products</h3>
+
+                        <p>
+                            Explore the latest clothing available at Elite Wear.
+                        </p>
+
+                        <a href="Product.html">
+                            Start Shopping &#8594;
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Personal Information -->
+
+                <div class="account-details-card">
+
+                    <h2>Personal Information</h2>
+
+
+                    <div class="account-details-list">
+
+                        <div class="account-detail-item">
+                            <span>Full Name</span>
+                            <strong id="detailName">
+                                Elite Wear User
+                            </strong>
+                        </div>
+
+
+                        <div class="account-detail-item">
+                            <span>Email Address</span>
+                            <strong id="detailEmail">
+                                user@example.com
+                            </strong>
+                        </div>
+
+
+                        <div class="account-detail-item">
+                            <span>Phone Number</span>
+                            <strong id="detailPhone">
+                                Not added
+                            </strong>
+                        </div>
+
+
+                        <div class="account-detail-item">
+                            <span>Address</span>
+                            <strong id="detailAddress">
+                                Not added
+                            </strong>
+                        </div>
+
+                    </div>
+
+
+                    <a href="#"
+                       class="account-edit-btn">
+                        Edit Profile
+                    </a>
+
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<div class="footer">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="footer-col-1">
+
+                <h3>Download Our App</h3>
+
+                <p>
+                    Download the app for Android and iOS mobile phones.
+                </p>
+
+                <div class="app-logo">
+                    <img src="images/play-store.png"
+                         alt="Play Store">
+
+                    <img src="images/app-store.png"
+                         alt="App Store">
+                </div>
+
+            </div>
+
+
+            <div class="footer-col-2">
+
+                <img src="images/Elitewear-3.png"
+                     alt="Elitewear Logo">
+
+            </div>
+
+
+            <div class="footer-col-3">
+
+                <h3>Useful Links</h3>
+
+                <ul>
+                    <li>Coupons</li>
+                    <li>Blog Post</li>
+                    <li>Return Policy</li>
+                    <li>Join Affiliate</li>
+                </ul>
+
+            </div>
+
+
+            <div class="footer-col-4">
+
+                <h3>Follow Us</h3>
+
+                <ul>
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                    <li>Instagram</li>
+                    <li>YouTube</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <hr>
+
+        <p class="Copyright">
+            Copyright 2025 - EliteWear
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* =========================
+       MOBILE MENU
+    ========================= */
+
+    var MenuItems = document.getElementById("MenuItems");
+
+    MenuItems.style.maxHeight = "0px";
+
+
+    function menutoggle() {
+
+        if (MenuItems.style.maxHeight === "0px") {
+            MenuItems.style.maxHeight = "200px";
+        } else {
+            MenuItems.style.maxHeight = "0px";
+        }
+    }
+
+
+    /* =========================
+       ACCOUNT INFORMATION
+       Temporary frontend version.
+       Later this will come from Spring Boot.
+    ========================= */
+
+    const loggedUser =
+        JSON.parse(localStorage.getItem("loggedUser"));
+
+    // Protect the Account page.
+    // Guests can browse the website, but must log in to access their account.
+    if (!loggedUser) {
+        window.location.href = "login.html";
+    } else {
+
+        const fullName =
+            loggedUser.fullName ||
+            loggedUser.name ||
+            loggedUser.username ||
+            "Elite Wear User";
+
+        const email =
+            loggedUser.email ||
+            "user@example.com";
+
+        const phone =
+            loggedUser.phone ||
+            "Not added";
+
+        const address =
+            loggedUser.address ||
+            "Not added";
+
+
+        document.getElementById("profileName").textContent =
+            fullName;
+
+        document.getElementById("profileEmail").textContent =
+            email;
+
+        document.getElementById("welcomeName").textContent =
+            fullName.split(" ")[0];
+
+        document.getElementById("detailName").textContent =
+            fullName;
+
+        document.getElementById("detailEmail").textContent =
+            email;
+
+        document.getElementById("detailPhone").textContent =
+            phone;
+
+        document.getElementById("detailAddress").textContent =
+            address;
+
+        document.getElementById("profileLocation").textContent =
+            address !== "Not added"
+                ? address
+                : "Location not added";
+
+
+        document.getElementById("accountAvatar").textContent =
+            fullName.charAt(0).toUpperCase();
+    }
+
+
+    /* =========================
+       LOGOUT
+    ========================= */
+
+    function logoutUser() {
+
+        localStorage.removeItem("loggedUser");
+
+        window.location.href = "login.html";
+    }
+
+</script>
+
+
+
+<script>
+    const viewOrdersLink = document.getElementById("viewOrdersLink");
+
+    if (viewOrdersLink) {
+        viewOrdersLink.addEventListener("click", function (event) {
+            event.preventDefault();
+            window.location.assign("./orders.html");
+        });
+    }
+</script>
+
+</body>
+</html>
+

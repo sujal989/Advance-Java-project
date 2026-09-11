@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Elitewear - Product Details</title>
+
+    <link rel="stylesheet" href="css/main.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER / NAVBAR
+========================= -->
+
+<div class="header">
+    <div class="container">
+
+        <div class="navbar">
+
+            <div class="logo">
+                <a href="home.html">
+                    <img src="images/Elite.logo.png"
+                         width="140px"
+                         alt="Elitewear Logo">
+                </a>
+            </div>
+
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="Product.html">Products</a></li>
+                    <li><a href="Aboutus.html">About</a></li>
+                    <li><a href="contactus.html">Contact</a></li>
+                    <li><a href="login.html" id="accountLink">Login</a></li>
+                </ul>
+            </nav>
+
+            <a href="cart.html">
+                <img src="images/cart.png"
+                     width="30px"
+                     height="30px"
+                     alt="Cart">
+            </a>
+
+            <img src="images/menu.png"
+                 class="menu-icon"
+                 onclick="menutoggle()"
+                 alt="Menu Toggle">
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- =========================
+     PRODUCT DETAILS
+========================= -->
+
+<div class="small-container single-product">
+
+    <div class="row">
+
+        <div class="col-2">
+
+            <img src="images/product-2.jpg"
+                 width="100%"
+                 id="productImage"
+                 alt="Black Shoes">
+
+        </div>
+
+
+        <div class="col-2">
+
+            <p id="productBreadcrumb">Home / Product</p>
+
+            <h1 id="productName">Black Shoes</h1>
+
+            <h4 id="productPrice">Rs 800</h4>
+
+
+            <select id="productSize">
+                <option value="">Select Size</option>
+                <option value="XXL">XXL</option>
+                <option value="XL">XL</option>
+                <option value="Large">Large</option>
+                <option value="Medium">Medium</option>
+                <option value="Small">Small</option>
+            </select>
+
+
+            <input type="number"
+                   id="productQuantity"
+                   value="1"
+                   min="1">
+
+
+            <button type="button"
+                    class="btn"
+                    id="addToCartButton"
+                    onclick="addToCart()">
+                Add to Cart
+            </button>
+
+
+            <p id="cartMessage"
+               style="margin-top: 15px; color: #FF523b; font-weight: 600;">
+            </p>
+
+
+            <h3>
+                Product Details
+                <i class="fa fa-indent"></i>
+            </h3>
+
+            <br>
+
+            <p id="productDescription"></p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     RELATED PRODUCTS
+========================= -->
+
+<div class="small-container">
+    <div class="row row-2">
+        <h2>Related Products</h2>
+        <a href="Product.html">View More</a>
+    </div>
+
+    <div class="row">
+        <div class="col-4">
+            <a href="productdetails.html?id=1"><img src="images/product-1.jpg" alt="Red T-Shirt"></a>
+            <a href="productdetails.html?id=1"><h4>Red T-Shirt</h4></a>
+            <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></div>
+            <p>Rs 500</p>
+        </div>
+
+        <div class="col-4">
+            <a href="productdetails.html?id=2"><img src="images/product-2.jpg" alt="Shoes"></a>
+            <a href="productdetails.html?id=2"><h4>Shoes</h4></a>
+            <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></div>
+            <p>Rs 800</p>
+        </div>
+
+        <div class="col-4">
+            <a href="productdetails.html?id=3"><img src="images/product-3.jpg" alt="Pants"></a>
+            <a href="productdetails.html?id=3"><h4>Pants</h4></a>
+            <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></div>
+            <p>Rs 1,000</p>
+        </div>
+
+        <div class="col-4">
+            <a href="productdetails.html?id=4"><img src="images/product-4.jpg" alt="Shoes"></a>
+            <a href="productdetails.html?id=4"><h4>Shoes</h4></a>
+            <div class="rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></div>
+            <p>Rs 1,500</p>
+        </div>
+    </div>
+</div>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<div class="footer">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="footer-col-1">
+
+                <h3>Download Our App</h3>
+
+                <p>
+                    Download the app for Android and iOS mobile phones.
+                </p>
+
+                <div class="app-logo">
+
+                    <img src="images/play-store.png"
+                         alt="Play Store">
+
+                    <img src="images/app-store.png"
+                         alt="App Store">
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-col-2">
+
+                <img src="images/Elitewear-3.png"
+                     alt="Elitewear Logo">
+
+            </div>
+
+
+            <div class="footer-col-3">
+
+                <h3>Useful Links</h3>
+
+                <ul>
+                    <li>Coupons</li>
+                    <li>Blog Post</li>
+                    <li>Return Policy</li>
+                    <li>Join Affiliate</li>
+                </ul>
+
+            </div>
+
+
+            <div class="footer-col-4">
+
+                <h3>Follow Us</h3>
+
+                <ul>
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                    <li>Instagram</li>
+                    <li>YouTube</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <hr>
+
+
+        <p class="Copyright">
+            Copyright 2025 - EliteWear
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* =========================
+       MOBILE MENU
+    ========================= */
+
+    var MenuItems =
+        document.getElementById("MenuItems");
+
+
+    MenuItems.style.maxHeight =
+        "0px";
+
+
+    function menutoggle() {
+
+        MenuItems.style.maxHeight =
+            MenuItems.style.maxHeight === "0px"
+                ? "200px"
+                : "0px";
+    }
+
+
+    /* =========================
+       ACCOUNT LINK
+    ========================= */
+
+    const loggedUser =
+        JSON.parse(
+            localStorage.getItem("loggedUser")
+        );
+
+
+    const accountLink =
+        document.getElementById("accountLink");
+
+    if (loggedUser) {
+        accountLink.textContent = "Account";
+        accountLink.href = "account.html";
+    } else {
+        accountLink.textContent = "Login";
+        accountLink.href = "login.html";
+    }
+
+
+
+    /* =========================
+       PRODUCT DATA
+       Temporary frontend data.
+       Later this will come from the Spring Boot API.
+    ========================= */
+
+    const products = {
+        1: {
+            id: 1,
+            name: "Red T-Shirt",
+            price: 500,
+            image: "images/product-1.jpg",
+            category: "T-Shirt",
+            description: "A comfortable red T-shirt with a clean casual look, designed for everyday wear and easy styling."
+        },
+        2: {
+            id: 2,
+            name: "Shoes",
+            price: 800,
+            image: "images/product-2.jpg",
+            category: "Shoes",
+            description: "Comfortable everyday shoes with a modern design, made for casual outfits and daily wear."
+        },
+        3: {
+            id: 3,
+            name: "Pants",
+            price: 1000,
+            image: "images/product-3.jpg",
+            category: "Pants",
+            description: "Versatile casual pants designed for comfort, durability, and easy everyday styling."
+        },
+        4: {
+            id: 4,
+            name: "Shoes",
+            price: 1500,
+            image: "images/product-4.jpg",
+            category: "Shoes",
+            description: "Stylish premium shoes that combine a modern look with comfortable everyday wear."
+        },
+        5: {
+            id: 5,
+            name: "Socks",
+            price: 200,
+            image: "images/product-5.jpg",
+            category: "Accessories",
+            description: "Soft and comfortable everyday socks designed to pair easily with your favourite footwear."
+        },
+        6: {
+            id: 6,
+            name: "Watch",
+            price: 1200,
+            image: "images/product-6.jpg",
+            category: "Accessories",
+            description: "A clean everyday watch that adds a simple, polished finishing touch to your outfit."
+        }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const selectedProductId = Number(params.get("id")) || 1;
+    const selectedProduct = products[selectedProductId] || products[1];
+
+    document.getElementById("productName").textContent =
+        selectedProduct.name;
+
+    document.getElementById("productPrice").textContent =
+        "Rs " + selectedProduct.price;
+
+    document.getElementById("productImage").src =
+        selectedProduct.image;
+
+    document.getElementById("productImage").alt =
+        selectedProduct.name;
+
+    document.getElementById("productBreadcrumb").textContent =
+        "Home / " + selectedProduct.category;
+
+    document.getElementById("productDescription").textContent =
+        selectedProduct.description;
+
+
+    /* =========================
+       ADD TO CART
+    ========================= */
+
+    function addToCart() {
+
+        const loggedUser =
+            JSON.parse(localStorage.getItem("loggedUser"));
+
+        if (!loggedUser) {
+            alert("Please login to add products to your cart.");
+            window.location.href = "login.html";
+            return;
+        }
+
+        const productName =
+            document.getElementById("productName")
+                .textContent
+                .trim();
+
+
+        const priceText =
+            document.getElementById("productPrice")
+                .textContent
+                .trim();
+
+
+        /*
+           Gets the number from "Rs 800".
+           Your cart will display it using the current
+           currency format in cart.html.
+        */
+
+        const productPrice =
+            Number(
+                priceText.replace(/[^\d.]/g, "")
+            );
+
+
+        const productImage =
+            document.getElementById("productImage")
+                .getAttribute("src");
+
+
+        const productSize =
+            document.getElementById("productSize")
+                .value;
+
+
+        const productQuantity =
+            Number(
+                document.getElementById("productQuantity")
+                    .value
+            );
+
+
+        const cartMessage =
+            document.getElementById("cartMessage");
+
+
+        if (!productSize) {
+
+            cartMessage.textContent =
+                "Please select a size first.";
+
+            return;
+        }
+
+
+        if (
+            !productQuantity ||
+            productQuantity < 1
+        ) {
+
+            cartMessage.textContent =
+                "Please enter a valid quantity.";
+
+            return;
+        }
+
+
+        let cart =
+            JSON.parse(
+                localStorage.getItem("eliteWearCart")
+            ) || [];
+
+
+        /*
+           Same product + same size:
+           increase quantity instead of making
+           a duplicate cart row.
+        */
+
+        const existingProduct =
+            cart.find(
+                item =>
+                    Number(item.id) === Number(selectedProduct.id) &&
+                    item.size === productSize
+            );
+
+
+        if (existingProduct) {
+
+            existingProduct.quantity =
+                Number(existingProduct.quantity) +
+                productQuantity;
+
+        } else {
+
+            cart.push({
+
+                id: selectedProduct.id,
+
+                name: productName,
+
+                price: productPrice,
+
+                quantity: productQuantity,
+
+                size: productSize,
+
+                image: productImage
+
+            });
+        }
+
+
+        localStorage.setItem(
+            "eliteWearCart",
+            JSON.stringify(cart)
+        );
+
+
+        cartMessage.textContent =
+            productName + " added to your cart!";
+
+
+        /*
+           Small delay so the user can see the
+           confirmation before going to cart.
+        */
+
+        setTimeout(function () {
+
+            window.location.href =
+                "cart.html";
+
+        }, 600);
+    }
+
+</script>
+
+
+</body>
+</html>

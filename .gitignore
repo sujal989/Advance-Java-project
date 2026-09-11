@@ -1,0 +1,12 @@
+.idea/
+*.iml
+myproject/target/
+myproject/build/
+*.class
+
+# OS junk
+desktop.ini
+.DS_Store
+
+# Local secrets
+.env

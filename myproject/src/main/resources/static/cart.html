@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Elitewear - My Cart</title>
+
+    <link rel="stylesheet" href="css/main.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER / NAVBAR
+========================= -->
+
+<div class="header">
+    <div class="container">
+
+        <div class="navbar">
+
+            <div class="logo">
+                <a href="home.html">
+                    <img src="images/Elite.logo.png"
+                         width="140px"
+                         alt="Elitewear Logo">
+                </a>
+            </div>
+
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="Product.html">Products</a></li>
+                    <li><a href="Aboutus.html">About</a></li>
+                    <li><a href="contactus.html">Contact</a></li>
+                    <li><a href="account.html">Account</a></li>
+                </ul>
+            </nav>
+
+            <a href="cart.html">
+                <img src="images/cart.png"
+                     width="30px"
+                     height="30px"
+                     alt="Shopping Cart">
+            </a>
+
+            <img src="images/menu.png"
+                 class="menu-icon"
+                 alt="Menu"
+                 onclick="menutoggle()">
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- =========================
+     CART PAGE
+========================= -->
+
+<section class="cart-modern-page">
+
+    <div class="cart-modern-container">
+
+        <div class="cart-modern-header">
+            <h1>My Cart</h1>
+            <p>
+                Review your selected items before continuing to checkout.
+            </p>
+        </div>
+
+
+        <div class="cart-layout">
+
+            <!-- CART ITEMS -->
+
+            <div class="cart-items-panel">
+
+                <div class="cart-items-heading">
+                    <h2>Shopping Cart</h2>
+                    <span id="cartItemCount">0 items</span>
+                </div>
+
+                <div id="cartItemsContainer"></div>
+
+                <a href="Product.html"
+                   class="cart-continue-btn">
+                    &#8592; Continue Shopping
+                </a>
+
+            </div>
+
+
+            <!-- ORDER SUMMARY -->
+
+            <aside class="cart-summary-card">
+
+                <h2>Order Summary</h2>
+
+                <div class="cart-summary-row">
+                    <span>Subtotal</span>
+                    <strong id="cartSubtotal">Rs 0</strong>
+                </div>
+
+                <div class="cart-summary-row">
+                    <span>Delivery</span>
+                    <strong id="cartDelivery">Rs 0</strong>
+                </div>
+
+                <div class="cart-summary-divider"></div>
+
+                <div class="cart-summary-total">
+                    <span>Total</span>
+                    <strong id="cartTotal">Rs 0</strong>
+                </div>
+
+                <a href="checkout.html"
+                   class="cart-checkout-btn"
+                   id="checkoutButton">
+                    Proceed to Checkout
+                </a>
+
+                <p class="cart-summary-note">
+                    Final delivery charges can be confirmed during checkout.
+                </p>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<div class="footer">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="footer-col-1">
+
+                <h3>Download Our App</h3>
+
+                <p>
+                    Download the app for Android and iOS mobile phones.
+                </p>
+
+                <div class="app-logo">
+                    <img src="images/play-store.png"
+                         alt="Play Store">
+
+                    <img src="images/app-store.png"
+                         alt="App Store">
+                </div>
+
+            </div>
+
+
+            <div class="footer-col-2">
+
+                <img src="images/Elitewear-3.png"
+                     alt="Elitewear Logo">
+
+            </div>
+
+
+            <div class="footer-col-3">
+
+                <h3>Useful Links</h3>
+
+                <ul>
+                    <li>Coupons</li>
+                    <li>Blog Post</li>
+                    <li>Return Policy</li>
+                    <li>Join Affiliate</li>
+                </ul>
+
+            </div>
+
+
+            <div class="footer-col-4">
+
+                <h3>Follow Us</h3>
+
+                <ul>
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                    <li>Instagram</li>
+                    <li>YouTube</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <p class="Copyright">
+            Copyright 2025 - EliteWear
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* =========================
+       MOBILE MENU
+    ========================= */
+
+    var MenuItems = document.getElementById("MenuItems");
+    MenuItems.style.maxHeight = "0px";
+
+    function menutoggle() {
+
+        if (MenuItems.style.maxHeight === "0px") {
+            MenuItems.style.maxHeight = "200px";
+        } else {
+            MenuItems.style.maxHeight = "0px";
+        }
+    }
+    /* =========================
+       LOGIN PROTECTION
+       Guests can browse the website,
+       but must log in to use the cart.
+    ========================= */
+
+    const loggedUser =
+        JSON.parse(localStorage.getItem("loggedUser"));
+
+    if (!loggedUser) {
+        window.location.href = "login.html";
+    }
+
+
+    /* =========================
+       FRONTEND CART
+       Temporary localStorage version.
+       Later we can connect this to Spring Boot.
+    ========================= */
+
+    let cart = JSON.parse(localStorage.getItem("eliteWearCart")) || [];
+
+    const cartItemsContainer =
+        document.getElementById("cartItemsContainer");
+
+    const cartItemCount =
+        document.getElementById("cartItemCount");
+
+    const cartSubtotal =
+        document.getElementById("cartSubtotal");
+
+    const cartDelivery =
+        document.getElementById("cartDelivery");
+
+    const cartTotal =
+        document.getElementById("cartTotal");
+
+    const checkoutButton =
+        document.getElementById("checkoutButton");
+
+
+    function saveCart() {
+
+        localStorage.setItem(
+            "eliteWearCart",
+            JSON.stringify(cart)
+        );
+    }
+
+
+    function renderCart() {
+
+        cartItemsContainer.innerHTML = "";
+
+
+        if (cart.length === 0) {
+
+            cartItemsContainer.innerHTML = `
+                <div class="cart-empty-state">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    <h3>Your cart is empty</h3>
+
+                    <p>
+                        Browse our products and add something you love.
+                    </p>
+
+                    <a href="Product.html">
+                        Shop Products
+                    </a>
+
+                </div>
+            `;
+
+            cartItemCount.textContent = "0 items";
+
+            cartSubtotal.textContent = "Rs 0";
+            cartDelivery.textContent = "Rs 0";
+            cartTotal.textContent = "Rs 0";
+
+            checkoutButton.style.pointerEvents = "none";
+            checkoutButton.style.opacity = "0.5";
+
+            return;
+        }
+
+
+        checkoutButton.style.pointerEvents = "auto";
+        checkoutButton.style.opacity = "1";
+
+
+        cart.forEach((item, index) => {
+
+            const itemElement =
+                document.createElement("div");
+
+            itemElement.className = "cart-item";
+
+
+            itemElement.innerHTML = `
+
+                <div class="cart-item-image">
+
+                    <img
+                        src="${item.image}"
+                        alt="${item.name}"
+                        onerror="this.src='images/Elite.logo.png'"
+                    >
+
+                </div>
+
+
+                <div class="cart-item-info">
+
+                    <h3>${item.name}</h3>
+
+                    <p>
+                        Size: ${item.size || "Standard"}
+                    </p>
+
+                    <div class="cart-item-price">
+                        Rs ${Number(item.price).toLocaleString("en-NP")}
+                    </div>
+
+                </div>
+
+
+                <div class="cart-item-controls">
+
+                    <div class="cart-qty-control">
+
+                        <button
+                            type="button"
+                            onclick="changeQuantity(${index}, -1)">
+                            −
+                        </button>
+
+                        <span>
+                            ${item.quantity}
+                        </span>
+
+                        <button
+                            type="button"
+                            onclick="changeQuantity(${index}, 1)">
+                            +
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="cart-remove-btn"
+                        onclick="removeItem(${index})">
+
+                        <i class="fa-solid fa-trash"></i>
+                        Remove
+
+                    </button>
+
+                </div>
+            `;
+
+
+            cartItemsContainer.appendChild(itemElement);
+        });
+
+
+        updateSummary();
+    }
+
+
+    function updateSummary() {
+
+        const itemCount =
+            cart.reduce(
+                (total, item) =>
+                    total + Number(item.quantity),
+                0
+            );
+
+
+        const subtotal =
+            cart.reduce(
+                (total, item) =>
+                    total +
+                    Number(item.price) *
+                    Number(item.quantity),
+                0
+            );
+
+
+        const delivery = subtotal > 0 ? 100 : 0;
+
+
+        const total =
+            subtotal + delivery;
+
+
+        cartItemCount.textContent =
+            itemCount === 1
+                ? "1 item"
+                : itemCount + " items";
+
+
+        cartSubtotal.textContent =
+            "Rs " + subtotal.toLocaleString("en-NP");
+
+
+        cartDelivery.textContent =
+            "Rs " + delivery.toLocaleString("en-NP");
+
+
+        cartTotal.textContent =
+            "Rs " + total.toLocaleString("en-NP");
+    }
+
+
+    function changeQuantity(index, change) {
+
+        cart[index].quantity =
+            Number(cart[index].quantity) + change;
+
+
+        if (cart[index].quantity < 1) {
+            cart[index].quantity = 1;
+        }
+
+
+        saveCart();
+        renderCart();
+    }
+
+
+    function removeItem(index) {
+
+        cart.splice(index, 1);
+
+        saveCart();
+        renderCart();
+    }
+
+
+    renderCart();
+
+</script>
+
+
+</body>
+</html>
+

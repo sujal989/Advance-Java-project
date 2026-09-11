@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - EliteWear</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<div class="account-page">
+  <div class="account-card">
+
+    <div class="form-tabs">
+      <button type="button" class="tab-btn active">Register</button>
+    </div>
+
+    <div class="form-content active">
+      <h2>Register</h2>
+
+      <form id="registerForm" autocomplete="off">
+        <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Username"
+                required>
+
+        <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email"
+                required>
+
+        <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                required>
+
+        <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                required>
+
+        <button type="submit" class="btn" id="registerButton">
+          Register
+        </button>
+      </form>
+
+      <p class="error-msg"
+         id="registerError"
+         style="display:none;"></p>
+
+      <p id="registerSuccess"
+         style="display:none; margin-top:10px; color:green; font-weight:600;"></p>
+
+      <p style="margin-top:10px;">
+        Already have an account?
+        <a href="login.html">Login here</a>
+      </p>
+
+      <p style="margin-top:10px;">
+        <a href="home.html">← Back to Home</a>
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const existingUser =
+          JSON.parse(localStorage.getItem("loggedUser"));
+
+  if (existingUser) {
+    if (existingUser.role === "admin") {
+      window.location.href = "adminpanel.html";
+    } else {
+      window.location.href = "home.html";
+    }
+  }
+
+  const registerForm =
+          document.getElementById("registerForm");
+
+  const errorEl =
+          document.getElementById("registerError");
+
+  const successEl =
+          document.getElementById("registerSuccess");
+
+  const registerButton =
+          document.getElementById("registerButton");
+
+  registerForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const username =
+            document.getElementById("username").value.trim();
+
+    const email =
+            document.getElementById("email").value.trim();
+
+    const password =
+            document.getElementById("password").value;
+
+    const confirmPassword =
+            document.getElementById("confirmPassword").value;
+
+    errorEl.style.display = "none";
+    successEl.style.display = "none";
+    errorEl.textContent = "";
+    successEl.textContent = "";
+
+    if (username.length < 3) {
+      errorEl.textContent =
+              "Username must be at least 3 characters.";
+      errorEl.style.display = "block";
+      return;
+    }
+
+    if (password.length < 6) {
+      errorEl.textContent =
+              "Password must be at least 6 characters.";
+      errorEl.style.display = "block";
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      errorEl.textContent =
+              "Passwords do not match.";
+      errorEl.style.display = "block";
+      return;
+    }
+
+    const params = new URLSearchParams();
+    params.append("username", username);
+    params.append("email", email);
+    params.append("password", password);
+
+    registerButton.disabled = true;
+    registerButton.textContent = "Registering...";
+
+    try {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type":
+                  "application/x-www-form-urlencoded"
+        },
+        body: params
+      });
+
+      if (!response.ok) {
+        throw new Error("Registration request failed.");
+      }
+
+      const data = await response.json();
+
+      if (data.success) {
+        successEl.textContent =
+                "Registration successful! Redirecting to login...";
+
+        successEl.style.display = "block";
+
+        setTimeout(function () {
+          window.location.href = "login.html";
+        }, 900);
+
+      } else {
+        errorEl.textContent =
+                data.message ||
+                "Username or email already exists.";
+
+        errorEl.style.display = "block";
+      }
+
+    } catch (error) {
+      errorEl.textContent =
+              "Could not reach the server. Please make sure the backend is running.";
+
+      errorEl.style.display = "block";
+
+    } finally {
+      registerButton.disabled = false;
+      registerButton.textContent = "Register";
+    }
+  });
+</script>
+
+</body>
+</html>

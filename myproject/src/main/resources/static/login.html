@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - EliteWear</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<div class="account-page">
+    <div class="account-card">
+
+        <div class="form-tabs">
+            <button type="button" class="tab-btn active">Login</button>
+        </div>
+
+        <div class="form-content active">
+            <h2>Login</h2>
+
+            <form id="loginForm" autocomplete="off">
+                <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Username"
+                        required>
+
+                <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Password"
+                        required>
+
+                <button type="submit" class="btn" id="loginButton">
+                    Login
+                </button>
+            </form>
+
+            <p class="error-msg"
+               id="loginError"
+               style="display:none;"></p>
+
+            <p style="margin-top:10px;">
+                Don't have an account?
+                <a href="register.html">Register here</a>
+            </p>
+
+            <p style="margin-top:10px;">
+                <a href="home.html">← Back to Home</a>
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // If the user is already logged in, do not show the login form again.
+    const existingUser = JSON.parse(localStorage.getItem("loggedUser"));
+
+    if (existingUser) {
+        if (existingUser.role === "admin") {
+            window.location.href = "adminpanel.html";
+        } else {
+            window.location.href = "home.html";
+        }
+    }
+
+    const loginForm = document.getElementById("loginForm");
+    const errorEl = document.getElementById("loginError");
+    const loginButton = document.getElementById("loginButton");
+
+    loginForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const username =
+            document.getElementById("username").value.trim();
+
+        const password =
+            document.getElementById("password").value;
+
+        errorEl.style.display = "none";
+        errorEl.textContent = "";
+
+        if (username === "" || password === "") {
+            errorEl.textContent =
+                "Please enter both username and password.";
+            errorEl.style.display = "block";
+            return;
+        }
+
+        const params = new URLSearchParams();
+        params.append("username", username);
+        params.append("password", password);
+
+        loginButton.disabled = true;
+        loginButton.textContent = "Logging in...";
+
+        try {
+            const response = await fetch("/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type":
+                        "application/x-www-form-urlencoded"
+                },
+                body: params
+            });
+
+            if (!response.ok) {
+                throw new Error("Login request failed.");
+            }
+
+            const data = await response.json();
+
+            if (data.success) {
+                localStorage.setItem(
+                    "loggedUser",
+                    JSON.stringify(data)
+                );
+
+                if (data.role === "admin") {
+                    window.location.href = "adminpanel.html";
+                } else {
+                    window.location.href = "home.html";
+                }
+
+            } else {
+                errorEl.textContent =
+                    data.message ||
+                    "Invalid username or password.";
+
+                errorEl.style.display = "block";
+            }
+
+        } catch (error) {
+            errorEl.textContent =
+                "Could not reach the server. Please make sure the backend is running.";
+
+            errorEl.style.display = "block";
+
+        } finally {
+            loginButton.disabled = false;
+            loginButton.textContent = "Login";
+        }
+    });
+</script>
+
+</body>
+</html>

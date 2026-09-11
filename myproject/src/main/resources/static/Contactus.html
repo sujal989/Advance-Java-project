@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elitewear - Contact Us</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="header">
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="home.html">
+                    <img src="images/Elite.logo.png" width="140px" alt="Elitewear Logo">
+                </a>
+            </div>
+
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="Product.html">Products</a></li>
+                    <li><a href="Aboutus.html">About</a></li>
+                    <li><a href="contactus.html">Contact</a></li>
+                    <li><a href="login.html" id="accountLink">Login</a></li>
+                </ul>
+            </nav>
+
+            <a href="cart.html">
+                <img src="images/cart.png" width="30px" height="30px" alt="Cart">
+            </a>
+
+            <img src="images/menu.png"
+                 class="menu-icon"
+                 alt="Menu"
+                 onclick="menutoggle()">
+        </div>
+    </div>
+</div>
+
+<section class="contact-section">
+    <div class="contact-container">
+
+        <div class="contact-header">
+            <h1>Contact Us</h1>
+            <p>
+                Have a question about Elite Wear, a product, or your order?
+                Send us a message and we'll be happy to help.
+            </p>
+        </div>
+
+        <div class="contact-content">
+
+            <div class="contact-info">
+                <h2>Get In Touch</h2>
+                <p>
+                    We are here to help. You can contact us using the form
+                    or through the details below.
+                </p>
+
+                <div class="contact-info-item">
+                    <div class="contact-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h3>Email</h3>
+                        <p>support@elitewear.com</p>
+                    </div>
+                </div>
+
+                <div class="contact-info-item">
+                    <div class="contact-icon">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div>
+                        <h3>Phone</h3>
+                        <p>+977 98XXXXXXXX</p>
+                    </div>
+                </div>
+
+                <div class="contact-info-item">
+                    <div class="contact-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <div>
+                        <h3>Location</h3>
+                        <p>Kathmandu, Nepal</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-card">
+                <form id="contactForm" action="#" method="POST" autocomplete="off">
+
+                    <div class="contact-field">
+                        <label for="name">Your Name</label>
+                        <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Your Name"
+                                required>
+                    </div>
+
+                    <div class="contact-field">
+                        <label for="email">Your Email</label>
+                        <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Your Email"
+                                required>
+                    </div>
+
+                    <div class="contact-field">
+                        <label for="phone">Phone Number</label>
+                        <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="Phone Number">
+                    </div>
+
+                    <div class="contact-field">
+                        <label for="message">Your Message</label>
+                        <textarea
+                                id="message"
+                                name="message"
+                                placeholder="Your Message"
+                                required></textarea>
+                    </div>
+
+                    <p id="contactLoginMessage"
+                       style="display:none; margin-bottom:12px; color:#c0392b; font-weight:600;"></p>
+
+                    <button type="submit" class="contact-submit-btn">
+                        Send Message
+                    </button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="footer">
+    <div class="container">
+        <div class="row">
+
+            <div class="footer-col-1">
+                <h3>Download Our App</h3>
+                <p>Download the app for Android and iOS mobile phones.</p>
+                <div class="app-logo">
+                    <img src="images/play-store.png" alt="Play Store">
+                    <img src="images/app-store.png" alt="App Store">
+                </div>
+            </div>
+
+            <div class="footer-col-2">
+                <img src="images/Elitewear-3.png" alt="Elitewear Logo">
+            </div>
+
+            <div class="footer-col-3">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li>Coupons</li>
+                    <li>Blog Post</li>
+                    <li>Return Policy</li>
+                    <li>Join Affiliate</li>
+                </ul>
+            </div>
+
+            <div class="footer-col-4">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                    <li>Instagram</li>
+                    <li>YouTube</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <hr>
+        <p class="Copyright">Copyright 2025 - EliteWear</p>
+    </div>
+</div>
+
+<script>
+    var MenuItems = document.getElementById("MenuItems");
+    MenuItems.style.maxHeight = "0px";
+
+    function menutoggle() {
+        MenuItems.style.maxHeight =
+            (MenuItems.style.maxHeight === "0px") ? "200px" : "0px";
+    }
+
+    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+    const accountLink = document.getElementById("accountLink");
+
+    if (loggedUser) {
+        accountLink.textContent = "Account";
+        accountLink.href = "account.html";
+    } else {
+        accountLink.textContent = "Login";
+        accountLink.href = "login.html";
+    }
+
+    const contactForm = document.getElementById("contactForm");
+
+    if (contactForm) {
+        contactForm.addEventListener("submit", function (event) {
+            const currentUser =
+                JSON.parse(localStorage.getItem("loggedUser"));
+
+            if (!currentUser) {
+                event.preventDefault();
+
+                const message =
+                    document.getElementById("contactLoginMessage");
+
+                message.textContent =
+                    "Please login before sending us a message.";
+                message.style.display = "block";
+
+                setTimeout(function () {
+                    window.location.href = "login.html";
+                }, 700);
+
+                return;
+            }
+
+            event.preventDefault();
+
+            alert("Message ready to send. Backend connection will be added next.");
+
+            // Later:
+            // fetch("/api/messages", { ... })
+            // This will send the contact message to Spring Boot and TiDB.
+        });
+    }
+</script>
+
+</body>
+</html>
