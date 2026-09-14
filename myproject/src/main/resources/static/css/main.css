@@ -173,7 +173,9 @@ p{
 .offer {
    background: radial-gradient(rgb(235, 218, 218), #F0DCDC);
    width: 100vw;
-   height: 100vh;
+   min-height: 500px;
+   height: auto;
+   padding: 50px 0;
    display: flex;
    align-items: center;
    justify-content: center;
@@ -2966,3 +2968,58 @@ form a{
    .admin-layout #usersSection { overflow-x:auto; }
    .admin-layout #usersSection table { min-width:650px; }
 }
+
+/*---offer mobile responsive ---*/
+@media only screen and (max-width: 600px) {
+   .offer {
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      margin-left: 0;
+      padding: 30px 0;
+   }
+
+   .offer .small-container {
+      width: 100%;
+      padding-left: 20px;
+      padding-right: 20px;
+   }
+
+   .offer .row {
+      flex-direction: column;
+      text-align: center;
+   }
+
+   .offer .col-2 {
+      flex-basis: 100%;
+      width: 100%;
+      min-width: 0;
+   }
+
+   .offer .col-2 img {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      padding: 10px 0 20px;
+      margin: 0 auto;
+      display: block;
+   }
+
+   .offer .col-2 h1 {
+      font-size: 32px;
+      line-height: 1.2;
+      margin: 12px 0;
+   }
+
+   .offer .col-2 p {
+      margin-left: 0;
+   }
+
+   .offer .col-2 small {
+      max-width: 100%;
+      white-space: normal;
+      margin-left: 0;
+      font-size: 14px;
+   }
+}
+

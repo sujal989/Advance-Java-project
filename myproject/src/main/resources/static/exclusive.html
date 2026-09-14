@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>PSD Watch - EliteWear</title>
+
+    <link rel="stylesheet"
+          href="css/main.css">
+
+    <link rel="stylesheet"
+          href="css/exclusive.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<div class="header">
+
+    <div class="container">
+
+        <div class="navbar">
+
+            <div class="logo">
+
+                <a href="home.html">
+
+                    <img src="images/Elite.logo.png"
+                         width="140px"
+                         alt="EliteWear Logo">
+
+                </a>
+
+            </div>
+
+
+            <nav>
+
+                <ul id="MenuItems">
+
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="Product.html">Products</a></li>
+                    <li><a href="Aboutus.html">About</a></li>
+                    <li><a href="contactus.html">Contact</a></li>
+                    <li><a href="account.html">Account</a></li>
+
+                </ul>
+
+            </nav>
+
+
+            <a href="cart.html">
+
+                <img src="images/cart.png"
+                     width="30px"
+                     height="30px"
+                     alt="Shopping Cart">
+
+            </a>
+
+
+            <img src="images/menu.png"
+                 class="menu-icon"
+                 alt="Menu"
+                 onclick="menutoggle()">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     EXCLUSIVE PRODUCT
+========================= -->
+
+<section class="exclusive-page">
+
+    <div class="exclusive-container">
+
+        <div class="exclusive-product">
+
+
+            <div class="exclusive-image-box">
+
+                <img src="images/exclusive.png"
+                     id="exclusiveImage"
+                     alt="PSD Watch">
+
+            </div>
+
+
+            <div class="exclusive-details">
+
+                <span class="exclusive-badge">
+                    EXCLUSIVE ON ELITEWEAR
+                </span>
+
+
+                <h1 id="exclusiveName">
+                    PSD Watch
+                </h1>
+
+
+                <p class="exclusive-subtitle">
+                    Smart Style. Everyday Performance.
+                </p>
+
+
+                <div class="exclusive-rating">
+
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+
+                    <span>
+                        Premium EliteWear Exclusive
+                    </span>
+
+                </div>
+
+
+                <div class="exclusive-price"
+                     id="exclusivePrice">
+
+                    Rs 4,999
+
+                </div>
+
+
+                <p class="exclusive-description">
+
+                    The PSD Watch combines modern style
+                    with everyday smart features.
+
+                    Designed for customers who want a
+                    simple, stylish and comfortable
+                    smartwatch for daily use.
+
+                </p>
+
+
+                <div class="exclusive-features">
+
+
+                    <div class="exclusive-feature">
+
+                        <i class="fa-solid fa-heart-pulse"></i>
+
+                        <span>
+                            Fitness and activity tracking
+                        </span>
+
+                    </div>
+
+
+                    <div class="exclusive-feature">
+
+                        <i class="fa-solid fa-battery-full"></i>
+
+                        <span>
+                            Long lasting battery
+                        </span>
+
+                    </div>
+
+
+                    <div class="exclusive-feature">
+
+                        <i class="fa-solid fa-mobile-screen"></i>
+
+                        <span>
+                            Smart notifications
+                        </span>
+
+                    </div>
+
+
+                    <div class="exclusive-feature">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        <span>
+                            Exclusive EliteWear product
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="exclusive-quantity">
+
+                    <label for="quantity">
+                        Quantity
+                    </label>
+
+
+                    <input type="number"
+                           id="quantity"
+                           value="1"
+                           min="1">
+
+                </div>
+
+
+                <div class="exclusive-buttons">
+
+
+                    <button type="button"
+                            class="exclusive-cart-btn"
+                            onclick="addExclusiveToCart()">
+
+                        <i class="fa-solid fa-cart-plus"></i>
+
+                        Add to Cart
+
+                    </button>
+
+
+                    <button type="button"
+                            class="exclusive-buy-btn"
+                            onclick="buyExclusiveNow()">
+
+                        Buy Now &#8594;
+
+                    </button>
+
+
+                </div>
+
+
+                <p class="exclusive-message"
+                   id="exclusiveMessage">
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="exclusive-info-section">
+
+
+            <h2>
+                Why Choose the PSD Watch?
+            </h2>
+
+
+            <div class="exclusive-info-grid">
+
+
+                <div class="exclusive-info-card">
+
+                    <i class="fa-solid fa-shirt"></i>
+
+                    <h3>
+                        Stylish Design
+                    </h3>
+
+                    <p>
+                        A modern design that works with both
+                        casual and smart outfits.
+                    </p>
+
+                </div>
+
+
+                <div class="exclusive-info-card">
+
+                    <i class="fa-solid fa-person-running"></i>
+
+                    <h3>
+                        Everyday Fitness
+                    </h3>
+
+                    <p>
+                        Keep track of your daily activity
+                        while staying connected.
+                    </p>
+
+                </div>
+
+
+                <div class="exclusive-info-card">
+
+                    <i class="fa-solid fa-gem"></i>
+
+                    <h3>
+                        EliteWear Exclusive
+                    </h3>
+
+                    <p>
+                        A special product available
+                        exclusively through EliteWear.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<div class="footer">
+
+    <div class="container">
+
+        <div class="row">
+
+
+            <div class="footer-col-1">
+
+                <h3>
+                    Download Our App
+                </h3>
+
+                <p>
+                    Download the app for Android
+                    and iOS mobile phones.
+                </p>
+
+
+                <div class="app-logo">
+
+                    <img src="images/play-store.png"
+                         alt="Play Store">
+
+                    <img src="images/app-store.png"
+                         alt="App Store">
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-col-2">
+
+                <img src="images/Elitewear-3.png"
+                     alt="EliteWear Logo">
+
+            </div>
+
+
+            <div class="footer-col-3">
+
+                <h3>
+                    Useful Links
+                </h3>
+
+                <ul>
+
+                    <li><a href="coupons.html">Coupons</a></li>
+                    <li><a href="blog.html">Blog Post</a></li>
+                    <li><a href="returnpolicy.html">Return Policy</a></li>
+                    <li><a href="affiliate.html">Join Affiliate</a></li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="footer-col-4">
+
+                <h3>
+                    Follow Us
+                </h3>
+
+                <ul>
+
+                    <li>Facebook</li>
+                    <li>Twitter</li>
+                    <li>Instagram</li>
+                    <li>YouTube</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <hr>
+
+
+        <p class="Copyright">
+            Copyright 2025 - EliteWear
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+    var MenuItems =
+        document.getElementById("MenuItems");
+
+    MenuItems.style.maxHeight =
+        "0px";
+
+
+    function menutoggle() {
+
+        if (MenuItems.style.maxHeight === "0px") {
+
+            MenuItems.style.maxHeight =
+                "200px";
+
+        } else {
+
+            MenuItems.style.maxHeight =
+                "0px";
+        }
+    }
+
+
+
+    let exclusiveProduct = null;
+
+
+
+    async function loadExclusiveProduct() {
+
+        try {
+
+            const response =
+                await fetch("/api/products");
+
+
+            if (!response.ok) {
+                return;
+            }
+
+
+            const products =
+                await response.json();
+
+
+            exclusiveProduct =
+                products.find(
+                    product =>
+                        product.name &&
+                        product.name
+                            .toLowerCase()
+                            .includes("psd watch")
+                );
+
+
+            if (exclusiveProduct) {
+
+                document
+                    .getElementById("exclusiveName")
+                    .textContent =
+                    exclusiveProduct.name;
+
+
+                document
+                    .getElementById("exclusivePrice")
+                    .textContent =
+                    "Rs " +
+                    Number(
+                        exclusiveProduct.price
+                    ).toLocaleString("en-NP");
+
+
+                if (exclusiveProduct.image) {
+
+                    document
+                        .getElementById("exclusiveImage")
+                        .src =
+                        exclusiveProduct.image;
+                }
+
+            }
+
+
+        } catch (error) {
+
+            console.error(
+                "Could not load exclusive product:",
+                error
+            );
+        }
+    }
+
+
+
+    function addExclusiveToCart() {
+
+        const message =
+            document.getElementById(
+                "exclusiveMessage"
+            );
+
+
+        if (!exclusiveProduct) {
+
+            message.style.color =
+                "#FF523b";
+
+            message.textContent =
+                "PSD Watch is currently unavailable.";
+
+            return;
+        }
+
+
+        let quantity =
+            Number(
+                document.getElementById(
+                    "quantity"
+                ).value
+            );
+
+
+        if (
+            quantity < 1 ||
+            !Number.isInteger(quantity)
+        ) {
+
+            quantity = 1;
+
+            document
+                .getElementById("quantity")
+                .value = 1;
+        }
+
+
+        let cart =
+            JSON.parse(
+                localStorage.getItem(
+                    "eliteWearCart"
+                )
+            ) || [];
+
+
+        const existingItem =
+            cart.find(
+                item =>
+                    item.id ===
+                    exclusiveProduct.id
+            );
+
+
+        if (existingItem) {
+
+            existingItem.quantity +=
+                quantity;
+
+        } else {
+
+            cart.push({
+
+                id:
+                exclusiveProduct.id,
+
+                name:
+                exclusiveProduct.name,
+
+                price:
+                exclusiveProduct.price,
+
+                image:
+                exclusiveProduct.image,
+
+                quantity:
+                quantity
+
+            });
+        }
+
+
+        localStorage.setItem(
+            "eliteWearCart",
+            JSON.stringify(cart)
+        );
+
+
+        message.style.color =
+            "green";
+
+        message.textContent =
+            "PSD Watch added to your cart.";
+
+    }
+
+
+
+    function buyExclusiveNow() {
+
+        if (!exclusiveProduct) {
+
+            const message =
+                document.getElementById(
+                    "exclusiveMessage"
+                );
+
+            message.style.color =
+                "#FF523b";
+
+            message.textContent =
+                "PSD Watch is currently unavailable.";
+
+            return;
+        }
+
+
+        addExclusiveToCart();
+
+
+        window.location.href =
+            "cart.html";
+
+    }
+
+
+
+    loadExclusiveProduct();
+
+</script>
+
+</body>
+
+</html>
