@@ -1,0 +1,368 @@
+/* =========================================
+   ELITEWEAR - MESSAGES & SUPPORT PAGE
+========================================= */
+
+.support-page {
+    min-height: 65vh;
+    padding: 65px 25px 85px;
+    background: linear-gradient(180deg, #fff 0%, #fff8f6 100%);
+}
+
+.support-page-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Header */
+
+.support-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.support-page-header h1 {
+    color: #222;
+    font-size: 34px;
+    margin-bottom: 7px;
+}
+
+.support-page-header h1 i {
+    color: #FF523b;
+    margin-right: 8px;
+}
+
+.support-page-header p {
+    color: #777;
+    font-size: 15px;
+}
+
+.support-new-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 12px 22px;
+
+    background: #FF523b;
+    color: #fff;
+
+    border-radius: 30px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition: 0.25s ease;
+}
+
+.support-new-btn:hover {
+    background: #e6452e;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+
+/* Message list */
+
+.support-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+/* Individual message */
+
+.support-item {
+    background: #fff;
+
+    border: 1px solid #eee;
+    border-radius: 16px;
+
+    padding: 25px;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+
+    transition: transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.support-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Message top */
+
+.support-item-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+
+    margin-bottom: 20px;
+}
+
+.support-item-top h3 {
+    color: #222;
+    font-size: 19px;
+    margin-bottom: 4px;
+}
+
+.support-date {
+    color: #999;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+
+/* Status badges */
+
+.support-badge {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 7px 13px;
+
+    border-radius: 30px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.support-badge.waiting {
+    background: #fff3d6;
+    color: #a86c00;
+}
+
+.support-badge.replied {
+    background: #e5f8ed;
+    color: #198754;
+}
+
+
+/* Customer message */
+
+.support-user-message {
+    background: #f8f8f8;
+
+    border-radius: 12px;
+
+    padding: 18px;
+
+    color: #444;
+
+    font-size: 15px;
+    line-height: 1.6;
+
+    margin-bottom: 16px;
+
+    word-break: break-word;
+}
+
+.support-user-message strong {
+    display: block;
+
+    color: #222;
+
+    font-size: 15px;
+
+    margin-bottom: 8px;
+}
+
+
+/* Admin reply */
+
+.support-admin-reply {
+    position: relative;
+
+    background: #fff4f1;
+
+    border-left: 4px solid #FF523b;
+
+    border-radius: 10px;
+
+    padding: 18px;
+
+    color: #444;
+
+    font-size: 15px;
+    line-height: 1.6;
+
+    word-break: break-word;
+}
+
+.support-admin-reply strong {
+    display: block;
+
+    color: #FF523b;
+
+    margin-bottom: 8px;
+
+    font-size: 15px;
+}
+
+.support-admin-reply strong i {
+    margin-right: 5px;
+}
+
+.support-reply-date {
+    display: block;
+
+    color: #999;
+
+    font-size: 11px;
+    font-weight: 500;
+
+    margin-top: 12px;
+}
+
+
+/* Waiting text */
+
+.support-waiting {
+    color: #888;
+
+    font-size: 13px;
+
+    margin: 4px 0 0;
+}
+
+
+/* Back button */
+
+.support-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    margin-top: 28px;
+
+    color: #555;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    transition: color 0.25s ease;
+}
+
+.support-back:hover {
+    color: #FF523b;
+}
+
+
+/* Loading / empty / error state */
+
+.support-empty {
+    background: #fff;
+
+    border: 1px solid #eee;
+    border-radius: 16px;
+
+    padding: 50px 25px;
+
+    text-align: center;
+
+    color: #777;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+}
+
+.support-empty > i {
+    display: block;
+
+    color: #FF523b;
+
+    font-size: 34px;
+
+    margin-bottom: 14px;
+}
+
+.support-empty strong {
+    display: block;
+
+    color: #333;
+
+    font-size: 18px;
+
+    margin-bottom: 7px;
+}
+
+.support-empty p {
+    color: #888;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media only screen and (max-width: 700px) {
+
+    .support-page {
+        padding: 45px 18px 65px;
+    }
+
+    .support-page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .support-page-header h1 {
+        font-size: 27px;
+    }
+
+    .support-page-header p {
+        font-size: 14px;
+    }
+
+    .support-new-btn {
+        padding: 10px 18px;
+    }
+
+    .support-item {
+        padding: 20px;
+    }
+
+    .support-item-top {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .support-badge {
+        align-self: flex-start;
+    }
+}
+
+
+@media only screen and (max-width: 450px) {
+
+    .support-page {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .support-page-header h1 {
+        font-size: 24px;
+    }
+
+    .support-item {
+        padding: 17px;
+        border-radius: 13px;
+    }
+
+    .support-user-message,
+    .support-admin-reply {
+        padding: 15px;
+    }
+}

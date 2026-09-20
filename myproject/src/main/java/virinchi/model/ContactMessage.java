@@ -48,6 +48,15 @@ public class ContactMessage {
     private LocalDateTime createdAt;
 
 
+    // Admin reply to customer
+    @Column(length = 2000)
+    private String adminReply;
+
+
+    // Time admin replied
+    private LocalDateTime repliedAt;
+
+
     public ContactMessage() {
     }
 
@@ -112,5 +121,23 @@ public class ContactMessage {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+
+    public String getAdminReply() {
+        return adminReply;
+    }
+
+    public void setAdminReply(String adminReply) {
+        this.adminReply = adminReply;
+    }
+
+
+    public LocalDateTime getRepliedAt() {
+        return repliedAt;
+    }
+
+    public void setRepliedAt(LocalDateTime repliedAt) {
+        this.repliedAt = repliedAt;
     }
 }

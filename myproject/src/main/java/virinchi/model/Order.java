@@ -19,52 +19,41 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-
-    // Username is set by the backend session
     @Column(nullable = false)
     private String username;
-
 
     @NotBlank(message = "First name is required")
     @Column(nullable = false)
     private String firstName;
 
-
     @NotBlank(message = "Last name is required")
     @Column(nullable = false)
     private String lastName;
-
 
     @NotBlank(message = "Email is required")
     @Email(message = "Please enter a valid email")
     @Column(nullable = false)
     private String email;
 
-
     @NotBlank(message = "Phone number is required")
     @Column(nullable = false)
     private String phone;
-
 
     @NotBlank(message = "Street is required")
     @Column(nullable = false)
     private String street;
 
-
     @NotBlank(message = "City is required")
     @Column(nullable = false)
     private String city;
-
 
     @NotBlank(message = "State is required")
     @Column(nullable = false)
     private String state;
 
-
     @NotBlank(message = "Postcode is required")
     @Column(nullable = false)
     private String postcode;
-
 
     @NotBlank(message = "Country is required")
     @Pattern(
@@ -74,31 +63,24 @@ public class Order {
     @Column(nullable = false)
     private String country;
 
-
     @NotBlank(message = "Payment method is required")
     @Column(nullable = false)
     private String paymentMethod;
 
-
     @Column(nullable = false)
     private double subtotal;
-
 
     @Column(nullable = false)
     private double delivery;
 
-
     @Column(nullable = false)
     private double total;
-
 
     @Column(nullable = false)
     private String status;
 
-
     @Column(nullable = false)
     private LocalDateTime createdAt;
-
 
     @Valid
     @NotEmpty(message = "Order must contain at least one item")
@@ -119,7 +101,6 @@ public class Order {
         return id;
     }
 
-
     public void setId(int id) {
         this.id = id;
     }
@@ -128,7 +109,6 @@ public class Order {
     public String getUsername() {
         return username;
     }
-
 
     public void setUsername(String username) {
         this.username = username;
@@ -139,7 +119,6 @@ public class Order {
         return firstName;
     }
 
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -148,7 +127,6 @@ public class Order {
     public String getLastName() {
         return lastName;
     }
-
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
@@ -159,7 +137,6 @@ public class Order {
         return email;
     }
 
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -168,7 +145,6 @@ public class Order {
     public String getPhone() {
         return phone;
     }
-
 
     public void setPhone(String phone) {
         this.phone = phone;
@@ -179,7 +155,6 @@ public class Order {
         return street;
     }
 
-
     public void setStreet(String street) {
         this.street = street;
     }
@@ -188,7 +163,6 @@ public class Order {
     public String getCity() {
         return city;
     }
-
 
     public void setCity(String city) {
         this.city = city;
@@ -199,7 +173,6 @@ public class Order {
         return state;
     }
 
-
     public void setState(String state) {
         this.state = state;
     }
@@ -208,7 +181,6 @@ public class Order {
     public String getPostcode() {
         return postcode;
     }
-
 
     public void setPostcode(String postcode) {
         this.postcode = postcode;
@@ -219,7 +191,6 @@ public class Order {
         return country;
     }
 
-
     public void setCountry(String country) {
         this.country = country;
     }
@@ -229,8 +200,9 @@ public class Order {
         return paymentMethod;
     }
 
-
-    public void setPaymentMethod(String paymentMethod) {
+    public void setPaymentMethod(
+            String paymentMethod
+    ) {
         this.paymentMethod = paymentMethod;
     }
 
@@ -238,7 +210,6 @@ public class Order {
     public double getSubtotal() {
         return subtotal;
     }
-
 
     public void setSubtotal(double subtotal) {
         this.subtotal = subtotal;
@@ -249,7 +220,6 @@ public class Order {
         return delivery;
     }
 
-
     public void setDelivery(double delivery) {
         this.delivery = delivery;
     }
@@ -258,7 +228,6 @@ public class Order {
     public double getTotal() {
         return total;
     }
-
 
     public void setTotal(double total) {
         this.total = total;
@@ -269,7 +238,6 @@ public class Order {
         return status;
     }
 
-
     public void setStatus(String status) {
         this.status = status;
     }
@@ -278,7 +246,6 @@ public class Order {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
-
 
     public void setCreatedAt(
             LocalDateTime createdAt
@@ -290,7 +257,6 @@ public class Order {
     public List<OrderItem> getItems() {
         return items;
     }
-
 
     public void setItems(
             List<OrderItem> items

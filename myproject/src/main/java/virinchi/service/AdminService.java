@@ -14,13 +14,17 @@ public class AdminService {
     private UserRepository userRepository;
 
 
+    // =========================
     // GET ALL USERS
+    // =========================
     public List<UserTable> getAllUsers() {
         return userRepository.findAll();
     }
 
 
+    // =========================
     // ACTIVATE / DEACTIVATE USER
+    // =========================
     public UserTable changeUserStatus(int id, boolean active) {
 
         UserTable user =
@@ -30,13 +34,30 @@ public class AdminService {
             return null;
         }
 
+
+        // ---------------------------------
+        // PROTECT ADMIN ACCOUNT
+        // ---------------------------------
+        // Admin accounts must always remain active.
+        if ("admin".equalsIgnoreCase(user.getRole())) {
+
+            // If someone tries to deactivate admin,
+            // do not change the account.
+            if (!active) {
+                return user;
+            }
+        }
+
+
         user.setActive(active);
 
         return userRepository.save(user);
     }
 
 
+    // =========================
     // DELETE USER
+    // =========================
     public boolean deleteUser(int id) {
 
         UserTable user =
@@ -46,10 +67,14 @@ public class AdminService {
             return false;
         }
 
-        // Do not allow admin account deletion
+
+        // ---------------------------------
+        // PROTECT ADMIN ACCOUNT
+        // ---------------------------------
         if ("admin".equalsIgnoreCase(user.getRole())) {
             return false;
         }
+
 
         userRepository.deleteById(id);
 

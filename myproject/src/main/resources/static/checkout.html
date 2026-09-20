@@ -4,15 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Elitewear - Checkout</title>
+    <title>Secure Checkout | EliteWear</title>
 
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-
 <body>
-
 <!-- HEADER -->
 <div class="header">
     <div class="container">
@@ -174,110 +172,45 @@
                 <div class="checkout-section">
 
                     <div class="checkout-section-title">
-                        <i class="fa-solid fa-credit-card"></i>
+                        <i class="fa-solid fa-wallet"></i>
                         <h2>Payment Method</h2>
                     </div>
-
 
                     <div class="checkout-payment-options">
 
                         <div class="checkout-payment-option">
-
-                            <input type="radio"
-                                   id="cardPayment"
+                            <input type="radio" id="cashPayment"
                                    name="paymentMethod"
-                                   value="Card"
-                                   checked>
-
-                            <label for="cardPayment">
-                                <i class="fa-solid fa-credit-card"></i>
-                                Credit / Debit Card
-                            </label>
-
-                        </div>
-
-
-                        <div class="checkout-payment-option">
-
-                            <input type="radio"
-                                   id="cashPayment"
-                                   name="paymentMethod"
-                                   value="Cash on Delivery">
+                                   value="Cash on Delivery" checked>
 
                             <label for="cashPayment">
                                 <i class="fa-solid fa-money-bill-wave"></i>
-                                Cash on Delivery
+                                <span>
+                                    <strong>Cash on Delivery</strong>
+                                    <small>Pay when your order arrives.</small>
+                                </span>
                             </label>
+                        </div>
 
+                        <div class="checkout-payment-option">
+                            <input type="radio" id="esewaPayment"
+                                   name="paymentMethod"
+                                   value="eSewa">
+
+                            <label for="esewaPayment">
+                                <span class="checkout-esewa-mark">eS</span>
+                                <span>
+                                    <strong>eSewa</strong>
+                                    <small>eSewa payment option for project demonstration.</small>
+                                </span>
+                            </label>
                         </div>
 
                     </div>
 
-
-                    <div class="checkout-card-fields"
-                         id="cardFields">
-
-                        <div class="checkout-form-grid">
-
-                            <div class="checkout-field full-width">
-                                <label for="cardName">
-                                    Name on Card
-                                </label>
-
-                                <input type="text"
-                                       id="cardName">
-
-                                <small class="checkout-error"
-                                       id="cardNameError"></small>
-                            </div>
-
-
-                            <div class="checkout-field full-width">
-                                <label for="cardNumber">
-                                    Card Number
-                                </label>
-
-                                <input type="text"
-                                       id="cardNumber"
-                                       maxlength="19"
-                                       placeholder="1234 5678 9012 3456">
-
-                                <small class="checkout-error"
-                                       id="cardNumberError"></small>
-                            </div>
-
-
-                            <div class="checkout-field">
-                                <label for="expiry">
-                                    Expiry
-                                </label>
-
-                                <input type="text"
-                                       id="expiry"
-                                       maxlength="5"
-                                       placeholder="MM/YY">
-
-                                <small class="checkout-error"
-                                       id="expiryError"></small>
-                            </div>
-
-
-                            <div class="checkout-field">
-                                <label for="cvv">
-                                    CVV
-                                </label>
-
-                                <input type="password"
-                                       id="cvv"
-                                       maxlength="4"
-                                       placeholder="123">
-
-                                <small class="checkout-error"
-                                       id="cvvError"></small>
-                            </div>
-
-                        </div>
-
+                    <div class="checkout-payment-info" id="esewaNotice">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>eSewa payment is simulated for this project. No real online transaction will be processed.</span>
                     </div>
 
                 </div>
@@ -336,8 +269,7 @@
 
                     <p class="checkout-secure-note">
                         <i class="fa-solid fa-lock"></i>
-                        This is a project checkout interface.
-                        No real payment is processed.
+                        Payment methods are simulated for project demonstration purposes.
                     </p>
 
 
@@ -660,30 +592,14 @@
 
 
     // Payment selection
-    const cardFields =
-        document.getElementById(
-            "cardFields"
-        );
-
+    const esewaNotice = document.getElementById("esewaNotice");
 
     document
-        .querySelectorAll(
-            'input[name="paymentMethod"]'
-        )
+        .querySelectorAll('input[name="paymentMethod"]')
         .forEach(option => {
-
-            option.addEventListener(
-                "change",
-                function () {
-
-                    cardFields.style.display =
-                        this.value === "Card"
-                            ? "block"
-                            : "none";
-
-                    clearCardErrors();
-                }
-            );
+            option.addEventListener("change", function () {
+                esewaNotice.classList.toggle("show", this.value === "eSewa");
+            });
         });
 
 
@@ -730,17 +646,6 @@
         if (error) {
             error.textContent = "";
         }
-    }
-
-
-    function clearCardErrors() {
-
-        [
-            "cardName",
-            "cardNumber",
-            "expiry",
-            "cvv"
-        ].forEach(clearError);
     }
 
 
@@ -822,146 +727,8 @@
 
             valid = false;
         }
-
-
-        const paymentMethod =
-            document.querySelector(
-                'input[name="paymentMethod"]:checked'
-            ).value;
-
-
-        if (paymentMethod === "Card") {
-
-            clearCardErrors();
-
-
-            const cardName =
-                document
-                    .getElementById("cardName")
-                    .value
-                    .trim();
-
-
-            const cardNumber =
-                document
-                    .getElementById("cardNumber")
-                    .value
-                    .replace(/\s/g, "");
-
-
-            const expiry =
-                document
-                    .getElementById("expiry")
-                    .value
-                    .trim();
-
-
-            const cvv =
-                document
-                    .getElementById("cvv")
-                    .value
-                    .trim();
-
-
-            if (!cardName) {
-
-                setError(
-                    "cardName",
-                    "Please enter the name on the card."
-                );
-
-                valid = false;
-            }
-
-
-            if (!/^\d{16}$/.test(cardNumber)) {
-
-                setError(
-                    "cardNumber",
-                    "Enter a 16-digit card number."
-                );
-
-                valid = false;
-            }
-
-
-            if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiry)) {
-
-                setError(
-                    "expiry",
-                    "Use MM/YY format."
-                );
-
-                valid = false;
-            }
-
-
-            if (!/^\d{3,4}$/.test(cvv)) {
-
-                setError(
-                    "cvv",
-                    "Enter a valid CVV."
-                );
-
-                valid = false;
-            }
-        }
-
-
         return valid;
     }
-
-
-    // Card number formatting
-    document
-        .getElementById("cardNumber")
-        .addEventListener(
-            "input",
-            function () {
-
-                const numbers =
-                    this.value
-                        .replace(/\D/g, "")
-                        .substring(0, 16);
-
-
-                this.value =
-                    numbers
-                        .replace(
-                            /(.{4})/g,
-                            "$1 "
-                        )
-                        .trim();
-            }
-        );
-
-
-    // Expiry formatting
-    document
-        .getElementById("expiry")
-        .addEventListener(
-            "input",
-            function () {
-
-                let value =
-                    this.value
-                        .replace(/\D/g, "")
-                        .substring(0, 4);
-
-
-                if (value.length > 2) {
-
-                    value =
-                        value.substring(0, 2) +
-                        "/" +
-                        value.substring(2);
-                }
-
-
-                this.value =
-                    value;
-            }
-        );
 
 
     // Place order
@@ -983,7 +750,11 @@
                 }
 
 
-                // Make sure session still exists
+                const selectedPaymentMethod =
+                    document.querySelector(
+                        'input[name="paymentMethod"]:checked'
+                    ).value;
+// Make sure session still exists
                 const sessionValid =
                     await checkSession();
 
@@ -1142,6 +913,12 @@
 
                 try {
 
+                    // ==========================================
+                    // PLACE ORDER
+                    // COD and eSewa use the same order API.
+                    // eSewa is simulated for this project.
+                    // ==========================================
+
                     const response =
                         await fetch(
                             "/api/orders",
@@ -1162,9 +939,7 @@
                         );
 
 
-                    if (
-                        response.status === 401
-                    ) {
+                    if (response.status === 401) {
 
                         localStorage.removeItem(
                             "loggedUser"
@@ -1179,7 +954,12 @@
 
                     if (!response.ok) {
 
+                        const errorData =
+                            await response.json()
+                                .catch(() => null);
+
                         throw new Error(
+                            errorData?.message ||
                             "Could not place order"
                         );
                     }
@@ -1207,13 +987,14 @@
                 } catch (error) {
 
                     console.error(
-                        "Order error:",
+                        "Order/payment error:",
                         error
                     );
 
 
                     alert(
-                        "Could not place your order. Please try again."
+                        error.message ||
+                        "Could not complete checkout. Please try again."
                     );
 
 
@@ -1256,6 +1037,7 @@
     startCheckout();
 
 </script>
-
 </body>
 </html>
+
+```

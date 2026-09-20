@@ -3,47 +3,262 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Elitewear - My Orders</title>
 
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet"
+          href="css/main.css">
+
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+
+        /* =====================================
+           ORDER ACTIONS
+        ===================================== */
+
+        .orders-message {
+            display: none;
+            margin: 0 0 25px;
+            padding: 14px 18px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .orders-message.show {
+            display: block;
+        }
+
+        .orders-message.success {
+            background: #edf8ef;
+            border: 1px solid #b8dfbf;
+            color: #247536;
+        }
+
+        .orders-message.error {
+            background: #fff0f0;
+            border: 1px solid #efb9b9;
+            color: #b42318;
+        }
+
+        .orders-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-left: auto;
+        }
+
+        .orders-action-btn {
+            border: none;
+            border-radius: 6px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .orders-action-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .orders-action-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .orders-reorder-btn {
+            background: #ff523b;
+            color: white;
+        }
+
+        .orders-cancel-btn {
+            background: #fff3f1;
+            color: #d63a27;
+            border: 1px solid #ffb8ae;
+        }
+
+        .orders-delete-btn {
+            background: #333;
+            color: white;
+        }
+
+        .orders-card-footer {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+
+        /* =====================================
+           CONFIRMATION BOX
+        ===================================== */
+
+        .orders-confirm-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .orders-confirm-overlay.show {
+            display: flex;
+        }
+
+        .orders-confirm-box {
+            background: white;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 12px;
+            padding: 28px;
+            text-align: center;
+            box-shadow:
+                    0 20px 60px rgba(0, 0, 0, 0.20);
+        }
+
+        .orders-confirm-icon {
+            font-size: 35px;
+            color: #ff523b;
+            margin-bottom: 15px;
+        }
+
+        .orders-confirm-box h2 {
+            margin-bottom: 10px;
+        }
+
+        .orders-confirm-box p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .orders-confirm-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .orders-confirm-buttons button {
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .orders-confirm-no {
+            background: #eee;
+            color: #333;
+        }
+
+        .orders-confirm-yes {
+            background: #ff523b;
+            color: white;
+        }
+
+
+        @media(max-width: 600px) {
+
+            .orders-card-footer {
+                align-items: stretch;
+            }
+
+            .orders-actions {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .orders-action-btn {
+                flex: 1;
+            }
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
+
 <!-- HEADER -->
 <div class="header">
+
     <div class="container">
 
         <div class="navbar">
 
             <div class="logo">
+
                 <a href="home.html">
+
                     <img src="images/Elite.logo.png"
                          width="140px"
                          alt="Elitewear Logo">
+
                 </a>
+
             </div>
 
+
             <nav>
+
                 <ul id="MenuItems">
-                    <li><a href="home.html">Home</a></li>
-                    <li><a href="Product.html">Products</a></li>
-                    <li><a href="Aboutus.html">About</a></li>
-                    <li><a href="contactus.html">Contact</a></li>
-                    <li><a href="account.html">Account</a></li>
+
+                    <li>
+                        <a href="home.html">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="Product.html">
+                            Products
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="Aboutus.html">
+                            About
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="contactus.html">
+                            Contact
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="account.html">
+                            Account
+                        </a>
+                    </li>
+
                 </ul>
+
             </nav>
 
+
             <a href="cart.html">
+
                 <img src="images/cart.png"
                      width="30px"
                      height="30px"
                      alt="Cart">
+
             </a>
+
 
             <img src="images/menu.png"
                  class="menu-icon"
@@ -53,7 +268,9 @@
         </div>
 
     </div>
+
 </div>
+
 
 
 <!-- ORDERS -->
@@ -61,25 +278,32 @@
 
     <div class="orders-container">
 
+
         <div class="orders-heading">
 
             <div>
+
                 <p class="orders-eyebrow">
                     ELITEWEAR ACCOUNT
                 </p>
 
-                <h1>My Orders</h1>
+                <h1>
+                    My Orders
+                </h1>
 
                 <p>
                     View your recent EliteWear purchases
                     and order details.
                 </p>
+
             </div>
+
 
             <a href="Product.html"
                class="orders-shop-btn">
 
                 <i class="fa-solid fa-bag-shopping"></i>
+
                 Continue Shopping
 
             </a>
@@ -87,11 +311,68 @@
         </div>
 
 
+        <!-- IN-PAGE MESSAGE -->
+        <div id="ordersMessage"
+             class="orders-message">
+        </div>
+
+
+        <!-- ORDERS -->
         <div id="ordersList"></div>
+
 
     </div>
 
 </main>
+
+
+
+<!-- CUSTOM CONFIRMATION -->
+<div class="orders-confirm-overlay"
+     id="confirmOverlay">
+
+    <div class="orders-confirm-box">
+
+        <div class="orders-confirm-icon">
+
+            <i class="fa-solid fa-circle-question"></i>
+
+        </div>
+
+        <h2 id="confirmTitle">
+            Confirm Action
+        </h2>
+
+        <p id="confirmText">
+            Are you sure?
+        </p>
+
+
+        <div class="orders-confirm-buttons">
+
+            <button type="button"
+                    class="orders-confirm-no"
+                    id="confirmNo">
+
+                Go Back
+
+            </button>
+
+
+            <button type="button"
+                    class="orders-confirm-yes"
+                    id="confirmYes">
+
+                Confirm
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
 
 
 <!-- FOOTER -->
@@ -103,11 +384,15 @@
 
             <div class="footer-col-1">
 
-                <h3>Download Our App</h3>
+                <h3>
+                    Download Our App
+                </h3>
 
                 <p>
-                    Download the app for Android and iOS mobile phones.
+                    Download the app for Android
+                    and iOS mobile phones.
                 </p>
+
 
                 <div class="app-logo">
 
@@ -132,13 +417,36 @@
 
             <div class="footer-col-3">
 
-                <h3>Useful Links</h3>
+                <h3>
+                    Useful Links
+                </h3>
 
                 <ul>
-                    <li><a href="coupons.html">Coupons</a></li>
-                    <li><a href="blog.html">Blog Post</a></li>
-                    <li><a href="returnpolicy.html">Return Policy</a></li>
-                    <li><a href="affiliate.html">Join Affiliate</a></li>
+
+                    <li>
+                        <a href="coupons.html">
+                            Coupons
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="blog.html">
+                            Blog Post
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="returnpolicy.html">
+                            Return Policy
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="affiliate.html">
+                            Join Affiliate
+                        </a>
+                    </li>
+
                 </ul>
 
             </div>
@@ -146,7 +454,9 @@
 
             <div class="footer-col-4">
 
-                <h3>Follow Us</h3>
+                <h3>
+                    Follow Us
+                </h3>
 
                 <ul>
                     <li>Facebook</li>
@@ -162,6 +472,7 @@
 
         <hr>
 
+
         <p class="Copyright">
             Copyright 2025 - EliteWear
         </p>
@@ -171,24 +482,35 @@
 </div>
 
 
+
 <script>
 
-    // Logged-in user from backend session
     let loggedUser = null;
 
+    let currentOrders = [];
 
-    // Check real Spring Boot session
+    let confirmAction = null;
+
+
+    // =========================================
+    // SESSION
+    // =========================================
+
     async function checkSession() {
 
         try {
 
             const response =
-                await fetch("/api/auth/session");
+                await fetch(
+                    "/api/auth/session"
+                );
 
 
             if (!response.ok) {
 
-                localStorage.removeItem("loggedUser");
+                localStorage.removeItem(
+                    "loggedUser"
+                );
 
                 window.location.href =
                     "login.html";
@@ -203,7 +525,9 @@
 
             if (!session.loggedIn) {
 
-                localStorage.removeItem("loggedUser");
+                localStorage.removeItem(
+                    "loggedUser"
+                );
 
                 window.location.href =
                     "login.html";
@@ -224,7 +548,6 @@
                 error
             );
 
-
             window.location.href =
                 "login.html";
 
@@ -233,11 +556,20 @@
     }
 
 
-    // Mobile menu
-    const MenuItems =
-        document.getElementById("MenuItems");
 
-    MenuItems.style.maxHeight = "0px";
+    // =========================================
+    // MOBILE MENU
+    // =========================================
+
+    const MenuItems =
+        document.getElementById(
+            "MenuItems"
+        );
+
+
+    MenuItems.style.maxHeight =
+        "0px";
+
 
     function menutoggle() {
 
@@ -248,9 +580,150 @@
     }
 
 
-    const ordersList =
-        document.getElementById("ordersList");
 
+    // =========================================
+    // ELEMENTS
+    // =========================================
+
+    const ordersList =
+        document.getElementById(
+            "ordersList"
+        );
+
+
+    const ordersMessage =
+        document.getElementById(
+            "ordersMessage"
+        );
+
+
+    const confirmOverlay =
+        document.getElementById(
+            "confirmOverlay"
+        );
+
+
+    const confirmTitle =
+        document.getElementById(
+            "confirmTitle"
+        );
+
+
+    const confirmText =
+        document.getElementById(
+            "confirmText"
+        );
+
+
+    const confirmYes =
+        document.getElementById(
+            "confirmYes"
+        );
+
+
+    const confirmNo =
+        document.getElementById(
+            "confirmNo"
+        );
+
+
+
+    // =========================================
+    // MESSAGE
+    // =========================================
+
+    function showMessage(
+        message,
+        type = "success"
+    ) {
+
+        ordersMessage.textContent =
+            message;
+
+        ordersMessage.className =
+            "orders-message show " +
+            type;
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+
+        setTimeout(() => {
+
+            ordersMessage.className =
+                "orders-message";
+
+        }, 5000);
+    }
+
+
+
+    // =========================================
+    // CUSTOM CONFIRMATION
+    // =========================================
+
+    function showConfirmation(
+        title,
+        message,
+        action
+    ) {
+
+        confirmTitle.textContent =
+            title;
+
+        confirmText.textContent =
+            message;
+
+        confirmAction =
+            action;
+
+        confirmOverlay.classList.add(
+            "show"
+        );
+    }
+
+
+    function closeConfirmation() {
+
+        confirmOverlay.classList.remove(
+            "show"
+        );
+
+        confirmAction = null;
+    }
+
+
+    confirmNo.addEventListener(
+        "click",
+        closeConfirmation
+    );
+
+
+    confirmYes.addEventListener(
+        "click",
+        async function () {
+
+            if (!confirmAction) {
+                return;
+            }
+
+            const action =
+                confirmAction;
+
+            closeConfirmation();
+
+            await action();
+        }
+    );
+
+
+
+    // =========================================
+    // HELPERS
+    // =========================================
 
     function formatMoney(amount) {
 
@@ -265,9 +738,12 @@
         const date =
             new Date(dateValue);
 
+
         if (isNaN(date.getTime())) {
+
             return "Date unavailable";
         }
+
 
         return date.toLocaleDateString(
             "en-NP",
@@ -283,7 +759,9 @@
     function safeText(value) {
 
         const element =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
         element.textContent =
             value == null
@@ -294,11 +772,16 @@
     }
 
 
-    // Get orders from Spring Boot
+
+    // =========================================
+    // LOAD ORDERS
+    // =========================================
+
     async function loadOrders() {
 
         ordersList.innerHTML =
             "<p>Loading orders...</p>";
+
 
         try {
 
@@ -311,6 +794,15 @@
                 );
 
 
+            if (response.status === 401) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+            }
+
+
             if (!response.ok) {
 
                 throw new Error(
@@ -319,11 +811,13 @@
             }
 
 
-            const orders =
+            currentOrders =
                 await response.json();
 
 
-            renderOrders(orders);
+            renderOrders(
+                currentOrders
+            );
 
 
         } catch (error) {
@@ -335,13 +829,18 @@
 
 
             ordersList.innerHTML = `
+
                 <div class="orders-empty">
 
                     <div class="orders-empty-icon">
+
                         <i class="fa-solid fa-triangle-exclamation"></i>
+
                     </div>
 
-                    <h2>Could not load orders</h2>
+                    <h2>
+                        Could not load orders
+                    </h2>
 
                     <p>
                         Please try again later.
@@ -353,21 +852,34 @@
     }
 
 
+
+    // =========================================
+    // RENDER ORDERS
+    // =========================================
+
     function renderOrders(orders) {
 
         ordersList.innerHTML = "";
 
 
-        if (!orders || orders.length === 0) {
+        if (
+            !orders ||
+            orders.length === 0
+        ) {
 
             ordersList.innerHTML = `
+
                 <div class="orders-empty">
 
                     <div class="orders-empty-icon">
+
                         <i class="fa-solid fa-box-open"></i>
+
                     </div>
 
-                    <h2>No orders yet</h2>
+                    <h2>
+                        No orders yet
+                    </h2>
 
                     <p>
                         Once you complete checkout,
@@ -388,288 +900,474 @@
         }
 
 
-        orders.forEach((order, index) => {
+        orders.forEach(
+            (order, index) => {
 
-            const items =
-                Array.isArray(order.items)
-                    ? order.items
-                    : [];
-
-
-            const itemCount =
-                items.reduce(
-                    (total, item) =>
-                        total +
-                        Number(item.quantity || 0),
-                    0
-                );
+                const items =
+                    Array.isArray(
+                        order.items
+                    )
+                        ? order.items
+                        : [];
 
 
-            const itemHtml =
-                items.map(item => `
+                const itemCount =
+                    items.reduce(
+                        (total, item) =>
+                            total +
+                            Number(
+                                item.quantity || 0
+                            ),
+                        0
+                    );
 
-                    <div class="orders-product">
 
-                        <div class="orders-product-image">
+                const status =
+                    order.status ||
+                    "Order Placed";
 
-                            <img
-                                src="${safeText(
-                    item.image ||
-                    "images/Elite.logo.png"
-                )}"
-                                alt="${safeText(
-                    item.name ||
-                    "Product"
-                )}"
-                                onerror="this.src='images/Elite.logo.png'">
+
+                const canCancel =
+                    status.toLowerCase() ===
+                    "order placed"
+                    ||
+                    status.toLowerCase() ===
+                    "processing";
+
+
+                const canDelete =
+                    status.toLowerCase() ===
+                    "cancelled"
+                    ||
+                    status.toLowerCase() ===
+                    "delivered";
+
+
+                const itemHtml =
+                    items.map(item => `
+
+                        <div class="orders-product">
+
+                            <div class="orders-product-image">
+
+                                <img
+                                    src="${safeText(
+                        item.image ||
+                        "images/Elite.logo.png"
+                    )}"
+
+                                    alt="${safeText(
+                        item.name ||
+                        "Product"
+                    )}"
+
+                                    onerror="
+                                        this.src='images/Elite.logo.png'
+                                    ">
+
+                            </div>
+
+
+                            <div class="orders-product-info">
+
+                                <h3>
+                                    ${safeText(
+                        item.name ||
+                        "Product"
+                    )}
+                                </h3>
+
+                                <p>
+
+                                    Size:
+                                    ${safeText(
+                        item.size ||
+                        "Standard"
+                    )}
+
+                                    &nbsp; • &nbsp;
+
+                                    Qty:
+                                    ${safeText(
+                        item.quantity ||
+                        1
+                    )}
+
+                                </p>
+
+
+                                <strong>
+
+                                    ${formatMoney(
+                        Number(
+                            item.price || 0
+                        )
+                        *
+                        Number(
+                            item.quantity || 1
+                        )
+                    )}
+
+                                </strong>
+
+                            </div>
 
                         </div>
+                    `).join("");
 
 
-                        <div class="orders-product-info">
-
-                            <h3>
-                                ${safeText(
-                    item.name ||
-                    "Product"
-                )}
-                            </h3>
-
-                            <p>
-                                Size:
-                                ${safeText(
-                    item.size ||
-                    "Standard"
-                )}
-
-                                &nbsp; • &nbsp;
-
-                                Qty:
-                                ${safeText(
-                    item.quantity ||
-                    1
-                )}
-                            </p>
-
-                            <strong>
-                                ${formatMoney(
-                    Number(item.price || 0) *
-                    Number(item.quantity || 1)
-                )}
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-                `).join("");
-
-
-            const orderCard =
-                document.createElement("section");
-
-            orderCard.className =
-                "orders-card";
-
-
-            orderCard.innerHTML = `
-
-                <div class="orders-card-header">
-
-                    <div>
-
-                        <span class="orders-label">
-                            Order ID
-                        </span>
-
-                        <h2>
-                            EW-${safeText(order.id)}
-                        </h2>
-
-                    </div>
-
-
-                    <span class="orders-status">
-                        ${safeText(
-                order.status ||
-                "Order Placed"
-            )}
-                    </span>
-
-                </div>
-
-
-                <div class="orders-meta">
-
-                    <div>
-
-                        <i class="fa-regular fa-calendar"></i>
-
-                        <span>
-                            ${formatDate(
-                order.createdAt
-            )}
-                        </span>
-
-                    </div>
-
-
-                    <div>
-
-                        <i class="fa-solid fa-box"></i>
-
-                        <span>
-                            ${itemCount}
-                            ${itemCount === 1
-                ? "item"
-                : "items"}
-                        </span>
-
-                    </div>
-
-
-                    <div>
-
-                        <i class="fa-solid fa-wallet"></i>
-
-                        <span>
-                            ${safeText(
-                order.paymentMethod ||
-                "Payment unavailable"
-            )}
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="orders-products">
-
-                    ${itemHtml}
-
-                </div>
-
-
-                <div class="orders-details-grid"
-                     data-order-details="${index}">
-
-
-                    <div class="orders-detail-box">
-
-                        <h3>
-                            <i class="fa-solid fa-location-dot"></i>
-                            Delivery Address
-                        </h3>
-
-                        <p>
-                            ${safeText(order.firstName)}
-                            ${safeText(order.lastName)}
-                        </p>
-
-                        <p>
-                            ${safeText(order.street)}
-                        </p>
-
-                        <p>
-                            ${safeText(order.city)}
-                            ${order.state
-                ? ", " + safeText(order.state)
-                : ""}
-                            ${order.postcode
-                ? " " + safeText(order.postcode)
-                : ""}
-                        </p>
-
-                        <p>
-                            ${safeText(order.country)}
-                        </p>
-
-                    </div>
-
-
-                    <div class="orders-detail-box orders-payment-summary">
-
-                        <h3>
-                            <i class="fa-solid fa-receipt"></i>
-                            Order Summary
-                        </h3>
-
-
-                        <div>
-
-                            <span>
-                                Subtotal
-                            </span>
-
-                            <span>
-                                ${formatMoney(
-                order.subtotal
-            )}
-                            </span>
-
-                        </div>
-
-
-                        <div>
-
-                            <span>
-                                Delivery
-                            </span>
-
-                            <span>
-                                ${formatMoney(
-                order.delivery
-            )}
-                            </span>
-
-                        </div>
-
-
-                        <div class="orders-total">
-
-                            <span>
-                                Total
-                            </span>
-
-                            <strong>
-                                ${formatMoney(
-                order.total
-            )}
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="orders-card-footer">
+                let actionButtons = `
 
                     <button
                         type="button"
-                        class="orders-details-btn"
-                        onclick="toggleOrderDetails(
-                            ${index},
-                            this
-                        )">
+                        class="
+                            orders-action-btn
+                            orders-reorder-btn
+                        "
+                        onclick="
+                            reorderOrder(
+                                ${order.id}
+                            )
+                        ">
 
-                        <i class="fa-solid fa-chevron-up"></i>
-                        Hide Details
+                        <i class="fa-solid fa-rotate-right"></i>
+
+                        Reorder
 
                     </button>
-
-                </div>
-            `;
+                `;
 
 
-            ordersList.appendChild(
-                orderCard
-            );
-        });
+                if (canCancel) {
+
+                    actionButtons += `
+
+                        <button
+                            type="button"
+                            class="
+                                orders-action-btn
+                                orders-cancel-btn
+                            "
+                            onclick="
+                                confirmCancel(
+                                    ${order.id}
+                                )
+                            ">
+
+                            <i class="fa-solid fa-ban"></i>
+
+                            Cancel Order
+
+                        </button>
+                    `;
+                }
+
+
+                if (canDelete) {
+
+                    actionButtons += `
+
+                        <button
+                            type="button"
+                            class="
+                                orders-action-btn
+                                orders-delete-btn
+                            "
+                            onclick="
+                                confirmDelete(
+                                    ${order.id}
+                                )
+                            ">
+
+                            <i class="fa-solid fa-trash"></i>
+
+                            Delete
+
+                        </button>
+                    `;
+                }
+
+
+                const orderCard =
+                    document.createElement(
+                        "section"
+                    );
+
+
+                orderCard.className =
+                    "orders-card";
+
+
+                orderCard.innerHTML = `
+
+                    <div class="orders-card-header">
+
+                        <div>
+
+                            <span class="orders-label">
+                                Order ID
+                            </span>
+
+                            <h2>
+                                EW-${safeText(
+                    order.id
+                )}
+                            </h2>
+
+                        </div>
+
+
+                        <span class="orders-status">
+
+                            ${safeText(status)}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="orders-meta">
+
+                        <div>
+
+                            <i class="fa-regular fa-calendar"></i>
+
+                            <span>
+
+                                ${formatDate(
+                    order.createdAt
+                )}
+
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <i class="fa-solid fa-box"></i>
+
+                            <span>
+
+                                ${itemCount}
+
+                                ${itemCount === 1
+                    ? "item"
+                    : "items"}
+
+                            </span>
+
+                        </div>
+
+
+                        <div>
+
+                            <i class="fa-solid fa-wallet"></i>
+
+                            <span>
+
+                                ${safeText(
+                    order.paymentMethod ||
+                    "Payment unavailable"
+                )}
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="orders-products">
+
+                        ${itemHtml}
+
+                    </div>
+
+
+                    <div
+                        class="orders-details-grid"
+                        data-order-details="${index}">
+
+
+                        <div class="orders-detail-box">
+
+                            <h3>
+
+                                <i class="fa-solid fa-location-dot"></i>
+
+                                Delivery Address
+
+                            </h3>
+
+
+                            <p>
+
+                                ${safeText(
+                    order.firstName
+                )}
+
+                                ${safeText(
+                    order.lastName
+                )}
+
+                            </p>
+
+
+                            <p>
+
+                                ${safeText(
+                    order.street
+                )}
+
+                            </p>
+
+
+                            <p>
+
+                                ${safeText(
+                    order.city
+                )}
+
+                                ${order.state
+                    ? ", " +
+                    safeText(
+                        order.state
+                    )
+                    : ""}
+
+                                ${order.postcode
+                    ? " " +
+                    safeText(
+                        order.postcode
+                    )
+                    : ""}
+
+                            </p>
+
+
+                            <p>
+
+                                ${safeText(
+                    order.country
+                )}
+
+                            </p>
+
+                        </div>
+
+
+                        <div
+                            class="
+                                orders-detail-box
+                                orders-payment-summary
+                            ">
+
+                            <h3>
+
+                                <i class="fa-solid fa-receipt"></i>
+
+                                Order Summary
+
+                            </h3>
+
+
+                            <div>
+
+                                <span>
+                                    Subtotal
+                                </span>
+
+                                <span>
+
+                                    ${formatMoney(
+                    order.subtotal
+                )}
+
+                                </span>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    Delivery
+                                </span>
+
+                                <span>
+
+                                    ${formatMoney(
+                    order.delivery
+                )}
+
+                                </span>
+
+                            </div>
+
+
+                            <div class="orders-total">
+
+                                <span>
+                                    Total
+                                </span>
+
+                                <strong>
+
+                                    ${formatMoney(
+                    order.total
+                )}
+
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="orders-card-footer">
+
+                        <button
+                            type="button"
+                            class="orders-details-btn"
+                            onclick="
+                                toggleOrderDetails(
+                                    ${index},
+                                    this
+                                )
+                            ">
+
+                            <i class="fa-solid fa-chevron-up"></i>
+
+                            Hide Details
+
+                        </button>
+
+
+                        <div class="orders-actions">
+
+                            ${actionButtons}
+
+                        </div>
+
+                    </div>
+                `;
+
+
+                ordersList.appendChild(
+                    orderCard
+                );
+            }
+        );
     }
 
+
+
+    // =========================================
+    // DETAILS
+    // =========================================
 
     function toggleOrderDetails(
         index,
@@ -696,15 +1394,315 @@
         button.innerHTML =
             hidden
 
-                ? `<i class="fa-solid fa-chevron-down"></i>
-                   View Details`
+                ? `
+                    <i class="fa-solid fa-chevron-down"></i>
+                    View Details
+                  `
 
-                : `<i class="fa-solid fa-chevron-up"></i>
-                   Hide Details`;
+                : `
+                    <i class="fa-solid fa-chevron-up"></i>
+                    Hide Details
+                  `;
     }
 
 
-    // Start page only after backend confirms login
+
+    // =========================================
+    // FIND ORDER
+    // =========================================
+
+    function findOrder(orderId) {
+
+        return currentOrders.find(
+            order =>
+                Number(order.id) ===
+                Number(orderId)
+        );
+    }
+
+
+
+    // =========================================
+    // CANCEL
+    // =========================================
+
+    function confirmCancel(orderId) {
+
+        showConfirmation(
+            "Cancel Order",
+            "Are you sure you want to cancel this order?",
+            () => cancelOrder(orderId)
+        );
+    }
+
+
+    async function cancelOrder(orderId) {
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/orders/" +
+                    orderId +
+                    "/cancel",
+                    {
+                        method: "PUT"
+                    }
+                );
+
+
+            const data =
+                await response.json()
+                    .catch(() => null);
+
+
+            if (response.status === 401) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+            }
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data?.message ||
+                    "Could not cancel order"
+                );
+            }
+
+
+            await loadOrders();
+
+
+            showMessage(
+                "Order cancelled successfully.",
+                "success"
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Cancel error:",
+                error
+            );
+
+
+            showMessage(
+                error.message ||
+                "Could not cancel order.",
+                "error"
+            );
+        }
+    }
+
+
+
+    // =========================================
+    // DELETE
+    // =========================================
+
+    function confirmDelete(orderId) {
+
+        showConfirmation(
+            "Delete Order",
+            "This will remove the order from your order history. Continue?",
+            () => deleteOrder(orderId)
+        );
+    }
+
+
+    async function deleteOrder(orderId) {
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/orders/" +
+                    orderId,
+                    {
+                        method: "DELETE"
+                    }
+                );
+
+
+            const data =
+                await response.json()
+                    .catch(() => null);
+
+
+            if (response.status === 401) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+            }
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data?.message ||
+                    "Could not delete order"
+                );
+            }
+
+
+            await loadOrders();
+
+
+            showMessage(
+                "Order deleted successfully.",
+                "success"
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Delete error:",
+                error
+            );
+
+
+            showMessage(
+                error.message ||
+                "Could not delete order.",
+                "error"
+            );
+        }
+    }
+
+
+
+    // =========================================
+    // REORDER
+    // =========================================
+
+    function reorderOrder(orderId) {
+
+        const order =
+            findOrder(orderId);
+
+
+        if (
+            !order ||
+            !Array.isArray(order.items) ||
+            order.items.length === 0
+        ) {
+
+            showMessage(
+                "This order does not contain any items.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        let cart =
+            JSON.parse(
+                localStorage.getItem(
+                    "eliteWearCart"
+                )
+            ) || [];
+
+
+        order.items.forEach(item => {
+
+            const productId =
+                Number(
+                    item.productId
+                );
+
+
+            const size =
+                item.size || "";
+
+
+            const existingItem =
+                cart.find(cartItem =>
+
+                    Number(
+                        cartItem.id ||
+                        cartItem.productId
+                    ) === productId
+
+                    &&
+
+                    String(
+                        cartItem.size || ""
+                    ) === String(size)
+                );
+
+
+            if (existingItem) {
+
+                existingItem.quantity =
+                    Number(
+                        existingItem.quantity || 0
+                    )
+                    +
+                    Number(
+                        item.quantity || 1
+                    );
+
+            } else {
+
+                cart.push({
+
+                    id:
+                    productId,
+
+                    productId:
+                    productId,
+
+                    name:
+                        item.name ||
+                        "Product",
+
+                    price:
+                        Number(
+                            item.price || 0
+                        ),
+
+                    quantity:
+                        Number(
+                            item.quantity || 1
+                        ),
+
+                    size:
+                    size,
+
+                    image:
+                        item.image ||
+                        "images/Elite.logo.png"
+                });
+            }
+        });
+
+
+        localStorage.setItem(
+            "eliteWearCart",
+            JSON.stringify(cart)
+        );
+
+
+        // Go to cart so customer can review
+        window.location.href =
+            "cart.html";
+    }
+
+
+
+    // =========================================
+    // START
+    // =========================================
+
     async function startPage() {
 
         const loggedIn =
@@ -721,6 +1719,7 @@
     startPage();
 
 </script>
+
 
 </body>
 

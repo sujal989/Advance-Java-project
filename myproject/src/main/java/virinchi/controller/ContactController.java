@@ -31,23 +31,36 @@ public class ContactController {
     ) {
 
         String username =
-                (String) session.getAttribute("username");
+                (String) session.getAttribute(
+                        "username"
+                );
+
 
         if (username == null) {
 
             Map<String, Object> response =
                     new HashMap<>();
 
-            response.put("success", false);
+
+            response.put(
+                    "success",
+                    false
+            );
+
+
             response.put(
                     "message",
                     "You must login first"
             );
 
+
             return ResponseEntity
-                    .status(HttpStatus.UNAUTHORIZED)
+                    .status(
+                            HttpStatus.UNAUTHORIZED
+                    )
                     .body(response);
         }
+
 
         return null;
     }
@@ -60,34 +73,50 @@ public class ContactController {
             HttpSession session
     ) {
 
-        ResponseEntity<Map<String, Object>> loginCheck =
+        ResponseEntity<Map<String, Object>>
+                loginCheck =
                 checkLogin(session);
 
+
         if (loginCheck != null) {
+
             return loginCheck;
         }
 
 
         String role =
-                (String) session.getAttribute("role");
+                (String) session.getAttribute(
+                        "role"
+                );
 
 
         if (
                 role == null ||
-                        !role.equalsIgnoreCase("admin")
+                        !role.equalsIgnoreCase(
+                                "admin"
+                        )
         ) {
 
             Map<String, Object> response =
                     new HashMap<>();
 
-            response.put("success", false);
+
+            response.put(
+                    "success",
+                    false
+            );
+
+
             response.put(
                     "message",
                     "Admin access required"
             );
 
+
             return ResponseEntity
-                    .status(HttpStatus.FORBIDDEN)
+                    .status(
+                            HttpStatus.FORBIDDEN
+                    )
                     .body(response);
         }
 
@@ -101,31 +130,45 @@ public class ContactController {
     // =========================
     @PostMapping
     public ResponseEntity<?> saveMessage(
-            @Valid @RequestBody ContactMessage message,
+            @Valid
+            @RequestBody
+            ContactMessage message,
+
             HttpSession session
     ) {
 
-        ResponseEntity<Map<String, Object>> loginCheck =
+        ResponseEntity<Map<String, Object>>
+                loginCheck =
                 checkLogin(session);
 
+
         if (loginCheck != null) {
+
             return loginCheck;
         }
 
 
         String loggedInUsername =
-                (String) session.getAttribute("username");
+                (String) session.getAttribute(
+                        "username"
+                );
 
 
-        // Do not trust username sent from frontend
-        message.setUsername(loggedInUsername);
+        // Never trust username from frontend
+        message.setUsername(
+                loggedInUsername
+        );
 
 
         ContactMessage savedMessage =
-                contactService.saveMessage(message);
+                contactService.saveMessage(
+                        message
+                );
 
 
-        return ResponseEntity.ok(savedMessage);
+        return ResponseEntity.ok(
+                savedMessage
+        );
     }
 
 
@@ -137,10 +180,13 @@ public class ContactController {
             HttpSession session
     ) {
 
-        ResponseEntity<Map<String, Object>> adminCheck =
+        ResponseEntity<Map<String, Object>>
+                adminCheck =
                 checkAdmin(session);
 
+
         if (adminCheck != null) {
+
             return adminCheck;
         }
 
@@ -149,6 +195,189 @@ public class ContactController {
                 contactService.getAllMessages();
 
 
-        return ResponseEntity.ok(messages);
+        return ResponseEntity.ok(
+                messages
+        );
+    }
+
+
+    // =========================
+    // GET LOGGED-IN USER MESSAGES
+    // =========================
+    @GetMapping("/my")
+    public ResponseEntity<?> getMyMessages(
+            HttpSession session
+    ) {
+
+        ResponseEntity<Map<String, Object>>
+                loginCheck =
+                checkLogin(session);
+
+
+        if (loginCheck != null) {
+
+            return loginCheck;
+        }
+
+
+        String username =
+                (String) session.getAttribute(
+                        "username"
+                );
+
+
+        List<ContactMessage> messages =
+                contactService
+                        .getMessagesByUsername(
+                                username
+                        );
+
+
+        return ResponseEntity.ok(
+                messages
+        );
+    }
+
+
+    // =========================
+    // ADMIN REPLY
+    // =========================
+    @PutMapping("/{id}/reply")
+    public ResponseEntity<?> replyToMessage(
+            @PathVariable int id,
+
+            @RequestBody
+            Map<String, String> request,
+
+            HttpSession session
+    ) {
+
+        ResponseEntity<Map<String, Object>>
+                adminCheck =
+                checkAdmin(session);
+
+
+        if (adminCheck != null) {
+
+            return adminCheck;
+        }
+
+
+        try {
+
+            String reply =
+                    request.get(
+                            "reply"
+                    );
+
+
+            ContactMessage updatedMessage =
+                    contactService
+                            .replyToMessage(
+                                    id,
+                                    reply
+                            );
+
+
+            return ResponseEntity.ok(
+                    updatedMessage
+            );
+
+
+        } catch (RuntimeException e) {
+
+            Map<String, Object> response =
+                    new HashMap<>();
+
+
+            response.put(
+                    "success",
+                    false
+            );
+
+
+            response.put(
+                    "message",
+                    e.getMessage()
+            );
+
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(response);
+        }
+    }
+
+
+    // =========================
+    // DELETE MESSAGE - ADMIN
+    // =========================
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteMessage(
+            @PathVariable int id,
+            HttpSession session
+    ) {
+
+        ResponseEntity<Map<String, Object>>
+                adminCheck =
+                checkAdmin(session);
+
+
+        if (adminCheck != null) {
+
+            return adminCheck;
+        }
+
+
+        try {
+
+            contactService.deleteMessage(
+                    id
+            );
+
+
+            Map<String, Object> response =
+                    new HashMap<>();
+
+
+            response.put(
+                    "success",
+                    true
+            );
+
+
+            response.put(
+                    "message",
+                    "Message deleted successfully"
+            );
+
+
+            return ResponseEntity.ok(
+                    response
+            );
+
+
+        } catch (RuntimeException e) {
+
+            Map<String, Object> response =
+                    new HashMap<>();
+
+
+            response.put(
+                    "success",
+                    false
+            );
+
+
+            response.put(
+                    "message",
+                    e.getMessage()
+            );
+
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(response);
+        }
     }
 }

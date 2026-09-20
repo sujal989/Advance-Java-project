@@ -3,310 +3,1485 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EliteWear Admin Panel</title>
+    <title>EliteWear Admin Dashboard</title>
+
     <link rel="stylesheet" href="css/main.css">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
 
 <div class="admin-layout">
-    <div class="sidebar">
-        <h2>EliteWear Admin</h2>
-        <button onclick="showSection('dashboard')">Dashboard</button>
-        <button onclick="showSection('users')">Users</button>
-        <button onclick="showSection('products')">Products</button>
-        <button onclick="showSection('orders')">Orders</button>
-        <button onclick="showSection('messages')">Messages</button>
-    </div>
 
-    <div class="main-content">
-        <div class="top-bar">
-            <h1 id="pageTitle">Dashboard</h1>
-            <button class="logout-btn" onclick="logout()">Logout</button>
-        </div>
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+    <aside class="admin-sidebar">
 
-        <div id="dashboardSection">
-            <div class="dashboard-cards">
-                <div class="card"><h3>Total Users</h3><p id="totalUsers">0</p></div>
-                <div class="card"><h3>Active Users</h3><p id="activeUsers">0</p></div>
-                <div class="card"><h3>Total Products</h3><p id="totalProducts">0</p></div>
-                <div class="card"><h3>Total Orders</h3><p id="totalOrders">0</p></div>
-                <div class="card"><h3>Total Messages</h3><p id="totalMessages">0</p></div>
+        <div class="admin-brand">
+            <div class="admin-brand-icon">
+                <i class="fa-solid fa-bag-shopping"></i>
+            </div>
+
+            <div>
+                <h2>EliteWear</h2>
+                <span>Admin Panel</span>
             </div>
         </div>
 
-        <div id="usersSection" style="display:none;">
-            <h2>User Management</h2>
-            <table>
-                <thead><tr><th>ID</th><th>Username</th><th>Email</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead>
-                <tbody id="userTableBody"></tbody>
-            </table>
+        <div class="admin-menu-label">MAIN MENU</div>
+
+        <nav class="admin-nav">
+
+            <button
+                    class="admin-nav-btn active"
+                    data-section="dashboard"
+                    onclick="showSection('dashboard', this)"
+            >
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Dashboard</span>
+            </button>
+
+            <button
+                    class="admin-nav-btn"
+                    data-section="users"
+                    onclick="showSection('users', this)"
+            >
+                <i class="fa-solid fa-users"></i>
+                <span>Users</span>
+            </button>
+
+            <button
+                    class="admin-nav-btn"
+                    data-section="products"
+                    onclick="showSection('products', this)"
+            >
+                <i class="fa-solid fa-shirt"></i>
+                <span>Products</span>
+            </button>
+
+            <button
+                    class="admin-nav-btn"
+                    data-section="orders"
+                    onclick="showSection('orders', this)"
+            >
+                <i class="fa-solid fa-box"></i>
+                <span>Orders</span>
+            </button>
+
+            <button
+                    class="admin-nav-btn"
+                    data-section="messages"
+                    onclick="showSection('messages', this)"
+            >
+                <i class="fa-solid fa-envelope"></i>
+                <span>Messages</span>
+            </button>
+
+        </nav>
+
+        <div class="admin-sidebar-bottom">
+
+            <div class="admin-profile-small">
+                <div class="admin-avatar">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+
+                <div>
+                    <strong>Administrator</strong>
+                    <span>EliteWear Admin</span>
+                </div>
+            </div>
+
+            <button class="admin-sidebar-logout" onclick="logout()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </button>
+
         </div>
 
-        <div id="productsSection" style="display:none;">
-            <h2>Product Management</h2>
-            <div style="margin:20px 0 30px;padding:20px;background:white;border-radius:8px;">
-                <h3 id="productFormTitle">Add Product</h3>
+    </aside>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+    <main class="admin-main">
+
+        <!-- TOP BAR -->
+        <div class="admin-topbar">
+
+            <div>
+                <p class="admin-page-label">ADMIN PANEL</p>
+                <h1 id="pageTitle">Dashboard</h1>
+            </div>
+
+            <div class="admin-topbar-right">
+
+                <div class="admin-status">
+                    <span></span>
+                    Admin Online
+                </div>
+
+                <button class="admin-top-logout" onclick="logout()">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             DASHBOARD
+        ========================== -->
+        <section id="dashboardSection">
+
+            <div class="admin-welcome">
+
+                <div>
+                    <span class="admin-welcome-small">WELCOME BACK</span>
+
+                    <h2>EliteWear Administration</h2>
+
+                    <p>
+                        Manage customers, products, orders and customer
+                        messages from one place.
+                    </p>
+                </div>
+
+                <div class="admin-welcome-icon">
+                    <i class="fa-solid fa-store"></i>
+                </div>
+
+            </div>
+
+
+            <!-- STAT CARDS -->
+            <div class="admin-stats">
+
+                <div class="admin-stat-card">
+
+                    <div class="admin-stat-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+
+                    <div>
+                        <span>Total Users</span>
+                        <h3 id="totalUsers">0</h3>
+                        <small>Registered customers</small>
+                    </div>
+
+                </div>
+
+
+                <div class="admin-stat-card">
+
+                    <div class="admin-stat-icon">
+                        <i class="fa-solid fa-user-check"></i>
+                    </div>
+
+                    <div>
+                        <span>Active Users</span>
+                        <h3 id="activeUsers">0</h3>
+                        <small>Currently active accounts</small>
+                    </div>
+
+                </div>
+
+
+                <div class="admin-stat-card">
+
+                    <div class="admin-stat-icon">
+                        <i class="fa-solid fa-shirt"></i>
+                    </div>
+
+                    <div>
+                        <span>Products</span>
+                        <h3 id="totalProducts">0</h3>
+                        <small>Products available</small>
+                    </div>
+
+                </div>
+
+
+                <div class="admin-stat-card">
+
+                    <div class="admin-stat-icon">
+                        <i class="fa-solid fa-box-open"></i>
+                    </div>
+
+                    <div>
+                        <span>Total Orders</span>
+                        <h3 id="totalOrders">0</h3>
+                        <small>Customer orders</small>
+                    </div>
+
+                </div>
+
+
+                <div class="admin-stat-card">
+
+                    <div class="admin-stat-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+
+                    <div>
+                        <span>Messages</span>
+                        <h3 id="totalMessages">0</h3>
+                        <small>Customer enquiries</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK MANAGEMENT -->
+            <div class="admin-dashboard-panel">
+
+                <div class="admin-panel-heading">
+
+                    <div>
+                        <h2>Quick Management</h2>
+                        <p>Access the main administration areas.</p>
+                    </div>
+
+                </div>
+
+
+                <div class="admin-quick-grid">
+
+                    <button onclick="showSection('products')" class="admin-quick-card">
+                        <i class="fa-solid fa-plus"></i>
+
+                        <div>
+                            <strong>Manage Products</strong>
+                            <span>Add, edit or remove products</span>
+                        </div>
+                    </button>
+
+
+                    <button onclick="showSection('orders')" class="admin-quick-card">
+                        <i class="fa-solid fa-truck-fast"></i>
+
+                        <div>
+                            <strong>Manage Orders</strong>
+                            <span>View and update order status</span>
+                        </div>
+                    </button>
+
+
+                    <button onclick="showSection('users')" class="admin-quick-card">
+                        <i class="fa-solid fa-user-gear"></i>
+
+                        <div>
+                            <strong>Manage Users</strong>
+                            <span>Manage customer accounts</span>
+                        </div>
+                    </button>
+
+
+                    <button onclick="showSection('messages')" class="admin-quick-card">
+                        <i class="fa-solid fa-comments"></i>
+
+                        <div>
+                            <strong>View Messages</strong>
+                            <span>Read customer enquiries</span>
+                        </div>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             USERS
+        ========================== -->
+        <section id="usersSection" class="admin-section" style="display:none;">
+
+            <div class="admin-section-heading">
+                <div>
+                    <h2>User Management</h2>
+                    <p>Manage registered EliteWear users.</p>
+                </div>
+            </div>
+
+            <div class="admin-table-container">
+
+                <table class="admin-table">
+
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="userTableBody"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PRODUCTS
+        ========================== -->
+        <section id="productsSection" class="admin-section" style="display:none;">
+
+            <div class="admin-section-heading">
+                <div>
+                    <h2>Product Management</h2>
+                    <p>Add, update and manage EliteWear products.</p>
+                </div>
+            </div>
+
+
+            <div class="admin-product-form">
+
+                <div class="admin-form-heading">
+                    <div>
+                        <h3 id="productFormTitle">Add Product</h3>
+                        <p>Enter the product information below.</p>
+                    </div>
+
+                    <i class="fa-solid fa-shirt"></i>
+                </div>
+
+
                 <input type="hidden" id="productId">
-                <p><label>Product Name</label><br><input type="text" id="productName"></p>
-                <p><label>Price</label><br><input type="number" id="productPrice" min="0"></p>
-                <p><label>Category</label><br><input type="text" id="productCategory"></p>
-                <p><label>Stock</label><br><input type="number" id="productStock" min="0"></p>
-                <p><label>Product Image</label><br><input type="file" id="productImageFile" accept="image/*"></p>
-                <p><label>Description</label><br><textarea id="productDescription" rows="4"></textarea></p>
-                <button class="action-btn activate-btn" id="saveProductButton" onclick="saveProduct()">Add Product</button>
-                <button class="action-btn deactivate-btn" id="cancelEditButton" onclick="clearProductForm()" style="display:none;">Cancel</button>
+
+
+                <div class="admin-form-grid">
+
+                    <div class="admin-field">
+                        <label>Product Name</label>
+                        <input
+                                type="text"
+                                id="productName"
+                                placeholder="Enter product name"
+                        >
+                    </div>
+
+
+                    <div class="admin-field">
+                        <label>Price (Rs)</label>
+                        <input
+                                type="number"
+                                id="productPrice"
+                                min="0"
+                                placeholder="Enter price"
+                        >
+                    </div>
+
+
+                    <div class="admin-field">
+                        <label>Category</label>
+                        <input
+                                type="text"
+                                id="productCategory"
+                                placeholder="Example: Men, Women, Accessories"
+                        >
+                    </div>
+
+
+                    <div class="admin-field">
+                        <label>Stock</label>
+                        <input
+                                type="number"
+                                id="productStock"
+                                min="0"
+                                placeholder="Available quantity"
+                        >
+                    </div>
+
+
+                    <div class="admin-field admin-field-full">
+                        <label>Product Image</label>
+
+                        <input
+                                type="file"
+                                id="productImageFile"
+                                accept="image/*"
+                        >
+                    </div>
+
+
+                    <div class="admin-field admin-field-full">
+                        <label>Description</label>
+
+                        <textarea
+                                id="productDescription"
+                                rows="4"
+                                placeholder="Enter product description"
+                        ></textarea>
+                    </div>
+
+                </div>
+
+
+                <div class="admin-form-actions">
+
+                    <button
+                            class="admin-primary-btn"
+                            id="saveProductButton"
+                            onclick="saveProduct()"
+                    >
+                        <i class="fa-solid fa-plus"></i>
+                        Add Product
+                    </button>
+
+                    <button
+                            class="admin-secondary-btn"
+                            id="cancelEditButton"
+                            onclick="clearProductForm()"
+                            style="display:none;"
+                    >
+                        Cancel
+                    </button>
+
+                </div>
+
             </div>
 
-            <table>
-                <thead><tr><th>ID</th><th>Image</th><th>Name</th><th>Price</th><th>Category</th><th>Stock</th><th>Actions</th></tr></thead>
-                <tbody id="productTableBody"></tbody>
-            </table>
-        </div>
 
-        <div id="ordersSection" style="display:none;">
-            <h2>Order Management</h2>
-            <table>
-                <thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Payment</th><th>Date</th><th>Status</th><th>Update</th></tr></thead>
-                <tbody id="orderTableBody"></tbody>
-            </table>
-        </div>
+            <div class="admin-table-container">
 
-        <div id="messagesSection" style="display:none;">
-            <h2>Contact Messages</h2>
-            <table>
-                <thead><tr><th>ID</th><th>User</th><th>Name</th><th>Email</th><th>Phone</th><th>Message</th><th>Date</th></tr></thead>
-                <tbody id="messageTableBody"></tbody>
-            </table>
+                <table class="admin-table">
+
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Stock</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="productTableBody"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ORDERS
+        ========================== -->
+        <section id="ordersSection" class="admin-section" style="display:none;">
+
+            <div class="admin-section-heading">
+
+                <div>
+                    <h2>Order Management</h2>
+                    <p>View customer orders and update delivery status.</p>
+                </div>
+
+            </div>
+
+
+            <div class="admin-table-container">
+
+                <table class="admin-table">
+
+                    <thead>
+                    <tr>
+                        <th>Order</th>
+                        <th>Customer</th>
+                        <th>Total</th>
+                        <th>Payment</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="orderTableBody"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             MESSAGES
+        ========================== -->
+        <section id="messagesSection" class="admin-section" style="display:none;">
+            <div class="admin-section-heading">
+                <div>
+                    <h2>Contact Messages</h2>
+                    <p>Read customer enquiries, send replies and manage support messages.</p>
+                </div>
+            </div>
+
+            <div id="adminNotice" class="admin-notice"></div>
+            <div id="messageCards" class="admin-message-list"></div>
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- CUSTOM CONFIRMATION MODAL -->
+<div id="adminConfirm" class="admin-confirm-overlay">
+    <div class="admin-confirm-box">
+        <div class="admin-confirm-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <h3 id="confirmTitle">Confirm action</h3>
+        <p id="confirmText">Are you sure?</p>
+        <div class="admin-confirm-actions">
+            <button class="admin-secondary-btn" onclick="closeAdminConfirm()">Cancel</button>
+            <button id="confirmActionBtn" class="admin-confirm-danger">Delete</button>
         </div>
     </div>
 </div>
 
+
 <script>
-    let users = [], products = [], orders = [], messages = [];
+
+    let users = [];
+    let products = [];
+    let orders = [];
+    let messages = [];
+
+
+    let confirmAction = null;
+
+    function showAdminNotice(message, type = "success") {
+        const box = document.getElementById("adminNotice");
+        if (!box) return;
+        box.className = `admin-notice show ${type}`;
+        box.innerHTML = `<i class="fa-solid ${type === "success" ? "fa-circle-check" : "fa-circle-exclamation"}"></i><span>${message}</span>`;
+        clearTimeout(window.adminNoticeTimer);
+        window.adminNoticeTimer = setTimeout(() => box.classList.remove("show"), 3500);
+    }
+
+    function openAdminConfirm(title, text, action, buttonText = "Delete") {
+        confirmTitle.textContent = title;
+        confirmText.textContent = text;
+        confirmActionBtn.textContent = buttonText;
+        confirmAction = action;
+        adminConfirm.classList.add("show");
+    }
+
+    function closeAdminConfirm() {
+        adminConfirm.classList.remove("show");
+        confirmAction = null;
+    }
+
+    confirmActionBtn.onclick = async () => {
+        if (!confirmAction) return;
+        const action = confirmAction;
+        closeAdminConfirm();
+        await action();
+    };
+
+    function escapeHtml(value) {
+        return String(value ?? "")
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#039;");
+    }
+
+
+    /* =========================
+       ADMIN SESSION
+    ========================== */
 
     async function checkAdminSession() {
+
         try {
+
             const r = await fetch("/api/auth/session");
-            if (!r.ok) throw new Error();
+
+            if (!r.ok) {
+                throw new Error();
+            }
+
             const s = await r.json();
-            if (!s.loggedIn || s.role !== "admin") throw new Error();
+
+            if (!s.loggedIn || s.role !== "admin") {
+                throw new Error();
+            }
+
             return true;
+
         } catch {
+
             localStorage.removeItem("loggedUser");
             window.location.href = "login.html";
+
             return false;
         }
     }
 
+
+    /* =========================
+       USERS
+    ========================== */
+
     async function loadUsers() {
+
         const r = await fetch("/api/admin/users");
-        if (!r.ok) return;
-        users = await r.json();
-        userTableBody.innerHTML = users.map(u => `
-        <tr>
-            <td>${u.id}</td><td>${u.username}</td><td>${u.email}</td><td>${u.role}</td>
-            <td class="${u.active ? "status-active" : "status-inactive"}">${u.active ? "Active" : "Inactive"}</td>
-            <td>
-                <button class="action-btn ${u.active ? "deactivate-btn" : "activate-btn"}"
-                        onclick="changeStatus(${u.id}, ${!u.active})">${u.active ? "Deactivate" : "Activate"}</button>
-                ${u.role !== "admin" ? `<button class="action-btn deactivate-btn" onclick="deleteUser(${u.id})">Delete</button>` : ""}
-            </td>
-        </tr>`).join("");
-        updateDashboard();
-    }
-
-    async function changeStatus(id, active) {
-        const r = await fetch(`/api/admin/users/${id}/status?active=${active}`, {method:"PUT"});
-        if (r.ok) loadUsers(); else alert("Could not update user");
-    }
-
-    async function deleteUser(id) {
-        if (!confirm("Delete this user?")) return;
-        const r = await fetch(`/api/admin/users/${id}`, {method:"DELETE"});
-        if (r.ok) loadUsers(); else alert("Could not delete user");
-    }
-
-    async function loadProducts() {
-        const r = await fetch("/api/products");
-        if (!r.ok) return;
-        products = await r.json();
-
-        productTableBody.innerHTML = products.map(p => `
-        <tr>
-            <td>${p.id}</td>
-            <td><img src="${p.image}" alt="${p.name}" width="60" height="60" style="object-fit:cover;"></td>
-            <td>${p.name}</td>
-            <td>Rs ${Number(p.price).toLocaleString("en-NP")}</td>
-            <td>${p.category}</td><td>${p.stock}</td>
-            <td>
-                <button class="action-btn activate-btn" onclick="editProduct(${p.id})">Edit</button>
-                <button class="action-btn deactivate-btn" onclick="deleteProduct(${p.id})">Delete</button>
-            </td>
-        </tr>`).join("");
-        updateDashboard();
-    }
-
-    async function saveProduct() {
-        const id = productId.value;
-        const file = productImageFile.files[0];
-
-        const data = {
-            name: productName.value.trim(),
-            price: Number(productPrice.value),
-            category: productCategory.value.trim(),
-            stock: Number(productStock.value),
-            description: productDescription.value.trim(),
-            image: id ? (products.find(p => p.id == id)?.image || "") : ""
-        };
-
-        if (!data.name || !productPrice.value || !data.category || !productStock.value || !data.description) {
-            alert("Please fill in all product fields.");
-            return;
-        }
-
-        if (!id && !file) {
-            alert("Please choose a product image.");
-            return;
-        }
-
-        const r = await fetch(id ? `/api/products/${id}` : "/api/products", {
-            method: id ? "PUT" : "POST",
-            headers: {"Content-Type":"application/json"},
-            body: JSON.stringify(data)
-        });
 
         if (!r.ok) {
-            alert("Could not save product");
             return;
         }
+
+        users = await r.json();
+
+
+        userTableBody.innerHTML = users.map(u => `
+
+            <tr>
+
+                <td>#${u.id}</td>
+
+                <td>
+                    <strong>${u.username}</strong>
+                </td>
+
+                <td>${u.email}</td>
+
+                <td>
+                    <span class="admin-role-badge">
+                        ${u.role}
+                    </span>
+                </td>
+
+                <td>
+                    <span class="${u.active
+            ? "admin-status-badge active"
+            : "admin-status-badge inactive"}">
+
+                        ${u.active ? "Active" : "Inactive"}
+
+                    </span>
+                </td>
+
+                <td class="admin-actions">
+
+                    <button
+                        class="${u.active
+            ? "admin-action-btn admin-danger-btn"
+            : "admin-action-btn admin-success-btn"}"
+
+                        onclick="changeStatus(${u.id}, ${!u.active})"
+                    >
+                        ${u.active ? "Deactivate" : "Activate"}
+                    </button>
+
+
+                    ${u.role !== "admin"
+
+            ? `<button
+                                class="admin-action-btn admin-delete-btn"
+                                onclick="deleteUser(${u.id})">
+
+                                <i class="fa-solid fa-trash"></i>
+
+                           </button>`
+
+            : ""
+        }
+
+                </td>
+
+            </tr>
+
+        `).join("");
+
+
+        updateDashboard();
+    }
+
+
+    async function changeStatus(id, active) {
+        const r = await fetch(`/api/admin/users/${id}/status?active=${active}`, {method: "PUT"});
+        if (r.ok) {
+            showAdminNotice(`User ${active ? "activated" : "deactivated"} successfully.`);
+            loadUsers();
+        } else {
+            showAdminNotice("Could not update user.", "error");
+        }
+    }
+
+    function deleteUser(id) {
+        openAdminConfirm(
+            "Delete user?",
+            "This user account will be permanently deleted.",
+            async () => {
+                const r = await fetch(`/api/admin/users/${id}`, {method: "DELETE"});
+                if (r.ok) {
+                    showAdminNotice("User deleted successfully.");
+                    loadUsers();
+                } else {
+                    showAdminNotice("Could not delete user.", "error");
+                }
+            }
+        );
+    }
+
+
+    /* =========================
+       PRODUCTS
+    ========================== */
+
+    async function loadProducts() {
+
+        const r = await fetch("/api/products");
+
+        if (!r.ok) {
+            return;
+        }
+
+        products = await r.json();
+
+
+        productTableBody.innerHTML = products.length
+
+            ? products.map(p => `
+
+                <tr>
+
+                    <td>#${p.id}</td>
+
+                    <td>
+
+                        <img
+                            class="admin-product-image"
+                            src="${p.image}"
+                            alt="${p.name}"
+                        >
+
+                    </td>
+
+                    <td>
+                        <strong>${p.name}</strong>
+                    </td>
+
+                    <td>
+                        Rs ${Number(p.price).toLocaleString("en-NP")}
+                    </td>
+
+                    <td>
+                        <span class="admin-category-badge">
+                            ${p.category}
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <span class="${Number(p.stock) > 0
+                ? "admin-stock in-stock"
+                : "admin-stock out-stock"}">
+
+                            ${p.stock}
+
+                        </span>
+
+                    </td>
+
+                    <td class="admin-actions">
+
+                        <button
+                            class="admin-action-btn admin-edit-btn"
+                            onclick="editProduct(${p.id})"
+                        >
+                            <i class="fa-solid fa-pen"></i>
+                            Edit
+                        </button>
+
+                        <button
+                            class="admin-action-btn admin-delete-btn"
+                            onclick="deleteProduct(${p.id})"
+                        >
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `).join("")
+
+            : `
+
+                <tr>
+                    <td colspan="7" class="admin-empty-table">
+                        No products found.
+                    </td>
+                </tr>
+
+            `;
+
+
+        updateDashboard();
+    }
+
+
+    async function saveProduct() {
+
+        const id = productId.value;
+
+        const file = productImageFile.files[0];
+
+
+        const data = {
+
+            name: productName.value.trim(),
+
+            price: Number(productPrice.value),
+
+            category: productCategory.value.trim(),
+
+            stock: Number(productStock.value),
+
+            description: productDescription.value.trim(),
+
+            image: id
+                ? (products.find(p => p.id == id)?.image || "")
+                : ""
+        };
+
+
+        if (
+            !data.name ||
+            !productPrice.value ||
+            !data.category ||
+            !productStock.value ||
+            !data.description
+        ) {
+
+            showAdminNotice("Please fill in all product fields.", "error");
+
+            return;
+        }
+
+
+        if (!id && !file) {
+
+            showAdminNotice("Please choose a product image.", "error");
+
+            return;
+        }
+
+
+        const r = await fetch(
+
+            id
+                ? `/api/products/${id}`
+                : "/api/products",
+
+            {
+
+                method: id
+                    ? "PUT"
+                    : "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(data)
+            }
+        );
+
+
+        if (!r.ok) {
+
+            showAdminNotice("Could not save product.", "error");
+
+            return;
+        }
+
 
         const saved = await r.json();
 
+
         if (file) {
+
             const fd = new FormData();
+
             fd.append("file", file);
-            const ir = await fetch(`/api/products/${saved.id}/image`, {method:"POST", body:fd});
-            if (!ir.ok) alert("Product saved but image upload failed");
+
+
+            const ir = await fetch(
+
+                `/api/products/${saved.id}/image`,
+
+                {
+                    method: "POST",
+                    body: fd
+                }
+            );
+
+
+            if (!ir.ok) {
+
+                showAdminNotice("Product saved but image upload failed.", "error");
+            }
         }
 
+
         clearProductForm();
+
         loadProducts();
     }
 
+
     function editProduct(id) {
-        const p = products.find(x => x.id == id);
-        if (!p) return;
+
+        const p = products.find(
+            x => x.id == id
+        );
+
+
+        if (!p) {
+            return;
+        }
+
 
         productId.value = p.id;
+
         productName.value = p.name;
+
         productPrice.value = p.price;
+
         productCategory.value = p.category;
+
         productStock.value = p.stock;
+
         productDescription.value = p.description;
+
         productImageFile.value = "";
-        productFormTitle.textContent = "Edit Product";
-        saveProductButton.textContent = "Update Product";
-        cancelEditButton.style.display = "inline-block";
+
+
+        productFormTitle.textContent =
+            "Edit Product";
+
+
+        saveProductButton.innerHTML =
+            `<i class="fa-solid fa-floppy-disk"></i> Update Product`;
+
+
+        cancelEditButton.style.display =
+            "inline-block";
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
     }
 
-    async function deleteProduct(id) {
-        if (!confirm("Delete this product?")) return;
-        const r = await fetch(`/api/products/${id}`, {method:"DELETE"});
-        if (r.ok) loadProducts(); else alert("Could not delete product");
+
+    function deleteProduct(id) {
+        openAdminConfirm(
+            "Delete product?",
+            "This product will be permanently removed from EliteWear.",
+            async () => {
+                const r = await fetch(`/api/products/${id}`, {method: "DELETE"});
+                if (r.ok) {
+                    showAdminNotice("Product deleted successfully.");
+                    loadProducts();
+                } else {
+                    showAdminNotice("Could not delete product.", "error");
+                }
+            }
+        );
     }
+
 
     function clearProductForm() {
+
         productId.value = "";
+
         productName.value = "";
+
         productPrice.value = "";
+
         productCategory.value = "";
+
         productStock.value = "";
+
         productDescription.value = "";
+
         productImageFile.value = "";
-        productFormTitle.textContent = "Add Product";
-        saveProductButton.textContent = "Add Product";
-        cancelEditButton.style.display = "none";
+
+
+        productFormTitle.textContent =
+            "Add Product";
+
+
+        saveProductButton.innerHTML =
+            `<i class="fa-solid fa-plus"></i> Add Product`;
+
+
+        cancelEditButton.style.display =
+            "none";
     }
 
+
+    /* =========================
+       ORDERS
+    ========================== */
+
     async function loadOrders() {
+
         const r = await fetch("/api/orders");
-        if (!r.ok) return;
+
+        if (!r.ok) {
+            return;
+        }
+
+
         orders = await r.json();
 
-        orderTableBody.innerHTML = orders.length ? orders.map(o => `
-        <tr>
-            <td>EW-${o.id}</td><td>${o.username}</td>
-            <td>Rs ${Number(o.total || 0).toLocaleString("en-NP")}</td>
-            <td>${o.paymentMethod}</td>
-            <td>${o.createdAt ? new Date(o.createdAt).toLocaleDateString("en-NP") : "-"}</td>
-            <td>${o.status}</td>
-            <td>
-                <select id="status-${o.id}">
-                    ${["Order Placed","Processing","Shipped","Delivered","Cancelled"]
-            .map(s => `<option value="${s}" ${o.status === s ? "selected" : ""}>${s}</option>`).join("")}
-                </select>
-                <button class="action-btn activate-btn" onclick="updateOrderStatus(${o.id})">Update</button>
-            </td>
-        </tr>`).join("") : `<tr><td colspan="7">No orders found.</td></tr>`;
+
+        orderTableBody.innerHTML = orders.length
+
+            ? orders.map(o => `
+
+                <tr>
+
+                    <td>
+                        <strong>EW-${o.id}</strong>
+                    </td>
+
+                    <td>${o.username}</td>
+
+                    <td>
+                        <strong>
+                            Rs ${Number(
+                o.total || 0
+            ).toLocaleString("en-NP")}
+                        </strong>
+                    </td>
+
+                    <td>${o.paymentMethod}</td>
+
+                    <td>
+                        ${o.createdAt
+                ? new Date(
+                    o.createdAt
+                ).toLocaleDateString("en-NP")
+                : "-"
+            }
+                    </td>
+
+                    <td>
+
+                        <span class="admin-order-status
+                                     ${getOrderStatusClass(o.status)}">
+
+                            ${o.status}
+
+                        </span>
+
+                    </td>
+
+                    <td class="admin-order-update">
+
+                        <select id="status-${o.id}">
+
+                            ${[
+                "Order Placed",
+                "Processing",
+                "Shipped",
+                "Delivered",
+                "Cancelled"
+            ]
+
+                .map(s => `
+
+                                <option
+                                    value="${s}"
+                                    ${o.status === s
+                    ? "selected"
+                    : ""}
+                                >
+                                    ${s}
+                                </option>
+
+                            `).join("")}
+
+                        </select>
+
+
+                        <button
+                            class="admin-action-btn admin-edit-btn"
+                            onclick="updateOrderStatus(${o.id})"
+                        >
+                            Update
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            `).join("")
+
+            : `
+
+                <tr>
+
+                    <td
+                        colspan="7"
+                        class="admin-empty-table"
+                    >
+                        No orders found.
+                    </td>
+
+                </tr>
+
+            `;
+
+
         updateDashboard();
     }
 
-    async function updateOrderStatus(id) {
-        const status = document.getElementById(`status-${id}`).value;
-        const r = await fetch(`/api/orders/${id}/status?status=${encodeURIComponent(status)}`, {method:"PUT"});
-        if (r.ok) loadOrders(); else alert("Could not update order status");
+
+    function getOrderStatusClass(status) {
+
+        switch (status) {
+
+            case "Delivered":
+                return "delivered";
+
+            case "Shipped":
+                return "shipped";
+
+            case "Processing":
+                return "processing";
+
+            case "Cancelled":
+                return "cancelled";
+
+            default:
+                return "placed";
+        }
     }
+
+
+    async function updateOrderStatus(id) {
+
+        const status =
+            document.getElementById(
+                `status-${id}`
+            ).value;
+
+
+        const r = await fetch(
+
+            `/api/orders/${id}/status?status=${encodeURIComponent(status)}`,
+
+            {
+                method: "PUT"
+            }
+        );
+
+
+        if (r.ok) {
+
+            loadOrders();
+
+        } else {
+
+            showAdminNotice("Could not update order status.", "error");
+        }
+    }
+
+
+    /* =========================
+       MESSAGES
+    ========================== */
 
     async function loadMessages() {
         const r = await fetch("/api/messages");
-        if (!r.ok) return;
+        if (!r.ok) {
+            showAdminNotice("Could not load messages.", "error");
+            return;
+        }
         messages = await r.json();
-
-        messageTableBody.innerHTML = messages.length ? messages.map(m => `
-        <tr>
-            <td>${m.id}</td><td>${m.username}</td><td>${m.name}</td>
-            <td>${m.email}</td><td>${m.phone || "-"}</td><td>${m.message}</td>
-            <td>${m.createdAt ? new Date(m.createdAt).toLocaleDateString("en-NP") : "-"}</td>
-        </tr>`).join("") : `<tr><td colspan="7">No messages found.</td></tr>`;
+        renderMessages();
         updateDashboard();
     }
 
-    function updateDashboard() {
-        totalUsers.textContent = users.length;
-        activeUsers.textContent = users.filter(u => u.active).length;
-        totalProducts.textContent = products.length;
-        totalOrders.textContent = orders.length;
-        totalMessages.textContent = messages.length;
+    function renderMessages() {
+        const box = document.getElementById("messageCards");
+        if (!messages.length) {
+            box.innerHTML = `<div class="admin-message-empty"><i class="fa-regular fa-envelope"></i><h3>No messages yet</h3><p>Customer enquiries will appear here.</p></div>`;
+            return;
+        }
+
+        box.innerHTML = messages.map(m => {
+            const replied = m.adminReply && m.adminReply.trim();
+            const date = m.createdAt ? new Date(m.createdAt).toLocaleString("en-NP") : "-";
+            const replyDate = m.repliedAt ? new Date(m.repliedAt).toLocaleString("en-NP") : "";
+            return `
+                <article class="admin-message-card">
+                    <div class="admin-message-card-head">
+                        <div>
+                            <span class="admin-message-id">#${m.id}</span>
+                            <h3>${escapeHtml(m.name)}</h3>
+                            <p><i class="fa-regular fa-user"></i> ${escapeHtml(m.username)} &nbsp; <i class="fa-regular fa-envelope"></i> ${escapeHtml(m.email)}</p>
+                        </div>
+                        <span class="admin-message-status ${replied ? "replied" : "waiting"}">${replied ? '<i class="fa-solid fa-circle-check"></i> Replied' : '<i class="fa-regular fa-clock"></i> Waiting'}</span>
+                    </div>
+
+                    <div class="admin-message-body">
+                        <div class="admin-message-text">
+                            <span>Customer message</span>
+                            <p>${escapeHtml(m.message)}</p>
+                            <small>${date}${m.phone ? ` · ${escapeHtml(m.phone)}` : ""}</small>
+                        </div>
+                        ${replied ? `<div class="admin-saved-reply"><span><i class="fa-solid fa-reply"></i> Your reply</span><p>${escapeHtml(m.adminReply)}</p><small>${replyDate}</small></div>` : ""}
+                    </div>
+
+                    <div id="reply-${m.id}" class="admin-reply-editor">
+                        <textarea id="replyText-${m.id}" maxlength="2000" placeholder="Write a helpful reply...">${replied ? escapeHtml(m.adminReply) : ""}</textarea>
+                        <div>
+                            <button class="admin-primary-btn" onclick="sendReply(${m.id})"><i class="fa-solid fa-paper-plane"></i> ${replied ? "Update Reply" : "Send Reply"}</button>
+                            <button class="admin-secondary-btn" onclick="toggleReply(${m.id}, false)">Cancel</button>
+                        </div>
+                    </div>
+
+                    <div class="admin-message-actions">
+                        <button class="admin-action-btn admin-edit-btn" onclick="toggleReply(${m.id}, true)"><i class="fa-solid fa-reply"></i> ${replied ? "Edit Reply" : "Reply"}</button>
+                        <button class="admin-action-btn admin-delete-btn" onclick="deleteMessage(${m.id})"><i class="fa-solid fa-trash"></i> Delete</button>
+                    </div>
+                </article>`;
+        }).join("");
     }
 
-    function showSection(section) {
-        ["dashboard","users","products","orders","messages"].forEach(name => {
-            document.getElementById(name + "Section").style.display = name === section ? "block" : "none";
+    function toggleReply(id, show) {
+        const editor = document.getElementById(`reply-${id}`);
+        editor.classList.toggle("show", show);
+        if (show) document.getElementById(`replyText-${id}`).focus();
+    }
+
+    async function sendReply(id) {
+        const input = document.getElementById(`replyText-${id}`);
+        const reply = input.value.trim();
+        if (!reply) {
+            showAdminNotice("Please write a reply first.", "error");
+            return;
+        }
+        const r = await fetch(`/api/messages/${id}/reply`, {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({reply})
+        });
+        if (r.ok) {
+            showAdminNotice("Reply sent successfully.");
+            loadMessages();
+        } else {
+            showAdminNotice("Could not send reply.", "error");
+        }
+    }
+
+    function deleteMessage(id) {
+        openAdminConfirm(
+            "Delete message?",
+            "This customer message and its reply will be permanently deleted.",
+            async () => {
+                const r = await fetch(`/api/messages/${id}`, {method: "DELETE"});
+                if (r.ok) {
+                    showAdminNotice("Message deleted successfully.");
+                    loadMessages();
+                } else {
+                    showAdminNotice("Could not delete message.", "error");
+                }
+            }
+        );
+    }
+
+
+    /* =========================
+       DASHBOARD
+    ========================== */
+
+    function updateDashboard() {
+
+        totalUsers.textContent =
+            users.length;
+
+
+        activeUsers.textContent =
+            users.filter(
+                u => u.active
+            ).length;
+
+
+        totalProducts.textContent =
+            products.length;
+
+
+        totalOrders.textContent =
+            orders.length;
+
+
+        totalMessages.textContent =
+            messages.length;
+    }
+
+
+    /* =========================
+       NAVIGATION
+    ========================== */
+
+    function showSection(section, clickedButton = null) {
+
+        [
+            "dashboard",
+            "users",
+            "products",
+            "orders",
+            "messages"
+
+        ].forEach(name => {
+
+            document.getElementById(
+                name + "Section"
+            ).style.display =
+                name === section
+                    ? "block"
+                    : "none";
         });
 
-        pageTitle.textContent = section[0].toUpperCase() + section.slice(1);
 
-        if (section === "users") loadUsers();
-        if (section === "products") loadProducts();
-        if (section === "orders") loadOrders();
-        if (section === "messages") loadMessages();
+        const titles = {
+
+            dashboard: "Dashboard",
+
+            users: "User Management",
+
+            products: "Product Management",
+
+            orders: "Order Management",
+
+            messages: "Contact Messages"
+        };
+
+
+        pageTitle.textContent =
+            titles[section] || "Dashboard";
+
+
+        document
+            .querySelectorAll(".admin-nav-btn")
+            .forEach(btn => {
+
+                btn.classList.remove("active");
+
+                if (
+                    btn.dataset.section === section
+                ) {
+
+                    btn.classList.add("active");
+                }
+            });
+
+
+        if (section === "users") {
+
+            loadUsers();
+        }
+
+
+        if (section === "products") {
+
+            loadProducts();
+        }
+
+
+        if (section === "orders") {
+
+            loadOrders();
+        }
+
+
+        if (section === "messages") {
+
+            loadMessages();
+        }
     }
+
+
+    /* =========================
+       LOGOUT
+    ========================== */
 
     async function logout() {
-        await fetch("/api/auth/logout", {method:"POST"}).catch(() => {});
-        localStorage.removeItem("loggedUser");
-        window.location.href = "login.html";
+
+        await fetch(
+            "/api/auth/logout",
+            {
+                method: "POST"
+            }
+        ).catch(() => {});
+
+
+        localStorage.removeItem(
+            "loggedUser"
+        );
+
+
+        window.location.href =
+            "login.html";
     }
 
+
+    /* =========================
+       START
+    ========================== */
+
     async function start() {
-        if (!await checkAdminSession()) return;
+
+        if (
+            !await checkAdminSession()
+        ) {
+
+            return;
+        }
+
+
         loadUsers();
+
         loadProducts();
+
         loadOrders();
+
         loadMessages();
     }
 
+
     start();
+
 </script>
 
 </body>

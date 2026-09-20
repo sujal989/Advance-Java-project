@@ -2,24 +2,128 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Elitewear - Contact Us</title>
 
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet"
+          href="css/main.css">
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+    <style>
+
+        /* =====================================
+           CONTACT STATUS MESSAGE
+        ===================================== */
+
+        .contact-status-message {
+
+            display: none;
+
+            margin-bottom: 18px;
+
+            padding: 14px 16px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            line-height: 1.5;
+
+            animation: contactMessageIn 0.3s ease;
+        }
+
+
+        .contact-status-message.show {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .contact-status-message.success {
+
+            background: #edf8ef;
+
+            border: 1px solid #b8dfbf;
+
+            color: #247536;
+        }
+
+
+        .contact-status-message.error {
+
+            background: #fff0f0;
+
+            border: 1px solid #efb9b9;
+
+            color: #b42318;
+        }
+
+
+        .contact-status-message i {
+
+            font-size: 18px;
+        }
+
+
+        @keyframes contactMessageIn {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(-5px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+            }
+        }
+
+
+        /* Disable button while sending */
+
+        .contact-submit-btn:disabled {
+
+            opacity: 0.7;
+
+            cursor: not-allowed;
+        }
+
+    </style>
+
 </head>
 
+
 <body>
+
+
+<!-- =====================================
+     HEADER
+===================================== -->
 
 <div class="header">
 
     <div class="container">
 
         <div class="navbar">
+
 
             <div class="logo">
 
@@ -35,44 +139,62 @@
             </div>
 
 
+
             <nav>
 
                 <ul id="MenuItems">
 
                     <li>
+
                         <a href="home.html">
                             Home
                         </a>
+
                     </li>
 
+
                     <li>
+
                         <a href="Product.html">
                             Products
                         </a>
+
                     </li>
 
+
                     <li>
+
                         <a href="Aboutus.html">
                             About
                         </a>
+
                     </li>
 
+
                     <li>
+
                         <a href="contactus.html">
                             Contact
                         </a>
+
                     </li>
 
+
                     <li>
+
                         <a href="login.html"
                            id="accountLink">
+
                             Login
+
                         </a>
+
                     </li>
 
                 </ul>
 
             </nav>
+
 
 
             <a href="cart.html">
@@ -84,6 +206,7 @@
                         alt="Cart">
 
             </a>
+
 
 
             <img
@@ -100,6 +223,10 @@
 
 
 
+<!-- =====================================
+     CONTACT SECTION
+===================================== -->
+
 <section class="contact-section">
 
     <div class="contact-container">
@@ -111,30 +238,48 @@
                 Contact Us
             </h1>
 
+
             <p>
-                Have a question about Elite Wear, a product, or your order?
-                Send us a message and we'll be happy to help.
+
+                Have a question about Elite Wear,
+                a product, or your order?
+
+                Send us a message and we'll be
+                happy to help.
+
             </p>
 
         </div>
 
 
+
         <div class="contact-content">
 
 
-            <!-- CONTACT INFORMATION -->
+            <!-- =====================================
+                 CONTACT INFORMATION
+            ===================================== -->
+
             <div class="contact-info">
+
 
                 <h2>
                     Get In Touch
                 </h2>
 
+
                 <p>
+
                     We are here to help.
+
                     You can contact us using the form
                     or through the details below.
+
                 </p>
 
+
+
+                <!-- EMAIL -->
 
                 <div class="contact-info-item">
 
@@ -143,6 +288,7 @@
                         <i class="fa-solid fa-envelope"></i>
 
                     </div>
+
 
                     <div>
 
@@ -159,6 +305,9 @@
                 </div>
 
 
+
+                <!-- PHONE -->
+
                 <div class="contact-info-item">
 
                     <div class="contact-icon">
@@ -166,6 +315,7 @@
                         <i class="fa-solid fa-phone"></i>
 
                     </div>
+
 
                     <div>
 
@@ -182,6 +332,9 @@
                 </div>
 
 
+
+                <!-- LOCATION -->
+
                 <div class="contact-info-item">
 
                     <div class="contact-icon">
@@ -189,6 +342,7 @@
                         <i class="fa-solid fa-location-dot"></i>
 
                     </div>
+
 
                     <div>
 
@@ -204,23 +358,33 @@
 
                 </div>
 
+
             </div>
 
 
 
-            <!-- CONTACT FORM -->
+            <!-- =====================================
+                 CONTACT FORM
+            ===================================== -->
+
             <div class="contact-form-card">
+
 
                 <form
                         id="contactForm"
                         autocomplete="off">
 
 
+                    <!-- NAME -->
+
                     <div class="contact-field">
 
                         <label for="name">
+
                             Your Name
+
                         </label>
+
 
                         <input
                                 type="text"
@@ -232,11 +396,17 @@
                     </div>
 
 
+
+                    <!-- EMAIL -->
+
                     <div class="contact-field">
 
                         <label for="email">
+
                             Your Email
+
                         </label>
+
 
                         <input
                                 type="email"
@@ -248,11 +418,17 @@
                     </div>
 
 
+
+                    <!-- PHONE -->
+
                     <div class="contact-field">
 
                         <label for="phone">
+
                             Phone Number
+
                         </label>
+
 
                         <input
                                 type="tel"
@@ -263,11 +439,17 @@
                     </div>
 
 
+
+                    <!-- MESSAGE -->
+
                     <div class="contact-field">
 
                         <label for="message">
+
                             Your Message
+
                         </label>
+
 
                         <textarea
                                 id="message"
@@ -277,6 +459,9 @@
 
                     </div>
 
+
+
+                    <!-- LOGIN MESSAGE -->
 
                     <p
                             id="contactLoginMessage"
@@ -289,17 +474,38 @@
                     </p>
 
 
+
+                    <!-- =====================================
+                         SUCCESS / ERROR MESSAGE
+                    ===================================== -->
+
+                    <div
+                            id="contactStatusMessage"
+                            class="contact-status-message">
+                    </div>
+
+
+
+                    <!-- SEND BUTTON -->
+
                     <button
                             type="submit"
-                            class="contact-submit-btn">
+                            class="contact-submit-btn"
+                            id="contactSubmitButton">
 
-                        Send Message
+                        <span id="contactButtonText">
+
+                            Send Message
+
+                        </span>
 
                     </button>
+
 
                 </form>
 
             </div>
+
 
         </div>
 
@@ -309,7 +515,10 @@
 
 
 
-<!-- FOOTER -->
+<!-- =====================================
+     FOOTER
+===================================== -->
+
 <div class="footer">
 
     <div class="container">
@@ -323,9 +532,14 @@
                     Download Our App
                 </h3>
 
+
                 <p>
-                    Download the app for Android and iOS mobile phones.
+
+                    Download the app for Android
+                    and iOS mobile phones.
+
                 </p>
+
 
                 <div class="app-logo">
 
@@ -342,6 +556,7 @@
             </div>
 
 
+
             <div class="footer-col-2">
 
                 <img
@@ -351,36 +566,49 @@
             </div>
 
 
+
             <div class="footer-col-3">
 
                 <h3>
                     Useful Links
                 </h3>
 
+
                 <ul>
 
                     <li>
+
                         <a href="coupons.html">
                             Coupons
                         </a>
+
                     </li>
 
+
                     <li>
+
                         <a href="blog.html">
                             Blog Post
                         </a>
+
                     </li>
 
+
                     <li>
+
                         <a href="returnpolicy.html">
                             Return Policy
                         </a>
+
                     </li>
 
+
                     <li>
+
                         <a href="affiliate.html">
                             Join Affiliate
                         </a>
+
                     </li>
 
                 </ul>
@@ -388,11 +616,13 @@
             </div>
 
 
+
             <div class="footer-col-4">
 
                 <h3>
                     Follow Us
                 </h3>
+
 
                 <ul>
 
@@ -416,6 +646,7 @@
 
             </div>
 
+
         </div>
 
 
@@ -423,8 +654,11 @@
 
 
         <p class="Copyright">
+
             Copyright 2025 - EliteWear
+
         </p>
+
 
     </div>
 
@@ -434,9 +668,16 @@
 
 <script>
 
+
+    // =====================================
     // MOBILE MENU
+    // =====================================
+
     var MenuItems =
-        document.getElementById("MenuItems");
+        document.getElementById(
+            "MenuItems"
+        );
+
 
     MenuItems.style.maxHeight =
         "0px";
@@ -445,16 +686,24 @@
     function menutoggle() {
 
         MenuItems.style.maxHeight =
-            MenuItems.style.maxHeight === "0px"
+
+            MenuItems.style.maxHeight ===
+            "0px"
+
                 ? "200px"
+
                 : "0px";
     }
 
 
 
+    // =====================================
     // LOGIN / ACCOUNT NAVBAR
+    // =====================================
+
     const loggedUser =
         JSON.parse(
+
             localStorage.getItem(
                 "loggedUser"
             )
@@ -486,32 +735,118 @@
 
 
 
+    // =====================================
+    // CONTACT MESSAGE DISPLAY
+    // =====================================
+
+    function showContactMessage(
+        text,
+        type
+    ) {
+
+        const messageBox =
+            document.getElementById(
+                "contactStatusMessage"
+            );
+
+
+        if (type === "success") {
+
+            messageBox.innerHTML = `
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <span>
+                    ${text}
+                </span>
+            `;
+
+        } else {
+
+            messageBox.innerHTML = `
+
+                <i class="fa-solid fa-circle-exclamation"></i>
+
+                <span>
+                    ${text}
+                </span>
+            `;
+        }
+
+
+        messageBox.className =
+            "contact-status-message show " +
+            type;
+
+
+        // Automatically hide after 5 seconds
+
+        setTimeout(
+            function () {
+
+                messageBox.className =
+                    "contact-status-message";
+
+            },
+
+            5000
+        );
+    }
+
+
+
+    // =====================================
     // CONTACT FORM
+    // =====================================
+
     const contactForm =
         document.getElementById(
             "contactForm"
         );
 
 
+    const contactSubmitButton =
+        document.getElementById(
+            "contactSubmitButton"
+        );
+
+
+    const contactButtonText =
+        document.getElementById(
+            "contactButtonText"
+        );
+
+
     if (contactForm) {
 
+
         contactForm.addEventListener(
+
             "submit",
+
             async function (event) {
+
 
                 event.preventDefault();
 
 
+
+                // =====================================
+                // CHECK USER LOGIN
+                // =====================================
+
                 const currentUser =
                     JSON.parse(
+
                         localStorage.getItem(
                             "loggedUser"
                         )
                     );
 
 
-                // USER MUST BE LOGGED IN
+
                 if (!currentUser) {
+
 
                     const message =
                         document.getElementById(
@@ -528,12 +863,13 @@
 
 
                     setTimeout(
+
                         function () {
 
                             window.location.href =
                                 "login.html";
-
                         },
+
                         700
                     );
 
@@ -543,50 +879,91 @@
 
 
 
+                // Hide old login message
+
+                document.getElementById(
+                    "contactLoginMessage"
+                ).style.display =
+                    "none";
+
+
+
+                // =====================================
                 // CONTACT DATA
+                // =====================================
+
                 const contactData = {
+
 
                     username:
                     currentUser.username,
+
 
                     name:
                         document.getElementById(
                             "name"
                         ).value.trim(),
 
+
                     email:
                         document.getElementById(
                             "email"
                         ).value.trim(),
+
 
                     phone:
                         document.getElementById(
                             "phone"
                         ).value.trim(),
 
+
                     message:
                         document.getElementById(
                             "message"
                         ).value.trim()
+
                 };
+
+
+
+                // =====================================
+                // SENDING STATE
+                // =====================================
+
+                contactSubmitButton.disabled =
+                    true;
+
+
+                contactButtonText.innerHTML =
+
+                    '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
 
 
 
                 try {
 
+
+                    // =====================================
+                    // SEND TO SPRING BOOT
+                    // =====================================
+
                     const response =
                         await fetch(
+
                             "/api/messages",
+
                             {
 
                                 method:
                                     "POST",
+
 
                                 headers: {
 
                                     "Content-Type":
                                         "application/json"
                                 },
+
 
                                 body:
                                     JSON.stringify(
@@ -597,42 +974,139 @@
 
 
 
+                    // =====================================
+                    // SESSION EXPIRED
+                    // =====================================
+
+                    if (
+                        response.status ===
+                        401
+                    ) {
+
+
+                        localStorage.removeItem(
+                            "loggedUser"
+                        );
+
+
+                        showContactMessage(
+
+                            "Your session has expired. Please login again.",
+
+                            "error"
+                        );
+
+
+                        setTimeout(
+
+                            function () {
+
+                                window.location.href =
+                                    "login.html";
+                            },
+
+                            1200
+                        );
+
+
+                        return;
+                    }
+
+
+
+                    // =====================================
+                    // ERROR
+                    // =====================================
+
                     if (!response.ok) {
 
+
+                        let errorMessage =
+                            "Could not send message. Please try again.";
+
+
+                        try {
+
+                            const data =
+                                await response.json();
+
+
+                            if (data.message) {
+
+                                errorMessage =
+                                    data.message;
+                            }
+
+                        } catch (ignore) {
+
+                            // Keep default error message
+                        }
+
+
                         throw new Error(
-                            "Could not send message"
+                            errorMessage
                         );
                     }
 
 
 
-                    alert(
-                        "Message sent successfully"
-                    );
-
-
+                    // =====================================
+                    // SUCCESS
+                    // =====================================
 
                     contactForm.reset();
+
+
+                    showContactMessage(
+
+                        "Message sent successfully! Thank you for contacting EliteWear.",
+
+                        "success"
+                    );
 
 
 
                 } catch (error) {
 
+
                     console.error(
+
                         "Contact message error:",
+
                         error
                     );
 
 
-                    alert(
-                        "Could not send message"
+                    showContactMessage(
+
+                        error.message ||
+                        "Could not send message. Please try again.",
+
+                        "error"
                     );
+
+
+                } finally {
+
+
+                    // =====================================
+                    // RESET BUTTON
+                    // =====================================
+
+                    contactSubmitButton.disabled =
+                        false;
+
+
+                    contactButtonText.textContent =
+                        "Send Message";
                 }
             }
         );
     }
 
+
 </script>
+
 
 </body>
 

@@ -24,76 +24,141 @@ public class OrderService {
     private ProductRepository productRepository;
 
 
-    // Create a new order
+    // =========================
+    // CREATE ORDER
+    // =========================
     @Transactional
     public Order createOrder(Order order) {
 
         double subtotal = 0;
 
+        // Validate payment method
+        if (
+                order.getPaymentMethod() == null ||
+                        (
+                                !order.getPaymentMethod()
+                                        .equalsIgnoreCase(
+                                                "Cash on Delivery"
+                                        )
+                                        &&
+                                        !order.getPaymentMethod()
+                                                .equalsIgnoreCase(
+                                                        "eSewa"
+                                                )
+                        )
+        ) {
+
+            throw new RuntimeException(
+                    "Invalid payment method"
+            );
+        }
+
+
+        if (
+                order.getPaymentMethod()
+                        .equalsIgnoreCase("eSewa")
+        ) {
+
+            order.setPaymentMethod("eSewa");
+
+        } else {
+
+            order.setPaymentMethod(
+                    "Cash on Delivery"
+            );
+        }
+
+
         order.setStatus("Order Placed");
-        order.setCreatedAt(LocalDateTime.now());
+
+        order.setCreatedAt(
+                LocalDateTime.now()
+        );
 
 
-        if (order.getItems() != null) {
+        if (
+                order.getItems() == null ||
+                        order.getItems().isEmpty()
+        ) {
 
-            for (OrderItem item : order.getItems()) {
-
-                Product product =
-                        productRepository
-                                .findById(item.getProductId())
-                                .orElse(null);
+            throw new RuntimeException(
+                    "Order must contain at least one item"
+            );
+        }
 
 
-                if (product == null) {
+        // Validate products using database
+        for (OrderItem item : order.getItems()) {
 
-                    throw new RuntimeException(
-                            "Product not found: " +
+            Product product =
+                    productRepository
+                            .findById(
                                     item.getProductId()
-                    );
-                }
+                            )
+                            .orElse(null);
 
 
-                int quantity =
-                        item.getQuantity();
+            if (product == null) {
 
-
-                if (quantity <= 0) {
-
-                    throw new RuntimeException(
-                            "Invalid quantity"
-                    );
-                }
-
-
-                if (quantity > product.getStock()) {
-
-                    throw new RuntimeException(
-                            "Not enough stock for " +
-                                    product.getName()
-                    );
-                }
-
-
-                item.setName(product.getName());
-                item.setPrice(product.getPrice());
-                item.setImage(product.getImage());
-
-                item.setOrder(order);
-
-
-                subtotal +=
-                        product.getPrice() *
-                                quantity;
-
-
-                int newStock =
-                        product.getStock() -
-                                quantity;
-
-                product.setStock(newStock);
-
-                productRepository.save(product);
+                throw new RuntimeException(
+                        "Product not found: " +
+                                item.getProductId()
+                );
             }
+
+
+            int quantity =
+                    item.getQuantity();
+
+
+            if (quantity <= 0) {
+
+                throw new RuntimeException(
+                        "Invalid quantity"
+                );
+            }
+
+
+            if (
+                    quantity >
+                            product.getStock()
+            ) {
+
+                throw new RuntimeException(
+                        "Not enough stock for " +
+                                product.getName()
+                );
+            }
+
+
+            // Use trusted database values
+            item.setName(
+                    product.getName()
+            );
+
+            item.setPrice(
+                    product.getPrice()
+            );
+
+            item.setImage(
+                    product.getImage()
+            );
+
+            item.setOrder(order);
+
+
+            subtotal +=
+                    product.getPrice() *
+                            quantity;
+
+
+            // Reduce stock
+            product.setStock(
+                    product.getStock() -
+                            quantity
+            );
+
+            productRepository.save(product);
         }
 
 
@@ -103,20 +168,22 @@ public class OrderService {
                         : 0;
 
 
-        double total =
-                subtotal + delivery;
-
-
         order.setSubtotal(subtotal);
+
         order.setDelivery(delivery);
-        order.setTotal(total);
+
+        order.setTotal(
+                subtotal + delivery
+        );
 
 
         return orderRepository.save(order);
     }
 
 
-    // Get orders belonging to one user
+    // =========================
+    // GET USER ORDERS
+    // =========================
     public List<Order> getOrdersByUsername(
             String username
     ) {
@@ -128,14 +195,18 @@ public class OrderService {
     }
 
 
-    // Get every order - used by admin
+    // =========================
+    // GET ALL ORDERS
+    // =========================
     public List<Order> getAllOrders() {
 
         return orderRepository.findAll();
     }
 
 
-    // Get one order
+    // =========================
+    // GET ORDER
+    // =========================
     public Order getOrderById(int id) {
 
         return orderRepository
@@ -144,7 +215,123 @@ public class OrderService {
     }
 
 
-    // Change order status - used by admin
+    // =========================
+    // CANCEL ORDER
+    // =========================
+    @Transactional
+    public Order cancelOrder(int id) {
+
+        Order order =
+                orderRepository
+                        .findById(id)
+                        .orElse(null);
+
+
+        if (order == null) {
+
+            throw new RuntimeException(
+                    "Order not found"
+            );
+        }
+
+
+        String status =
+                order.getStatus();
+
+
+        // Only these statuses can be cancelled
+        if (
+                !"Order Placed".equalsIgnoreCase(status)
+                        &&
+                        !"Processing".equalsIgnoreCase(status)
+        ) {
+
+            throw new RuntimeException(
+                    "This order can no longer be cancelled"
+            );
+        }
+
+
+        // Restore stock
+        if (order.getItems() != null) {
+
+            for (OrderItem item :
+                    order.getItems()) {
+
+                Product product =
+                        productRepository
+                                .findById(
+                                        item.getProductId()
+                                )
+                                .orElse(null);
+
+
+                if (product != null) {
+
+                    product.setStock(
+                            product.getStock() +
+                                    item.getQuantity()
+                    );
+
+                    productRepository.save(
+                            product
+                    );
+                }
+            }
+        }
+
+
+        order.setStatus("Cancelled");
+
+
+        return orderRepository.save(order);
+    }
+
+
+    // =========================
+    // DELETE ORDER
+    // =========================
+    @Transactional
+    public void deleteOrder(int id) {
+
+        Order order =
+                orderRepository
+                        .findById(id)
+                        .orElse(null);
+
+
+        if (order == null) {
+
+            throw new RuntimeException(
+                    "Order not found"
+            );
+        }
+
+
+        String status =
+                order.getStatus();
+
+
+        // Keep active orders in database
+        if (
+                !"Cancelled".equalsIgnoreCase(status)
+                        &&
+                        !"Delivered".equalsIgnoreCase(status)
+        ) {
+
+            throw new RuntimeException(
+                    "Only cancelled or delivered orders can be deleted"
+            );
+        }
+
+
+        orderRepository.delete(order);
+    }
+
+
+    // =========================
+    // ADMIN UPDATE STATUS
+    // =========================
     public Order updateOrderStatus(
             int id,
             String status
@@ -161,13 +348,34 @@ public class OrderService {
         }
 
 
-        // Only allow valid order statuses
+        if (status == null) {
+
+            throw new RuntimeException(
+                    "Status is required"
+            );
+        }
+
+
         if (
-                !status.equalsIgnoreCase("Order Placed") &&
-                        !status.equalsIgnoreCase("Processing") &&
-                        !status.equalsIgnoreCase("Shipped") &&
-                        !status.equalsIgnoreCase("Delivered") &&
-                        !status.equalsIgnoreCase("Cancelled")
+                !status.equalsIgnoreCase(
+                        "Order Placed"
+                )
+                        &&
+                        !status.equalsIgnoreCase(
+                                "Processing"
+                        )
+                        &&
+                        !status.equalsIgnoreCase(
+                                "Shipped"
+                        )
+                        &&
+                        !status.equalsIgnoreCase(
+                                "Delivered"
+                        )
+                        &&
+                        !status.equalsIgnoreCase(
+                                "Cancelled"
+                        )
         ) {
 
             throw new RuntimeException(
@@ -176,21 +384,51 @@ public class OrderService {
         }
 
 
-        // Save status with consistent formatting
-        if (status.equalsIgnoreCase("Order Placed")) {
-            order.setStatus("Order Placed");
+        if (
+                status.equalsIgnoreCase(
+                        "Order Placed"
+                )
+        ) {
 
-        } else if (status.equalsIgnoreCase("Processing")) {
-            order.setStatus("Processing");
+            order.setStatus(
+                    "Order Placed"
+            );
 
-        } else if (status.equalsIgnoreCase("Shipped")) {
-            order.setStatus("Shipped");
+        } else if (
+                status.equalsIgnoreCase(
+                        "Processing"
+                )
+        ) {
 
-        } else if (status.equalsIgnoreCase("Delivered")) {
-            order.setStatus("Delivered");
+            order.setStatus(
+                    "Processing"
+            );
 
-        } else if (status.equalsIgnoreCase("Cancelled")) {
-            order.setStatus("Cancelled");
+        } else if (
+                status.equalsIgnoreCase(
+                        "Shipped"
+                )
+        ) {
+
+            order.setStatus(
+                    "Shipped"
+            );
+
+        } else if (
+                status.equalsIgnoreCase(
+                        "Delivered"
+                )
+        ) {
+
+            order.setStatus(
+                    "Delivered"
+            );
+
+        } else {
+
+            order.setStatus(
+                    "Cancelled"
+            );
         }
 
 

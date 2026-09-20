@@ -65,10 +65,8 @@ public class OrderController {
             return loginCheck;
         }
 
-
         String role =
                 (String) session.getAttribute("role");
-
 
         if (
                 role == null ||
@@ -88,7 +86,6 @@ public class OrderController {
                     .status(HttpStatus.FORBIDDEN)
                     .body(response);
         }
-
 
         return null;
     }
@@ -110,25 +107,21 @@ public class OrderController {
             return loginCheck;
         }
 
-
         String loggedInUsername =
                 (String) session.getAttribute("username");
 
-
-        // Do not trust username sent from frontend
+        // Never trust username sent from frontend
         order.setUsername(loggedInUsername);
-
 
         Order savedOrder =
                 orderService.createOrder(order);
-
 
         return ResponseEntity.ok(savedOrder);
     }
 
 
     // =========================
-    // GET ORDERS FOR ONE USER
+    // GET USER ORDERS
     // =========================
     @GetMapping("/user/{username}")
     public ResponseEntity<?> getUserOrders(
@@ -143,16 +136,12 @@ public class OrderController {
             return loginCheck;
         }
 
-
         String loggedInUsername =
                 (String) session.getAttribute("username");
 
         String role =
                 (String) session.getAttribute("role");
 
-
-        // User can only view their own orders
-        // Admin can view any user's orders
         if (
                 !username.equals(loggedInUsername) &&
                         !"admin".equalsIgnoreCase(role)
@@ -172,11 +161,9 @@ public class OrderController {
                     .body(response);
         }
 
-
         List<Order> orders =
                 orderService
                         .getOrdersByUsername(username);
-
 
         return ResponseEntity.ok(orders);
     }
@@ -196,7 +183,6 @@ public class OrderController {
         if (adminCheck != null) {
             return adminCheck;
         }
-
 
         return ResponseEntity.ok(
                 orderService.getAllOrders()
@@ -220,27 +206,15 @@ public class OrderController {
             return loginCheck;
         }
 
-
         Order order =
                 orderService.getOrderById(id);
 
-
         if (order == null) {
-
-            Map<String, Object> response =
-                    new HashMap<>();
-
-            response.put("success", false);
-            response.put(
-                    "message",
+            return createMessage(
+                    HttpStatus.NOT_FOUND,
                     "Order not found"
             );
-
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(response);
         }
-
 
         String loggedInUsername =
                 (String) session.getAttribute("username");
@@ -248,36 +222,144 @@ public class OrderController {
         String role =
                 (String) session.getAttribute("role");
 
-
-        // User can only view their own order
-        // Admin can view any order
         if (
                 !order.getUsername()
                         .equals(loggedInUsername) &&
                         !"admin".equalsIgnoreCase(role)
         ) {
 
-            Map<String, Object> response =
-                    new HashMap<>();
-
-            response.put("success", false);
-            response.put(
-                    "message",
+            return createMessage(
+                    HttpStatus.FORBIDDEN,
                     "You cannot view this order"
             );
-
-            return ResponseEntity
-                    .status(HttpStatus.FORBIDDEN)
-                    .body(response);
         }
-
 
         return ResponseEntity.ok(order);
     }
 
 
     // =========================
-    // UPDATE ORDER STATUS - ADMIN
+    // CANCEL OWN ORDER
+    // =========================
+    @PutMapping("/{id}/cancel")
+    public ResponseEntity<?> cancelOrder(
+            @PathVariable int id,
+            HttpSession session
+    ) {
+
+        ResponseEntity<Map<String, Object>> loginCheck =
+                checkLogin(session);
+
+        if (loginCheck != null) {
+            return loginCheck;
+        }
+
+        String username =
+                (String) session.getAttribute("username");
+
+        Order order =
+                orderService.getOrderById(id);
+
+        if (order == null) {
+            return createMessage(
+                    HttpStatus.NOT_FOUND,
+                    "Order not found"
+            );
+        }
+
+        // Customer can only cancel their own order
+        if (!order.getUsername().equals(username)) {
+
+            return createMessage(
+                    HttpStatus.FORBIDDEN,
+                    "You cannot cancel this order"
+            );
+        }
+
+        try {
+
+            Order cancelledOrder =
+                    orderService.cancelOrder(id);
+
+            return ResponseEntity.ok(
+                    cancelledOrder
+            );
+
+        } catch (RuntimeException exception) {
+
+            return createMessage(
+                    HttpStatus.BAD_REQUEST,
+                    exception.getMessage()
+            );
+        }
+    }
+
+
+    // =========================
+    // DELETE OWN ORDER
+    // =========================
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteOrder(
+            @PathVariable int id,
+            HttpSession session
+    ) {
+
+        ResponseEntity<Map<String, Object>> loginCheck =
+                checkLogin(session);
+
+        if (loginCheck != null) {
+            return loginCheck;
+        }
+
+        String username =
+                (String) session.getAttribute("username");
+
+        Order order =
+                orderService.getOrderById(id);
+
+        if (order == null) {
+            return createMessage(
+                    HttpStatus.NOT_FOUND,
+                    "Order not found"
+            );
+        }
+
+        // Customer can only delete their own order
+        if (!order.getUsername().equals(username)) {
+
+            return createMessage(
+                    HttpStatus.FORBIDDEN,
+                    "You cannot delete this order"
+            );
+        }
+
+        try {
+
+            orderService.deleteOrder(id);
+
+            Map<String, Object> response =
+                    new HashMap<>();
+
+            response.put("success", true);
+            response.put(
+                    "message",
+                    "Order deleted successfully"
+            );
+
+            return ResponseEntity.ok(response);
+
+        } catch (RuntimeException exception) {
+
+            return createMessage(
+                    HttpStatus.BAD_REQUEST,
+                    exception.getMessage()
+            );
+        }
+    }
+
+
+    // =========================
+    // UPDATE STATUS - ADMIN
     // =========================
     @PutMapping("/{id}/status")
     public ResponseEntity<?> updateOrderStatus(
@@ -293,31 +375,47 @@ public class OrderController {
             return adminCheck;
         }
 
-
         Order updatedOrder =
                 orderService.updateOrderStatus(
                         id,
                         status
                 );
 
-
         if (updatedOrder == null) {
 
-            Map<String, Object> response =
-                    new HashMap<>();
-
-            response.put("success", false);
-            response.put(
-                    "message",
+            return createMessage(
+                    HttpStatus.NOT_FOUND,
                     "Order not found"
             );
-
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(response);
         }
 
-
         return ResponseEntity.ok(updatedOrder);
+    }
+
+
+    // =========================
+    // MESSAGE RESPONSE
+    // =========================
+    private ResponseEntity<Map<String, Object>> createMessage(
+            HttpStatus status,
+            String message
+    ) {
+
+        Map<String, Object> response =
+                new HashMap<>();
+
+        response.put(
+                "success",
+                status.is2xxSuccessful()
+        );
+
+        response.put(
+                "message",
+                message
+        );
+
+        return ResponseEntity
+                .status(status)
+                .body(response);
     }
 }
