@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EliteWear Admin Dashboard</title>
 
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/admin.css">
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet"
@@ -568,6 +569,12 @@
 
     let confirmAction = null;
 
+    // Custom confirmation modal elements
+    const adminConfirm = document.getElementById("adminConfirm");
+    const confirmTitle = document.getElementById("confirmTitle");
+    const confirmText = document.getElementById("confirmText");
+    const confirmActionBtn = document.getElementById("confirmActionBtn");
+
     function showAdminNotice(message, type = "success") {
         const box = document.getElementById("adminNotice");
         if (!box) return;
@@ -684,28 +691,32 @@
 
                 <td class="admin-actions">
 
-                    <button
-                        class="${u.active
-            ? "admin-action-btn admin-danger-btn"
-            : "admin-action-btn admin-success-btn"}"
-
-                        onclick="changeStatus(${u.id}, ${!u.active})"
-                    >
-                        ${u.active ? "Deactivate" : "Activate"}
-                    </button>
-
-
                     ${u.role !== "admin"
 
-            ? `<button
-                                class="admin-action-btn admin-delete-btn"
-                                onclick="deleteUser(${u.id})">
+            ? `
+                        <button
+                            class="${u.active
+                ? "admin-action-btn admin-danger-btn"
+                : "admin-action-btn admin-success-btn"}"
+                            onclick="changeStatus(${u.id}, ${!u.active})"
+                        >
+                            ${u.active ? "Deactivate" : "Activate"}
+                        </button>
 
-                                <i class="fa-solid fa-trash"></i>
+                        <button
+                            class="admin-action-btn admin-delete-btn"
+                            onclick="deleteUser(${u.id})"
+                        >
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    `
 
-                           </button>`
-
-            : ""
+            : `
+                        <span class="admin-protected">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            Protected
+                        </span>
+                    `
         }
 
                 </td>
@@ -1486,3 +1497,4 @@
 
 </body>
 </html>
+
